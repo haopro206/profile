@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const data = {
-    name: "NGUYEN NGOC HAO",
+    name: "Nguyễn Ngọc Hảo",
     avatar: "avatar.jpg",  // ← ĐỔI LẠI ĐƯỜNG DẪN ĐÚNG CỦA BẠN
-    desc: "2011, quê Thanh Hóa, đếch biết sợ và thjch bị ăn đòn",
+    desc: "2011 , đếch biết sợ và thjch bị ăn đòn",
     social: [
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-instagram", link: "https://www.instagram.com/_.ngnghao._/" },

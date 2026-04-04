@@ -2045,46 +2045,6 @@ h4:hover {
     color: #fff;
   }
 }
-/* Hiệu ứng Glow cầu vồng cho tên */
-.name {
-  animation: rainbowGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes rainbowGlow {
-  0% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #ff0000, 0 0 15px #ff0000;
-    color: #ff0000;
-  }
-  16% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #ff8800, 0 0 15px #ff8800;
-    color: #ff8800;
-  }
-  33% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #ffff00, 0 0 15px #ffff00;
-    color: #ffff00;
-  }
-  50% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #00ff00, 0 0 15px #00ff00;
-    color: #00ff00;
-  }
-  66% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #0088ff, 0 0 15px #0088ff;
-    color: #0088ff;
-  }
-  83% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #8800ff, 0 0 15px #8800ff;
-    color: #8800ff;
-  }
-  100% {
-    text-shadow: 0 0 5px #fff, 0 0 10px #ff0088, 0 0 15px #ff0088;
-    color: #ff0088;
-  }
-}
-/* Giữ nguyên Rainbow Glow + thêm Float nhẹ cho tên */
-.name {
-  animation: floatLight 4s ease-in-out infinite, rainbowGlow 3s ease-in-out infinite alternate;
-  display: inline-block;
-}
 
 /* Lên xuống nhẹ - KHÔNG ảnh hưởng đến màu sắc */
 @keyframes floatLight {
@@ -2129,19 +2089,19 @@ h4:hover {
 }
 /* Icon to và có hiệu ứng */
 .social li i {
-  font-size: 30px !important;
+  font-size: 15px !important;
   transition: all 0.3s ease;
 }
 
 /* Hover vào icon */
 .social li a:hover i {
-  transform: scale(1.2);
-  filter: drop-shadow(0 0 5px #ff1177);
+  transform: scale(2.5);
+  filter: drop-shadow(0 0 10px #ff1177);
 }
 
 /* Tăng khoảng cách */
 .social li {
-  margin: 0 25px 0 0 !important;
+  margin: 0 30px -0 0 !important;
 }
 /* Chỉnh cho điện thoại */
 @media (max-width: 768px) {
@@ -2168,7 +2128,7 @@ h4:hover {
 /* Hoặc nếu muốn tùy chỉnh trên điện thoại */
 @media (max-width: 768px) {
   .details {
-    margin-top: 60px !important;
+    margin-top: 10px !important;
   }
 }
 /* Hiệu ứng typewriter */
@@ -2195,45 +2155,63 @@ h4:hover {
 .name {
   font-size: 30px !important;
 }
-/* Căn giữa trên điện thoại */
+/* Căn giữa hoàn toàn trên mobile */
 @media (max-width: 768px) {
+  .container {
+    padding: 0 15px !important;
+  }
+  
   .home {
-    display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     text-align: center !important;
-    padding: 40px 20px !important;
+    padding-top: 30px !important;
   }
   
   .avatar {
-    margin: 0 auto 30px auto !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    margin: 0 auto 25px auto !important;
   }
   
   .details {
-    margin-left: 0 !important;
+    margin: 0 auto !important;
     text-align: center !important;
     width: 100% !important;
   }
   
   .name {
     text-align: center !important;
+    display: block !important;
+    width: 100% !important;
   }
   
   .excerpt {
     text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin: 0 auto 20px auto !important;
+    max-width: 90% !important;
   }
   
   .social {
-    text-align: center !important;
-    padding-left: 0 !important;
-    display: flex;
     justify-content: center !important;
+    display: flex !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
-  
-  .social li {
-    margin: 0 15px !important;
+}
+/* Giảm kích thước chữ click here */
+.intro-screen h1 {
+  font-size: 28px !important;
+  font-family: Montserrat, serif;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  .intro-screen h1 {
+    font-size: 20px !important;
   }
 }

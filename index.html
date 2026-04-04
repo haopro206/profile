@@ -21,9 +21,7 @@
   <script src="index.ca21c878.js"></script>
 
   <div id="intro" class="intro-screen">
-    <h1>hi !<br>
-      <br>
-      🤍🤍🤍</h1>
+    <h1>click here...</h1>
   </div>
   <div id="main" style="display: none;">
   <div class="animation-wrapper">
@@ -41,8 +39,8 @@
             </div>
           </div>
           <div class="details">
-            <h3 class="name">NGUYEN NGOC HAO</h3>
-            <p class="excerpt">2011, quê Thanh Hóa, đếch biết sợ và thjch bị ăn đòn</p>
+            <h3 class="name">Nguyễn Ngọc Hảo</h3>
+            <p class="excerpt">2011 , đếch biết sợ và thjch bị ăn đòn</p>
             <ul class="social">
               <li>
                 <a href="https://www.facebook.com/haovjppro206/" target="_blank">
@@ -287,4 +285,87 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
   </script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"0706ce1a04a14385b5e9fd2604ea8602","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const text = "click here...";
+    const h1Element = document.querySelector('.intro-screen h1');
+    
+    if (h1Element) {
+      let index = 0;
+      let isDeleting = false;
+      h1Element.textContent = '';
+      
+      function typeLoop() {
+        if (isDeleting) {
+          if (index > 0) {
+            h1Element.textContent = text.substring(0, index - 1);
+            index--;
+            setTimeout(typeLoop, 50);
+          } else {
+            isDeleting = false;
+            setTimeout(typeLoop, 500);
+          }
+        } else {
+          if (index <= text.length) {
+            h1Element.textContent = text.substring(0, index);
+            index++;
+            setTimeout(typeLoop, 100);
+          } else {
+            isDeleting = true;
+            setTimeout(typeLoop, 1500);
+          }
+        }
+      }
+      
+      typeLoop();
+    }
+  });
+</script>
+<script>
+  // Hiệu ứng typewriter LOOP cho câu mô tả
+  document.addEventListener('DOMContentLoaded', function() {
+    const text = "2011, đếch biết sợ và thích bị ăn đòn";
+    const excerptEl = document.querySelector('.excerpt');
+    
+    if (!excerptEl) {
+      console.log('Không tìm thấy .excerpt');
+      return;
+    }
+    
+    let index = 0;
+    let isDeleting = false;
+    
+    // Xóa nội dung gốc
+    excerptEl.textContent = '';
+    
+    function typeLoop() {
+      if (isDeleting) {
+        // Đang xóa
+        if (index > 0) {
+          excerptEl.textContent = text.substring(0, index - 1);
+          index--;
+          setTimeout(typeLoop, 50);
+        } else {
+          // Xóa xong, chuyển sang gõ lại
+          isDeleting = false;
+          setTimeout(typeLoop, 500);
+        }
+      } else {
+        // Đang gõ
+        if (index <= text.length) {
+          excerptEl.textContent = text.substring(0, index);
+          index++;
+          setTimeout(typeLoop, 100);
+        } else {
+          // Gõ xong, chờ 2 giây rồi xóa
+          isDeleting = true;
+          setTimeout(typeLoop, 2000);
+        }
+      }
+    }
+    
+    typeLoop();
+  });
+</script>
 </body></html>
