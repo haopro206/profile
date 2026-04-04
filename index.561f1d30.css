@@ -2210,8 +2210,75 @@ h4:hover {
 }
 
 /* Responsive cho mobile */
-@media (max-width: 768px) {
+@media (max-width: 400px) {
   .intro-screen h1 {
     font-size: 20px !important;
+  }
+}
+/* Chỉnh cho điện thoại - giảm ảnh và kéo xuống */
+@media (max-width: 800px) {
+  /* Container chính - đẩy nội dung xuống dưới */
+  .container {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important; /* Đẩy xuống đáy */
+    padding-bottom: 300px !important; /* Cách đáy 100px, tăng lên nếu muốn thấp hơn */
+  }
+  
+  /* Home - căn giữa theo chiều ngang */
+  .home {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* Giảm kích thước avatar */
+  .avatar {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 30px auto !important;
+  }
+  
+  /* Ảnh bên trong avatar */
+  .avatar img {
+    width: 150% !important;
+    height: 150% !important;
+    object-fit: cover !important;
+  }
+  
+  /* Phần chữ */
+  .details {
+    margin-left: 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* Tên */
+  .name {
+    font-size: 22px !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Mô tả */
+  .excerpt {
+    font-size: 13px !important;
+    text-align: center !important;
+    margin: 0 auto 20px auto !important;
+    max-width: 90% !important;
+  }
+  
+  /* Social icons */
+  .social {
+    justify-content: center !important;
+    display: flex !important;
+    gap: 18px !important;
+    padding: 0 !important;
+  }
+  
+  .social li i {
+    font-size: 22px !important;
   }
 }
