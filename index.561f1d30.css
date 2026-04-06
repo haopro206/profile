@@ -2283,18 +2283,7 @@ h4:hover {
   }
 }
 /* Video background */
-#bgVideo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: -2;
-}
+
 
 /* Đảm bảo các hạt particle vẫn hiển thị trên video */
 .animation-wrapper {
@@ -2318,18 +2307,7 @@ h4:hover {
   z-index: 1;
 }
 
-/* Làm mờ video nhẹ để nội dung dễ đọc hơn (tùy chọn) */
-#bgVideo {
-  filter: brightness(0.7) blur(2px);
-}
-@media (max-width: 768px) {
-  #bgVideo {
-    left: -200% !important;
-    transform: translate(0, -50%) !important;
-    width: auto !important;
-    height: 100% !important;
-  }
-}
+/
 /* Ẩn con trỏ typewriter */
 .excerpt {
   border-right: none !important;
@@ -2457,24 +2435,68 @@ h4:hover {
   transform: scale(1.1);
   display: inline-block;
 }
-/* Hiệu ứng Ripple khi chạm vào màn hình */
-.ripple-effect {
-  position: fixed;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.6), rgba(0, 212, 255, 0.2), transparent);
-  transform: translate(-50%, -50%) scale(0);
-  animation: rippleAnim 0.6s ease-out forwards;
-  pointer-events: none;
-  z-index: 99999;
-}
-
-@keyframes rippleAnim {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0.7;
+/* Căn chỉnh social icons trên điện thoại */
+@media (max-width: 768px) {
+  .social {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 30px !important;
+    padding: 0 !important;
+    margin: 20px 0 0 0 !important;
+    width: 100% !important;
   }
-  100% {
-    transform: translate(-50%, -50%) scale(12);
-    opacity: 0;
+  
+  .social li {
+    margin: 0 !important;
+    display: inline-flex !important;
+  }
+  
+  .social li a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .social li i {
+    font-size: 15px !important;
+  }
+  
+  /* Đặc biệt cho chữ ngl */
+  .social li span {
+    font-size: 14px !important;
+  }
+}
+.excerpt {
+  border-right: none !important;
+}
+.excerpt {
+  font-family: Montserrat, serif;
+  font-style: italic;
+  font-weight: 500;
+  max-width: 450px;
+  margin-bottom: 30px;
+  opacity: 0.8;
+  min-height: 70px;
+}
+#bgVideo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -2;
+}
+/* Chỉ trên điện thoại - dịch video sang trái */
+@media (max-width: 768px) {
+  #bgVideo {
+    left: 0 !important;
+    transform: translate(50, -50%) !important;
+    object-position: left center !important;
   }
 }
