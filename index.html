@@ -579,6 +579,174 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     createRipple(touch.clientX, touch.clientY);
   });
 </script>
+<!-- Ảnh tùy chỉnh di theo chuột -->
+<div id="customCursor" class="custom-cursor" style="display: none;">
+  <img src="hao.png" alt="hao" id="cursorImg">
+</div>
+<script>
+  // Hiệu ứng ảnh PNG - tối đa 3 ảnh cùng lúc
+  (function() {
+    const cursor = document.getElementById('customCursor');
+    const cursorImg = document.getElementById('cursorImg');
+    
+    // Đường dẫn ảnh của bạn
+    const cursorImageSrc = "hao.png"; // 👈 ẢNH CỦA BẠN
+    
+    if (cursorImg) cursorImg.src = cursorImageSrc;
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorVisible = false;
+    
+    // Mảng lưu nhiều ảnh (tối đa 3)
+    let imagesArray = [];
+    let timeoutsArray = [];
+    const MAX_IMAGES = 3;
+    
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // PC: cập nhật vị trí chuột
+    if (!isMobile) {
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        if (!cursorVisible) {
+          cursor.style.display = 'block';
+          cursorVisible = true;
+        }
+        
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+      });
+      
+      document.addEventListener('mouseleave', function() {
+        cursor.style.display = 'none';
+        cursorVisible = false;
+      });
+    } else {
+      if (cursor) cursor.style.display = 'none';
+    }
+    
+    // Hàm xóa ảnh cũ nhất nếu quá 3
+    function removeOldestImage() {
+      if (imagesArray.length >= MAX_IMAGES) {
+        const oldest = imagesArray.shift();
+        const oldestTimeout = timeoutsArray.shift();
+        if (oldestTimeout) clearTimeout(oldestTimeout);
+        if (oldest) {
+          oldest.style.transform = 'translate(-50%, -50%) scale(1.2)';
+          oldest.style.opacity = '0';
+          setTimeout(() => { if (oldest) oldest.remove(); }, 300);
+        }
+      }
+    }
+    
+    // Hàm hiển thị ảnh
+    function showPersistentImage(x, y) {
+      removeOldestImage();
+      
+      const currentImage = document.createElement('div');
+      currentImage.style.position = 'fixed';
+      currentImage.style.left = x + 'px';
+      currentImage.style.top = y + 'px';
+      currentImage.style.width = '40px';
+      currentImage.style.height = '40px';
+      currentImage.style.transform = 'translate(-50%, -50%) scale(0)';
+      currentImage.style.pointerEvents = 'none';
+      currentImage.style.zIndex = '999998';
+      currentImage.style.transition = 'all 0.3s ease-out';
+      
+      const img = document.createElement('img');
+      img.src = cursorImageSrc;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'contain';
+      img.style.filter = 'none';
+      
+      currentImage.appendChild(img);
+      document.body.appendChild(currentImage);
+      
+      setTimeout(() => {
+        if (currentImage) {
+          currentImage.style.transform = 'translate(-50%, -50%) scale(1)';
+        }
+      }, 10);
+      
+      imagesArray.push(currentImage);
+      
+      const timeout = setTimeout(() => {
+        const index = imagesArray.indexOf(currentImage);
+        if (index > -1) {
+          imagesArray.splice(index, 1);
+          timeoutsArray.splice(index, 1);
+        }
+        if (currentImage) {
+          currentImage.style.transform = 'translate(-50%, -50%) scale(1.2)';
+          currentImage.style.opacity = '0';
+          setTimeout(() => {
+            if (currentImage) currentImage.remove();
+          }, 300);
+        }
+      }, 10000);
+      
+      timeoutsArray.push(timeout);
+    }
+    
+    // Hiệu ứng khi click chuột (PC)
+    if (!isMobile) {
+      document.addEventListener('mousedown', function(e) {
+        if (e.button === 0) {
+          cursor.classList.add('click');
+          showPersistentImage(mouseX, mouseY);
+          
+          setTimeout(() => {
+            cursor.classList.remove('click');
+          }, 200);
+        }
+      });
+    }
+    
+    // Hiệu ứng khi chạm (điện thoại) - KHÔNG chặn sự kiện
+    let touchTimeout;
+    let lastTouchTime = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+      // KHÔNG dùng e.preventDefault() để không chặn click
+      const now = Date.now();
+      if (now - lastTouchTime < 500) return;
+      lastTouchTime = now;
+      
+      const touch = e.touches[0];
+      const touchX = touch.clientX;
+      const touchY = touch.clientY;
+      
+      showPersistentImage(touchX, touchY);
+      
+      if (navigator.vibrate) navigator.vibrate(50);
+    }); // Đã xóa { passive: false }
+    
+    // Ẩn chuột khi rời khỏi cửa sổ (PC)
+    if (!isMobile) {
+      document.addEventListener('mouseleave', function() {
+        cursor.style.display = 'none';
+        cursorVisible = false;
+      });
+    }
+    
+    // Khi chuột di chuyển qua link (PC)
+    if (!isMobile) {
+      const allLinks = document.querySelectorAll('a, button, .info-btn, .social li, .avatar');
+      allLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.1)';
+        });
+        link.addEventListener('mouseleave', () => {
+          if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+      });
+    }
+  })();
+</script>
 </body>
 <!-- Video Background -->
 <video autoplay muted loop playsinline id="bgVideo" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -2; object-fit: cover;">
