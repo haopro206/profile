@@ -365,4 +365,44 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     typeLoop();
   });
 </script>
+<script>
+  // Hiệu ứng title typewriter (gõ → xóa → gõ câu khác)
+  const titles = [
+    "@ngochaodz"
+  ];
+  
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  
+  function typeTitle() {
+    const currentPhrase = titles[phraseIndex];
+    
+    if (isDeleting) {
+      document.title = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      if (charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % titles.length;
+        setTimeout(typeTitle, 30);
+      } else {
+        setTimeout(typeTitle, 300);
+      }
+    } else {
+      document.title = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === currentPhrase.length) {
+        isDeleting = true;
+        setTimeout(typeTitle, 300);
+      } else {
+        setTimeout(typeTitle, 300);
+      }
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    document.title = "";
+    typeTitle();
+  });
+</script>
 </body></html>
