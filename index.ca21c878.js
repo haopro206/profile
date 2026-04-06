@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-instagram", link: "https://www.instagram.com/_.ngnghao._/" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
-      { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" }
+      { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
+      { type: "info", icon: "fa-info-circle", link: "#" }
     ]
   };
 
@@ -16,30 +17,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const app = document.getElementById("app");
 
   app.innerHTML = `
-    <div class="wrap">
-      <div class="container">
-        <div class="home">
-          <div class="avatar">
-            <div class="image"></div>
-          </div>
-          <div class="details">
-            <h3 class="name">${data.name}</h3>
-            <p class="excerpt">${data.desc}</p>
-            <ul class="social">
-              ${data.social.map(s => `
-                <li>
-                  <a href="${s.link}" target="_blank">
-                    <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
-                    ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
-                  </a>
-                </li>
-              `).join("")}
-            </ul>
-          </div>
+  <div class="wrap">
+    <div class="container">
+      <div class="home">
+        <div class="avatar">
+          <div class="image"></div>
+        </div>
+        <div class="details">
+          <h3 class="name">${data.name}</h3>
+          <p class="excerpt">${data.desc}</p>
+          <ul class="social">
+            ${data.social.map(s => `
+              <li>
+                ${s.type === "info" 
+                  ? `<a href="javascript:void(0)" class="info-btn" onclick="toggleInfoPanel()">
+                      <i class="fas fa-info-circle"></i>
+                     </a>`
+                  : `<a href="${s.link}" target="_blank">
+                      <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
+                      ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
+                     </a>`
+                }
+              </li>
+            `).join("")}
+          </ul>
         </div>
       </div>
     </div>
-  `;
+  </div>
+`;
 
   // Set avatar
   const avatarImage = document.querySelector(".avatar .image");

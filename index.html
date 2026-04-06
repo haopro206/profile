@@ -34,42 +34,55 @@
     <div class="wrap">
       <div class="container">
         <div class="home">
+          
           <div class="avatar">
            <img src="avatar.jpg" alt="avatar">
             </div>
           </div>
           <div class="details">
-            <h3 class="name">Nguyễn Ngọc Hảo</h3>
-            <p class="excerpt">2011 , đếch biết sợ và thjch bị ăn đòn</p>
-            <ul class="social">
-              <li>
-                <a href="https://www.facebook.com/haovjppro206/" target="_blank">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com/_.ngnghao._/" target="_blank">
-                  <i class="fab fa-instagram"></i>
-                </a>
-              </li>
-              
-            <li>
-  <a href="https://ngl.link/_.ngnghao._2" target="_blank">
-    <span style="font-size: 14px; font-weight: bold;">ngl</span>
-  </a>
+  <h3 class="name">Nguyễn Ngọc Hảo</h3>
+  <p class="excerpt">2011, đếch biết sợ và thích bị ăn đòn</p>
+  <ul class="social">
+    <li>
+      <a href="https://www.facebook.com/haovjppro206/" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.instagram.com/_.ngnghao._/" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://ngl.link/_.ngnghao._2" target="_blank">
+        <span style="font-size: 14px; font-weight: bold;">ngl</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.tiktok.com/@nnhchechou" target="_blank">
+        <i class="fa fa-heart"></i>
+      </a>
+    </li>
+    <li>
+      
+  <button class="info-btn" onclick="toggleInfoPanel()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">
+    <i class="fas fa-info-circle"></i>
+  </button>
 </li>
-              <li>
-                <a href="https://www.tiktok.com/@nnhchechou" target="_blank">
-                  <i class="fa fa-heart"></i>
-                </a>
-              </li>
+    </li>
+  </ul>
+</div> <!-- Đóng details ở ĐÂY -->
+
+<!-- Bảng thông tin đặt NGOÀI details -->
+<!-- Bảng thông tin - thay thế đoạn cũ -->
+
+              
               <!-- <li>
                 <a href="https://www.tiktok.com/@ven1412zzzz" target="_blank">
                   <i class="fab fa-tiktok"></i>
                 </a>
               </li> -->
-            </ul>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -405,4 +418,177 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     typeTitle();
   });
 </script>
-</body></html>
+<script>
+  function toggleInfoPanel() {
+  var panel = document.getElementById('infoPanel');
+  if (panel.style.display === 'none' || panel.style.display === '') {
+    panel.style.display = 'flex';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+  
+  function closeInfoPanel() {
+    document.getElementById('infoPanel').style.display = 'none';
+  }
+  
+  // Đóng khi bấm ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var panel = document.getElementById('infoPanel');
+      if (panel) panel.style.display = 'none';
+    }
+  });
+  
+  // Đóng khi bấm ra ngoài
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('infoPanel');
+    var infoCard = document.querySelector('.info-card');
+    if (panel && panel.style.display === 'flex') {
+      if (!infoCard.contains(e.target) && !e.target.closest('.info-btn')) {
+        panel.style.display = 'none';
+      }
+    }
+  });
+</script>
+</div>
+<!-- Bảng thông tin trong suốt -->
+<!-- Bảng thông tin trắng trong suốt -->
+<!-- Bảng thông tin Liquid Glass Style iOS 26 -->
+<!-- Bảng thông tin - Kiểu Thủy tinh Shimmer (lung linh) -->
+<!-- Bảng thông tin - Kiểu Glassmorphism từ css.glass -->
+<div id="infoPanel" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:99999; display:none; justify-content:center; align-items:center;">
+  <div style="background: rgba(255, 255, 255, 0); border-radius: 16px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(4.2px); -webkit-backdrop-filter: blur(4.2px); border: 1px solid rgba(255, 255, 255, 0.52); width: 420px; max-width: 90%; padding: 28px 25px;">
+    
+    <h3 style="color:#28e7ea; margin-bottom:15px; font-size:22px; font-weight:600; text-align:center; font-family: monospace;">ℹ️ INFORMATION ℹ️</h3>
+    
+    <div style="border-top:1px solid rgba(255,255,255,0.3); margin:15px 0;"></div>
+    
+    <!-- Dùng Grid để căn thẳng hàng -->
+    <div style="display:grid; grid-template-columns:100px 1fr auto; gap:10px; align-items:center;">
+      
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">📍Location</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;">Nghe An</span>
+      <span></span>
+      
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">📅BirthDate</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;">15/07/2006</span>
+      <span></span>
+      
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">♂️Sex</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;">Male</span>
+      <span></span>
+      
+      <!-- Dòng AOV có nút copy -->
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">👾AOV</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText">'pjkyyy..</span>
+      <button onclick="copyText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 Copy</button>
+      
+      <!-- Dòng Riot có nút copy -->
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">🎮Riot</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText">Daniel#15726</span>
+      <button onclick="copyText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 Copy</button>
+      
+    </div>
+    
+    <!-- Nút copy cả 2 - ĐẶT TRONG infoPanel -->
+   
+    
+    <button onclick="closeInfoPanel()" style="margin-top:12px; padding:12px 28px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3); border-radius:50px; color:white; cursor:pointer; font-size:14px; width:100%;">Đóng</button>
+  </div>
+</div>
+
+<script>
+  // Copy từng dòng (sửa lỗi event)
+  function copyText(elementId, btnElement) {
+    const textElement = document.getElementById(elementId);
+    const textToCopy = textElement.textContent;
+    
+    navigator.clipboard.writeText(textToCopy).then(function() {
+      const originalText = btnElement.textContent;
+      btnElement.textContent = '✅ Đã copy!';
+      btnElement.style.background = 'rgba(0,200,0,0.3)';
+      
+      setTimeout(function() {
+        btnElement.textContent = originalText;
+        btnElement.style.background = 'rgba(255,255,255,0.15)';
+      }, 1500);
+    }).catch(function(err) {
+      alert('Không thể copy: ' + err);
+    });
+  }
+  
+  // Copy cả 2 dòng
+  function copyBoth() {
+    const aov = document.getElementById('aovText').textContent;
+    const riot = document.getElementById('riotText').textContent;
+    const textToCopy = `AOV: ${aov}\nRiot: ${riot}`;
+    const btn = event.target;
+    
+    navigator.clipboard.writeText(textToCopy).then(function() {
+      const originalText = btn.textContent;
+      btn.textContent = '✅ Đã copy!';
+      btn.style.background = 'rgba(0,200,0,0.3)';
+      
+      setTimeout(function() {
+        btn.textContent = originalText;
+        btn.style.background = 'rgba(255,255,255,0.15)';
+      }, 1500);
+    }).catch(function(err) {
+      alert('Không thể copy: ' + err);
+    });
+  }
+  
+  // Đóng panel
+  function closeInfoPanel() {
+    document.getElementById('infoPanel').style.display = 'none';
+  }
+</script>
+
+
+<style>
+  /* Hiệu ứng Shimmer */
+  @keyframes shimmerMove {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+</style>
+<script>
+  // Tạo hiệu ứng ripple khi chạm vào bất kỳ đâu trên trang
+  function createRipple(x, y) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple-effect';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    document.body.appendChild(ripple);
+    
+    // Tự động xóa ripple sau 0.6 giây
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  }
+  
+  // Bắt sự kiện click chuột (máy tính)
+  document.addEventListener('click', function(e) {
+    createRipple(e.clientX, e.clientY);
+  });
+  
+  // Bắt sự kiện chạm (điện thoại)
+  document.addEventListener('touchstart', function(e) {
+    const touch = e.touches[0];
+    createRipple(touch.clientX, touch.clientY);
+  });
+</script>
+</body>
+<!-- Video Background -->
+<video autoplay muted loop playsinline id="bgVideo" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -2; object-fit: cover;">
+  <source src="bgr.mp4" type="video/mp4">
+  <!-- Thêm fallback nếu video lỗi -->
+  Your browser does not support HTML5 video.
+</video>
+<!-- Video với fallback màu đen -->
+<video autoplay muted loop playsinline id="bgVideo" poster="fallback.jpg">
+  <source src="background.mp4" type="video/mp4">
+  <div style="position: fixed; top:0; left:0; width:100%; height:100%; background: #0a0a1a; z-index:-2;"></div>
+</video>
+</html>
