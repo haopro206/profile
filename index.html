@@ -280,17 +280,21 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     }
 
     function unlockAudio() {
-      var bgmusic = document.getElementById('bgmusic');
-      if (bgmusic) {
-        bgmusic.muted = false;
-        bgmusic.play().catch(function (error) {
-          console.warn('unlockAudio play blocked:', error);
-        });
-      }
-      document.removeEventListener('click', unlockAudio);
-      document.removeEventListener('touchstart', unlockAudio);
-      document.removeEventListener('keydown', unlockAudio);
-    }
+  var bgmusic = document.getElementById('bgmusic');
+  if (!bgmusic) return;
+
+  // 🔥 Chỉ unlock audio, KHÔNG tự bật nhạc
+  bgmusic.play().then(() => {
+    bgmusic.pause(); // dừng ngay sau khi unlock
+  }).catch(() => {});
+
+  // Giữ nguyên trạng thái mute ban đầu
+  bgmusic.muted = true;
+
+  document.removeEventListener('click', unlockAudio);
+  document.removeEventListener('touchstart', unlockAudio);
+  document.removeEventListener('keydown', unlockAudio);
+}
 
     document.addEventListener('click', unlockAudio, { once: true });
     document.addEventListener('touchstart', unlockAudio, { once: true });
@@ -1392,21 +1396,34 @@ function onEnded() {
 audioPlayer.addEventListener('ended', onEnded);
   
   // Bật/tắt âm lượng (nút mute)
-  function toggleMute() {
-    if (isMuted) {
-      audioPlayer.volume = lastVolume;
-      if (volumeSlider) volumeSlider.value = lastVolume * 100;
-      if (muteBtn) muteBtn.textContent = '🔊';
-      if (musicMainBtn) musicMainBtn.textContent = '🔊';
-    } else {
-      lastVolume = audioPlayer.volume;
-      audioPlayer.volume = 0;
-      if (volumeSlider) volumeSlider.value = 0;
-      if (muteBtn) muteBtn.textContent = '🔇';
-      if (musicMainBtn) musicMainBtn.textContent = '🔇';
-    }
-    isMuted = !isMuted;
+ function toggleMute() {
+  if (!audioPlayer) return;
+
+  if (isMuted) {
+    // 🔊 BẬT LẠI ÂM
+    audioPlayer.muted = false;                  // QUAN TRỌNG
+    audioPlayer.volume = lastVolume || 0.7;     // trả lại âm lượng cũ
+    
+    if (volumeSlider) volumeSlider.value = audioPlayer.volume * 100;
+    if (muteBtn) muteBtn.textContent = '🔊';
+    if (musicMainBtn) musicMainBtn.textContent = '🔊';
+
+    isMuted = false;
+    
+  } else {
+    // 🔇 TẮT ÂM
+    lastVolume = audioPlayer.volume;            // lưu lại âm lượng
+    
+    audioPlayer.muted = true;                   // 🔥 PHẢI CÓ (fix mobile)
+    audioPlayer.volume = 0;
+    
+    if (volumeSlider) volumeSlider.value = 0;
+    if (muteBtn) muteBtn.textContent = '🔇';
+    if (musicMainBtn) musicMainBtn.textContent = '🔇';
+
+    isMuted = true;
   }
+}
   
   // Điều chỉnh âm lượng (thanh kéo)
  function setVolume() {
@@ -1415,6 +1432,7 @@ audioPlayer.addEventListener('ended', onEnded);
   
   if (audioPlayer) {
     audioPlayer.volume = value;
+    audioPlayer.muted = (value === 0);
   }
   
   if (value === 0) {
@@ -1451,6 +1469,9 @@ audioPlayer.addEventListener('ended', onEnded);
 if (volumeSlider) {
   volumeSlider.addEventListener('change', setVolume);      // Thêm change
   volumeSlider.addEventListener('touchend', function() {   // Thêm cho mobile
+    setVolume();
+  });
+   volumeSlider.addEventListener('touchmove', function(e) {
     setVolume();
   });
 }
