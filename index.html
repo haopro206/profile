@@ -265,11 +265,13 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
           main.style.opacity = '1';
           var bgmusic = document.getElementById('bgmusic');
           if (bgmusic) {
-            bgmusic.muted = false;
-            bgmusic.play().catch(function (error) {
-              console.warn('Play after enterWeb blocked:', error);
-            });
-          }
+  bgmusic.muted = false;                 // bỏ mute
+  bgmusic.volume = lastVolume || 0.7;    // 🔥 thêm dòng này (rất quan trọng)
+
+  bgmusic.play().catch(function (error) {
+    console.warn('Play after enterWeb blocked:', error);
+  });
+}
             // THÊM DÒNG NÀY
     var musicControl = document.getElementById('musicControl');
     if (musicControl) musicControl.style.display = 'flex';
@@ -1427,8 +1429,10 @@ audioPlayer.addEventListener('ended', onEnded);
   
   // Điều chỉnh âm lượng (thanh kéo)
  function setVolume() {
+  if (!audioPlayer || !volumeSlider) return;
+
   const value = volumeSlider.value / 100;
-  console.log('Âm lượng:', value);  // Kiểm tra xem hàm có chạy không
+   // Kiểm tra xem hàm có chạy không
   
   if (audioPlayer) {
     audioPlayer.volume = value;
@@ -1446,7 +1450,7 @@ audioPlayer.addEventListener('ended', onEnded);
     lastVolume = value;
   }
 }
-  
+  // dừng ở đây
   // Bấm nút chính: hiện/ẩn panel
   if (musicMainBtn) {
     musicMainBtn.addEventListener('click', function(e) {
