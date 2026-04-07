@@ -233,7 +233,7 @@
         }
     </script>
   
-   <script src="blockf12."></script>
+   <script src="blockf12.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -1267,6 +1267,7 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
   const musicMainBtn = document.getElementById('musicMainBtn');
   const musicPanel = document.getElementById('musicPanel');
   const volumeSlider = document.getElementById('volumeSlider');
+  console.log('volumeSlider:', volumeSlider);  // Kiểm tra có tìm thấy element không
   const prevBtn = document.getElementById('prevBtn');
   const playPauseBtn = document.getElementById('playPauseBtn');
   const nextBtn = document.getElementById('nextBtn');
@@ -1408,21 +1409,25 @@ audioPlayer.addEventListener('ended', onEnded);
   }
   
   // Điều chỉnh âm lượng (thanh kéo)
-  function setVolume() {
-    const value = volumeSlider.value / 100;
+ function setVolume() {
+  const value = volumeSlider.value / 100;
+  console.log('Âm lượng:', value);  // Kiểm tra xem hàm có chạy không
+  
+  if (audioPlayer) {
     audioPlayer.volume = value;
-    
-    if (value === 0) {
-      if (muteBtn) muteBtn.textContent = '🔇';
-      if (musicMainBtn) musicMainBtn.textContent = '🔇';
-      isMuted = true;
-    } else {
-      if (muteBtn) muteBtn.textContent = '🔊';
-      if (musicMainBtn) musicMainBtn.textContent = '🔊';
-      isMuted = false;
-      lastVolume = value;
-    }
   }
+  
+  if (value === 0) {
+    if (muteBtn) muteBtn.textContent = '🔇';
+    if (musicMainBtn) musicMainBtn.textContent = '🔇';
+    isMuted = true;
+  } else {
+    if (muteBtn) muteBtn.textContent = '🔊';
+    if (musicMainBtn) musicMainBtn.textContent = '🔊';
+    isMuted = false;
+    lastVolume = value;
+  }
+}
   
   // Bấm nút chính: hiện/ẩn panel
   if (musicMainBtn) {
@@ -1442,6 +1447,13 @@ audioPlayer.addEventListener('ended', onEnded);
   if (nextBtn) nextBtn.addEventListener('click', nextSong);
   if (progressBar) progressBar.addEventListener('input', seekTo);
   if (volumeSlider) volumeSlider.addEventListener('input', setVolume);
+  // ===== THÊM CÁC DÒNG NÀY VÀO ĐÂY =====
+if (volumeSlider) {
+  volumeSlider.addEventListener('change', setVolume);      // Thêm change
+  volumeSlider.addEventListener('touchend', function() {   // Thêm cho mobile
+    setVolume();
+  });
+}
   if (muteBtn) muteBtn.addEventListener('click', toggleMute);
   
   // Gắn sự kiện cho audio
