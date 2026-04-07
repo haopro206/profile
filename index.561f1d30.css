@@ -2987,3 +2987,14 @@ a, button, .social li, .info-btn, .avatar, .name {
   background: rgba(255, 255, 255, 1) !important;
   transform: scale(1.2);
 }
+/* Ẩn thanh kéo âm lượng trên điện thoại, giữ trên laptop */
+@media (max-width: 768px) {
+  .volume-slider {
+    display: none !important;
+  }
+  
+  /* Giữ nguyên nút mute */
+  .mute-btn {
+    display: flex !important;
+  }
+}
