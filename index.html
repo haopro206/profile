@@ -478,23 +478,33 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">♂️Sex</span>
       <span style="font-size:16px; color:#fff; font-weight:500;">Male</span>
       <span></span>
+
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">📞Zalo</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="zaloText">0334025718</span>
+      <button onclick="copyText('zaloText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
+       <span style="font-size:16px; color:rgba(255,255,255,0.8);">💳Banking</span>
+<span style="font-size:16px; color:#fff; font-weight:500;">
+  <span id="bankingText">3915072006</span> MB Bank
+</span>
+<button onclick="copyText('bankingText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       <!-- Dòng AOV có nút copy -->
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">👾AOV</span>
       <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText">'pjkyyy..</span>
-      <button onclick="copyText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 Copy</button>
+      <button onclick="copyText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       <!-- Dòng Riot có nút copy -->
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">🎮Riot</span>
       <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText">Daniel#15726</span>
-      <button onclick="copyText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 Copy</button>
+      <button onclick="copyText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
+      
       
     </div>
     
     <!-- Nút copy cả 2 - ĐẶT TRONG infoPanel -->
    
     
-    <button onclick="closeInfoPanel()" style="margin-top:12px; padding:12px 28px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3); border-radius:50px; color:white; cursor:pointer; font-size:14px; width:100%;">Đóng</button>
+    <button onclick="closeInfoPanel()" style="margin-top:12px; padding:12px 28px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3); border-radius:50px; color:white; cursor:pointer; font-size:14px; width:100%;">Close</button>
   </div>
 </div>
 
@@ -506,7 +516,7 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     
     navigator.clipboard.writeText(textToCopy).then(function() {
       const originalText = btnElement.textContent;
-      btnElement.textContent = '✅ Đã copy!';
+      btnElement.textContent = '✅ Copied!';
       btnElement.style.background = 'rgba(0,200,0,0.3)';
       
       setTimeout(function() {
@@ -527,7 +537,7 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     
     navigator.clipboard.writeText(textToCopy).then(function() {
       const originalText = btn.textContent;
-      btn.textContent = '✅ Đã copy!';
+      btn.textContent = '✅ Copied!';
       btn.style.background = 'rgba(0,200,0,0.3)';
       
       setTimeout(function() {
@@ -745,6 +755,301 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
         });
       });
     }
+  })();
+</script>
+<script>
+  // Hiệu ứng 3D xoay theo chuột cho bảng thông tin
+  (function() {
+    const panel = document.querySelector('#infoPanel > div');
+    if (!panel) return;
+    
+    let bounds = panel.getBoundingClientRect();
+    
+    window.addEventListener('resize', () => {
+      bounds = panel.getBoundingClientRect();
+    });
+    
+    panel.addEventListener('mousemove', function(e) {
+      const x = e.clientX - bounds.left;
+      const y = e.clientY - bounds.top;
+      
+      const xPercent = (x / bounds.width) * 100;
+      const yPercent = (y / bounds.height) * 100;
+      
+      const xRotate = (50 - xPercent) / 5;
+      const yRotate = (50 - yPercent) / 5;
+      
+      panel.style.transform = `perspective(1000px) rotateY(${xRotate}deg) rotateX(${-yRotate}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+    
+    panel.addEventListener('mouseleave', function() {
+      panel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  })();
+</script>
+<script>
+  // Kéo thả avatar di chuyển
+  (function() {
+    const avatar = document.querySelector('.avatar');
+    if (!avatar) return;
+    
+    let isDragging = false;
+    let startX, startY;
+    let offsetX, offsetY;
+    
+    // Bắt đầu kéo (chuột)
+    avatar.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      
+      // Lấy vị trí hiện tại của avatar
+      const rect = avatar.getBoundingClientRect();
+      offsetX = startX - rect.left;
+      offsetY = startY - rect.top;
+      
+      avatar.style.cursor = 'grabbing';
+      avatar.style.transition = 'none';
+      e.preventDefault();
+    });
+    
+    // Di chuyển (chuột)
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      
+      let newX = e.clientX - offsetX;
+      let newY = e.clientY - offsetY;
+      
+      // Giới hạn trong màn hình
+      const maxX = window.innerWidth - avatar.offsetWidth;
+      const maxY = window.innerHeight - avatar.offsetHeight;
+      newX = Math.min(Math.max(0, newX), maxX);
+      newY = Math.min(Math.max(0, newY), maxY);
+      
+      avatar.style.position = 'fixed';
+      avatar.style.left = newX + 'px';
+      avatar.style.top = newY + 'px';
+      avatar.style.margin = '0';
+      avatar.style.zIndex = '1000';
+    });
+    
+    // Thả chuột
+    document.addEventListener('mouseup', function() {
+      if (isDragging) {
+        isDragging = false;
+        avatar.style.cursor = 'grab';
+        avatar.style.transition = 'transform 0.2s';
+      }
+    });
+    
+    // Hỗ trợ chạm trên điện thoại
+    avatar.addEventListener('touchstart', function(e) {
+      const touch = e.touches[0];
+      isDragging = true;
+      startX = touch.clientX;
+      startY = touch.clientY;
+      
+      const rect = avatar.getBoundingClientRect();
+      offsetX = startX - rect.left;
+      offsetY = startY - rect.top;
+      
+      avatar.style.transition = 'none';
+      e.preventDefault();
+    });
+    
+    document.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      
+      const touch = e.touches[0];
+      let newX = touch.clientX - offsetX;
+      let newY = touch.clientY - offsetY;
+      
+      const maxX = window.innerWidth - avatar.offsetWidth;
+      const maxY = window.innerHeight - avatar.offsetHeight;
+      newX = Math.min(Math.max(0, newX), maxX);
+      newY = Math.min(Math.max(0, newY), maxY);
+      
+      avatar.style.position = 'fixed';
+      avatar.style.left = newX + 'px';
+      avatar.style.top = newY + 'px';
+      avatar.style.margin = '0';
+      avatar.style.zIndex = '1000';
+    });
+    
+    document.addEventListener('touchend', function() {
+      isDragging = false;
+      avatar.style.transition = 'transform 0.2s';
+    });
+    
+    // Thêm cursor grab cho avatar
+    avatar.style.cursor = 'grab';
+    avatar.style.userSelect = 'none';
+  })();
+</script>
+<script>
+  (function() {
+    const avatar = document.querySelector('.avatar');
+    if (!avatar) {
+      console.log('Không tìm thấy avatar');
+      return;
+    }
+    
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let initialLeft = 0, initialTop = 0;
+    
+    // Hàm lấy vị trí hiện tại của avatar
+    function getAvatarPosition() {
+      const rect = avatar.getBoundingClientRect();
+      return { x: rect.left, y: rect.top };
+    }
+    
+    // Bắt đầu kéo
+    function onStart(e) {
+      e.preventDefault();
+      isDragging = true;
+      
+      // Lấy vị trí chuột/touch
+      const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
+      const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
+      
+      const pos = getAvatarPosition();
+      startX = clientX - pos.x;
+      startY = clientY - pos.y;
+      
+      // Chuyển sang fixed positioning
+      avatar.style.position = 'fixed';
+      avatar.style.left = pos.x + 'px';
+      avatar.style.top = pos.y + 'px';
+      avatar.style.margin = '0';
+      avatar.classList.add('dragging');
+      
+      console.log('Bắt đầu kéo tại:', pos.x, pos.y);
+    }
+    
+    // Di chuyển
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      
+      const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
+      const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
+      
+      let newX = clientX - startX;
+      let newY = clientY - startY;
+      
+      // Giới hạn trong màn hình
+      newX = Math.min(Math.max(0, newX), window.innerWidth - avatar.offsetWidth);
+      newY = Math.min(Math.max(0, newY), window.innerHeight - avatar.offsetHeight);
+      
+      avatar.style.left = newX + 'px';
+      avatar.style.top = newY + 'px';
+    }
+    
+    // Kết thúc kéo
+    function onEnd() {
+      if (isDragging) {
+        isDragging = false;
+        avatar.classList.remove('dragging');
+        console.log('Kết thúc kéo, vị trí:', avatar.style.left, avatar.style.top);
+      }
+    }
+    
+    // Gắn sự kiện chuột
+    avatar.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    
+    // Gắn sự kiện chạm (điện thoại)
+    avatar.addEventListener('touchstart', onStart, { passive: false });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+    
+    avatar.style.cursor = 'grab';
+  })();
+</script>
+<!-- Thêm jQuery và jQuery UI -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<script>
+  $(function() {
+    $(".avatar").draggable({
+      containment: "window",
+      cursor: "grab",
+      opacity: 0.8,
+      scroll: false
+    });
+  });
+</script>
+<script>
+  (function() {
+    const avatar = document.querySelector('.avatar');
+    if (!avatar) return;
+    
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let offsetX = 0, offsetY = 0;
+    
+    // Lấy vị trí chuột/touch
+    function getClientPos(e) {
+      if (e.touches) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      return { x: e.clientX, y: e.clientY };
+    }
+    
+    function onStart(e) {
+      e.preventDefault();
+      isDragging = true;
+      
+      const pos = getClientPos(e);
+      const rect = avatar.getBoundingClientRect();
+      
+      startX = pos.x - rect.left;
+      startY = pos.y - rect.top;
+      
+      avatar.style.position = 'fixed';
+      avatar.style.left = rect.left + 'px';
+      avatar.style.top = rect.top + 'px';
+      avatar.style.margin = '0';
+      avatar.style.zIndex = '9999';
+      avatar.style.cursor = 'grabbing';
+    }
+    
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      
+      const pos = getClientPos(e);
+      let newX = pos.x - startX;
+      let newY = pos.y - startY;
+      
+      // Giới hạn màn hình
+      newX = Math.min(Math.max(0, newX), window.innerWidth - avatar.offsetWidth);
+      newY = Math.min(Math.max(0, newY), window.innerHeight - avatar.offsetHeight);
+      
+      avatar.style.left = newX + 'px';
+      avatar.style.top = newY + 'px';
+    }
+    
+    function onEnd() {
+      isDragging = false;
+      avatar.style.cursor = 'grab';
+    }
+    
+    // Sự kiện chuột (PC)
+    avatar.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    
+    // Sự kiện chạm (Mobile)
+    avatar.addEventListener('touchstart', onStart, { passive: false });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+    
+    avatar.style.cursor = 'grab';
   })();
 </script>
 </body>
