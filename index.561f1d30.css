@@ -3106,3 +3106,14 @@ a, button, .social li, .info-btn, .avatar, .name {
   object-fit: contain;
   filter: brightness(0) invert(1); /* Làm trắng ảnh nếu cần */
 }
+.sound-btn, .sound-btn img {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.sound-btn {
+  pointer-events: auto;  /* Riêng nút vẫn click được */
+}

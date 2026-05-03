@@ -1074,8 +1074,6 @@ if (soundControl) soundControl.style.display = 'block';
   (function() {
     const soundBtn = document.getElementById('soundBtn');
     const soundIcon = document.getElementById('soundIcon');
-    
-    // Lấy chính xác 1 audio duy nhất
     let audioPlayer = document.getElementById('bgmusic');
     
     if (!audioPlayer) {
@@ -1085,43 +1083,34 @@ if (soundControl) soundControl.style.display = 'block';
     }
     
     let isMuted = false;
-    let lastVolume = audioPlayer.volume || 0.7;
+    let lastVolume = 0.7;
     
-    // Đường dẫn 2 file PNG
     const SOUND_ON = "sound-on.png";
     const SOUND_OFF = "sound-off.png";
     
-    function toggleMute() {
+    // Mặc định bật âm
+    soundIcon.src = SOUND_ON;
+    audioPlayer.muted = false;
+    audioPlayer.volume = 0.7;
+    
+    function toggleMute(e) {
+      e.preventDefault();  // Ngăn delay trên mobile
       if (isMuted) {
-        // BẬT LẠI ÂM
         audioPlayer.muted = false;
         audioPlayer.volume = lastVolume;
         soundIcon.src = SOUND_ON;
-        console.log("Bật âm, volume:", lastVolume);
       } else {
-        // TẮT ÂM
         lastVolume = audioPlayer.volume;
         audioPlayer.muted = true;
         audioPlayer.volume = 0;
         soundIcon.src = SOUND_OFF;
-        console.log("Tắt âm");
       }
       isMuted = !isMuted;
     }
     
-    if (soundBtn) {
-      soundBtn.addEventListener('click', toggleMute);
-      soundBtn.addEventListener('touchstart', toggleMute);
-    }
-    
-    // Khởi tạo icon đúng trạng thái
-    if (audioPlayer.muted === true || audioPlayer.volume === 0) {
-      soundIcon.src = SOUND_ON;
-      isMuted = true;
-    } else {
-      soundIcon.src = SOUND_OFF;
-      isMuted = false;
-    }
+    // Dùng cả click và touchstart để mobile phản hồi nhanh
+    soundBtn.addEventListener('click', toggleMute);
+    soundBtn.addEventListener('touchstart', toggleMute, { passive: false });
   })();
 </script>
 
