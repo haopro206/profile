@@ -40,8 +40,8 @@
             </div>
           </div>
           <div class="details">
-  <h3 class="name">Nguyễn Ngọc Hảo</h3>
-  <p class="excerpt">2011, đếch biết sợ và thích bị ăn đòn</p>
+  <h3 class="name">ngocj haor víp bờ rồ</h3>
+  <p class="excerpt">2011, đếch biết sợ và thích bị ăn đòn.</p>
   <ul class="social">
     <li>
       <a href="https://www.facebook.com/haovjppro206/" target="_blank">
@@ -233,7 +233,7 @@
         }
     </script>
   
-   <script src="blockf12.js"></script>
+   <script src="blockf1.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -266,16 +266,15 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
           var bgmusic = document.getElementById('bgmusic');
           if (bgmusic) {
   bgmusic.muted = false;                 // bỏ mute
-  bgmusic.volume = lastVolume || 0.7;    // 🔥 thêm dòng này (rất quan trọng)
+  bgmusic.volume =  0.7;    // 🔥 thêm dòng này (rất quan trọng)
 
   bgmusic.play().catch(function (error) {
     console.warn('Play after enterWeb blocked:', error);
   });
 }
             // THÊM DÒNG NÀY
-    var musicControl = document.getElementById('musicControl');
-    if (musicControl) musicControl.style.display = 'flex';
-    
+   var soundControl = document.getElementById('soundControl');
+if (soundControl) soundControl.style.display = 'block';
   
         }, 10);
       }, 1000);
@@ -346,7 +345,7 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
 <script>
   // Hiệu ứng typewriter LOOP cho câu mô tả
   document.addEventListener('DOMContentLoaded', function() {
-    const text = "2011, đếch biết sợ và thích bị ăn đòn";
+    const text = "2011, đếch biết sợ và thích bị ăn đòn.";
     const excerptEl = document.querySelector('.excerpt');
     
     if (!excerptEl) {
@@ -478,35 +477,33 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     <!-- Dùng Grid để căn thẳng hàng -->
     <div style="display:grid; grid-template-columns:100px 1fr auto; gap:10px; align-items:center;">
       
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">📍Location</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;">Nghe An</span>
-      <span></span>
       
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">📅BirthDate</span>
+      
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">📅Ngàysinh</span>
       <span style="font-size:16px; color:#fff; font-weight:500;">15/07/2006</span>
       <span></span>
       
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">♂️Sex</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;">Male</span>
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">♂️Giới tính</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;">Đực</span>
       <span></span>
 
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">📞Zalo</span>
       <span style="font-size:16px; color:#fff; font-weight:500;" id="zaloText">0334025718</span>
       <button onclick="copyText('zaloText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
-       <span style="font-size:16px; color:rgba(255,255,255,0.8);">💳Banking</span>
+       <span style="font-size:16px; color:rgba(255,255,255,0.8);">💳Bank</span>
 <span style="font-size:16px; color:#fff; font-weight:500;">
-  <span id="bankingText">3915072006</span> MB Bank
+  <span id="bankingText">3915072006</span> MB 
 </span>
 <button onclick="copyText('bankingText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       <!-- Dòng AOV có nút copy -->
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">👾AOV</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText">'pjkyyy..</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText">〆NgocHaoxyz.</span>
       <button onclick="copyText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       <!-- Dòng Riot có nút copy -->
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">🎮Riot</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText">Daniel#15726</span>
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">🎮TFT</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText">flex xì xà xì xồ#206</span>
       <button onclick="copyText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       
@@ -1063,453 +1060,69 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
     avatar.style.cursor = 'grab';
   })();
 </script><!-- Nút điều khiển nhạc (góc trái trên) -->
-<div id="musicControl" class="music-control" style="display: none;">
-  <button id="musicMainBtn" class="music-main-btn">🔊</button>
-  <div id="musicPanel" class="music-panel" style="display: none;">
-    <div class="music-panel-inner">
-      
-      <!-- Tên bài hát hiện tại -->
-      <div id="currentSongName" class="current-song">Đang tải...</div>
-      
-      <!-- Thanh tua nhạc + thời gian -->
-      <div class="progress-row">
-        <span id="currentTime" class="time">0:00</span>
-        <input type="range" id="progressBar" class="progress-slider" value="0" min="0" max="100" step="0.1">
-        <span id="duration" class="time">0:00</span>
-      </div>
-      
-      <!-- Nút điều khiển: Prev, Play/Pause, Next -->
-      <div class="controls-row">
-        <button id="prevBtn" class="ctrl-btn">⏮ Prev</button>
-        <button id="playPauseBtn" class="ctrl-btn play-pause-btn">▶</button>
-        <button id="nextBtn" class="ctrl-btn">Next ⏭</button>
-      </div>
-       <div class="volume-row">
-      <button id="muteBtn" class="mute-btn">🔊</button>
-      <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70">
-    </div>
-      
-      <!-- Âm lượng -->
-      
-    </div>
-  </div>
+<!-- Nút âm lượng đơn giản -->
+<div id="soundControl" class="sound-control" style="display: none;">
+  <button id="soundBtn" class="sound-btn">
+    <img id="soundIcon" src="sound-on.png" alt="sound">
+  </button>
 </div>
 
-<style>
-  .music-control {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  
-  .music-main-btn {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 22px;
-    cursor: pointer;
-    color: white;
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .music-main-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-  }
-  
-  .music-panel {
-    background: rgba(20, 20, 40, 0.95);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 12px 16px;
-    width: 260px;
-  }
-  
-  .music-panel-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .current-song {
-    color: #ff1177;
-    font-size: 13px;
-    font-weight: bold;
-    text-align: center;
-    padding: 4px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  .progress-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .time {
-    font-size: 10px;
-    color: white;
-    min-width: 35px;
-    font-family: monospace;
-  }
-  
-  .progress-slider {
-    flex: 1;
-    height: 3px;
-    -webkit-appearance: none;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .progress-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ff1177;
-    cursor: pointer;
-  }
-  
-  .controls-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-  
-  .ctrl-btn {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-    padding: 6px 12px;
-    color: white;
-    cursor: pointer;
-    font-size: 11px;
-    transition: 0.2s;
-    text-align: center;
-  }
-  
-  .ctrl-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.02);
-  }
-  
-  .play-pause-btn {
-    background: rgba(255, 17, 119, 0.7);
-    font-weight: bold;
-    min-width: 60px;
-  }
-  
-  .play-pause-btn:hover {
-    background: rgba(255, 17, 119, 1);
-  }
-  
-  .volume-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .volume-row span {
-    color: white;
-    font-size: 14px;
-  }
-  
-  .volume-slider {
-    flex: 1;
-    height: 3px;
-    -webkit-appearance: none;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ff1177;
-    cursor: pointer;
-  }
-</style>
+
+
 
 <script>
-  // ========== DANH SÁCH BÀI HÁT ==========
-  const playlist = [
-    { name: "Nếu x Nắm", src: "music.mp3" },
-    { name: "Buồn thì cứ khóc đi", src: "music2.mp3" },
-    { name: "Lo Người Ướt Áo", src: "music3.mp3" }
-  ];
-  
-  let currentIndex = 0;
-  let isPlaying = false;
-  
-  // DÙNG CHUNG audioPlayer với bgmusic
-  let audioPlayer = document.getElementById('bgmusic');
-  if (!audioPlayer) {
-    audioPlayer = new Audio();
-    audioPlayer.src = playlist[0].src;
-    audioPlayer.loop = false;
-  } else {
-    audioPlayer.src = playlist[0].src;
-    audioPlayer.loop = false;
-  }
-  
-  // DOM elements
-  const musicMainBtn = document.getElementById('musicMainBtn');
-  const musicPanel = document.getElementById('musicPanel');
-  const volumeSlider = document.getElementById('volumeSlider');
-  console.log('volumeSlider:', volumeSlider);  // Kiểm tra có tìm thấy element không
-  const prevBtn = document.getElementById('prevBtn');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const progressBar = document.getElementById('progressBar');
-  const currentTimeEl = document.getElementById('currentTime');
-  const durationEl = document.getElementById('duration');
-  const currentSongNameEl = document.getElementById('currentSongName');
-  const muteBtn = document.getElementById('muteBtn');
-  
-  let isMuted = false;
-  let lastVolume = audioPlayer.volume || 0.7;
-  
-  // Khởi tạo âm lượng
-  if (volumeSlider) {
-    volumeSlider.value = lastVolume * 100;
-    audioPlayer.volume = lastVolume;
-  }
-  if (muteBtn) muteBtn.textContent = '🔊';
-  
-  // Tải bài hát
-  function loadSong(index) {
-    const song = playlist[index];
-    if (!song) return;
+  (function() {
+    const soundBtn = document.getElementById('soundBtn');
+    const soundIcon = document.getElementById('soundIcon');
     
-    audioPlayer.src = song.src;
-    currentSongNameEl.textContent = song.name;
-    audioPlayer.load();
+    // Lấy chính xác 1 audio duy nhất
+    let audioPlayer = document.getElementById('bgmusic');
     
-    playPauseBtn.textContent = '▶';
-    isPlaying = false;
-  }
-  
-  // Play/Pause
-  function togglePlayPause() {
-    if (isPlaying) {
-      audioPlayer.pause();
-      playPauseBtn.textContent = '▶';
-    } else {
-      audioPlayer.play().catch(e => console.log('Cần tương tác để phát nhạc'));
-      playPauseBtn.textContent = '⏸';
+    if (!audioPlayer) {
+      audioPlayer = new Audio();
+      audioPlayer.src = "music.mp3";
+      audioPlayer.loop = true;
     }
-    isPlaying = !isPlaying;
-  }
-  
-  // Bài trước: nếu dưới 10s thì chuyển bài, nếu trên 10s thì tua đầu
- // Bài tiếp theo
-function nextSong() {
-  currentIndex = (currentIndex + 1) % playlist.length;
-  loadSong(currentIndex);
-  // Tự động phát bài mới
-  audioPlayer.play().catch(e => console.log('Play bị chặn'));
-  playPauseBtn.textContent = '⏸';
-  isPlaying = true;
-}
-
-// Bài trước: nếu dưới 10s thì chuyển bài, nếu trên 10s thì tua đầu
-function prevSong() {
-  const currentTime = audioPlayer.currentTime;
-  
-  if (currentTime < 10) {
-    // Chuyển bài trước
-    currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-    loadSong(currentIndex);
-    // Tự động phát bài mới
-    audioPlayer.play().catch(e => console.log('Play bị chặn'));
-    playPauseBtn.textContent = '⏸';
-    isPlaying = true;
-  } else {
-    // Tua về đầu bài hiện tại
-    audioPlayer.currentTime = 0;
-    if (!isPlaying) {
-      // Nếu đang dừng thì vẫn dừng
-      playPauseBtn.textContent = '▶';
-    } else {
-      // Nếu đang phát thì tiếp tục phát
-      audioPlayer.play().catch(e => console.log('Play bị chặn'));
-    }
-  }
-}
-  
-  // Format thời gian
-  function formatTime(seconds) {
-    if (isNaN(seconds)) return '0:00';
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? '0' + secs : secs}`;
-  }
-  
-  // Cập nhật thanh tiến trình
-  function updateProgress() {
-    if (audioPlayer.duration && !isNaN(audioPlayer.duration)) {
-      const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-      if (progressBar) progressBar.value = percent;
-      if (currentTimeEl) currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
-      if (durationEl) durationEl.textContent = formatTime(audioPlayer.duration);
-    }
-  }
-  
-  // Tua nhạc
-  function seekTo() {
-    if (audioPlayer.duration && !isNaN(audioPlayer.duration)) {
-      audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
-    }
-  }
-  
-  // Khi bài hát kết thúc (CHỈ 1 HÀM DUY NHẤT)
-  // Khi bài hát kết thúc - chuyển bài tiếp theo và tự động phát
-function onEnded() {
-  console.log("Bài hát kết thúc, chuyển bài tiếp theo"); // Kiểm tra log
-  currentIndex = (currentIndex + 1) % playlist.length;
-  loadSong(currentIndex);
-  
-  // Tự động phát bài mới
-  setTimeout(() => {
-    audioPlayer.play().catch(e => console.log('Tự động phát bị chặn:', e));
-    playPauseBtn.textContent = '⏸';
-    isPlaying = true;
-  }, 100);
-}
-
-// ĐẢM BẢO DÒNG NÀY TỒN TẠI (gắn sự kiện ended)
-audioPlayer.addEventListener('ended', onEnded);
-  
-  // Bật/tắt âm lượng (nút mute)
- function toggleMute() {
-  if (!audioPlayer) return;
-
-  if (isMuted) {
-    // 🔊 BẬT LẠI ÂM
-    audioPlayer.muted = false;                  // QUAN TRỌNG
-    audioPlayer.volume = lastVolume || 0.7;     // trả lại âm lượng cũ
     
-    if (volumeSlider) volumeSlider.value = audioPlayer.volume * 100;
-    if (muteBtn) muteBtn.textContent = '🔊';
-    if (musicMainBtn) musicMainBtn.textContent = '🔊';
-
-    isMuted = false;
+    let isMuted = false;
+    let lastVolume = audioPlayer.volume || 0.7;
     
-  } else {
-    // 🔇 TẮT ÂM
-    lastVolume = audioPlayer.volume;            // lưu lại âm lượng
+    // Đường dẫn 2 file PNG
+    const SOUND_ON = "sound-on.png";
+    const SOUND_OFF = "sound-off.png";
     
-    audioPlayer.muted = true;                   // 🔥 PHẢI CÓ (fix mobile)
-    audioPlayer.volume = 0;
-    
-    if (volumeSlider) volumeSlider.value = 0;
-    if (muteBtn) muteBtn.textContent = '🔇';
-    if (musicMainBtn) musicMainBtn.textContent = '🔇';
-
-    isMuted = true;
-  }
-}
-  
-  // Điều chỉnh âm lượng (thanh kéo)
- function setVolume() {
-  if (!audioPlayer || !volumeSlider) return;
-
-  const value = volumeSlider.value / 100;
-   // Kiểm tra xem hàm có chạy không
-  
-  if (audioPlayer) {
-    audioPlayer.volume = value;
-    audioPlayer.muted = (value === 0);
-  }
-  
-  if (value === 0) {
-    if (muteBtn) muteBtn.textContent = '🔇';
-    if (musicMainBtn) musicMainBtn.textContent = '🔇';
-    isMuted = true;
-  } else {
-    if (muteBtn) muteBtn.textContent = '🔊';
-    if (musicMainBtn) musicMainBtn.textContent = '🔊';
-    isMuted = false;
-    lastVolume = value;
-  }
-}
-  // dừng ở đây
-  // Bấm nút chính: hiện/ẩn panel
-  if (musicMainBtn) {
-    musicMainBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (musicPanel.style.display === 'none' || musicPanel.style.display === '') {
-        musicPanel.style.display = 'block';
+    function toggleMute() {
+      if (isMuted) {
+        // BẬT LẠI ÂM
+        audioPlayer.muted = false;
+        audioPlayer.volume = lastVolume;
+        soundIcon.src = SOUND_ON;
+        console.log("Bật âm, volume:", lastVolume);
       } else {
-        musicPanel.style.display = 'none';
+        // TẮT ÂM
+        lastVolume = audioPlayer.volume;
+        audioPlayer.muted = true;
+        audioPlayer.volume = 0;
+        soundIcon.src = SOUND_OFF;
+        console.log("Tắt âm");
       }
-    });
-  }
-  
-  // Gắn sự kiện
-  if (prevBtn) prevBtn.addEventListener('click', prevSong);
-  if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlayPause);
-  if (nextBtn) nextBtn.addEventListener('click', nextSong);
-  if (progressBar) progressBar.addEventListener('input', seekTo);
-  if (volumeSlider) volumeSlider.addEventListener('input', setVolume);
-  // ===== THÊM CÁC DÒNG NÀY VÀO ĐÂY =====
-if (volumeSlider) {
-  volumeSlider.addEventListener('change', setVolume);      // Thêm change
-  volumeSlider.addEventListener('touchend', function() {   // Thêm cho mobile
-    setVolume();
-  });
-   volumeSlider.addEventListener('touchmove', function(e) {
-    setVolume();
-  });
-}
-  if (muteBtn) muteBtn.addEventListener('click', toggleMute);
-  
-  // Gắn sự kiện cho audio
-  audioPlayer.addEventListener('timeupdate', updateProgress);
-  audioPlayer.addEventListener('ended', onEnded);
-  audioPlayer.addEventListener('loadedmetadata', () => {
-    if (durationEl) durationEl.textContent = formatTime(audioPlayer.duration);
-  });
-  
-  // Cập nhật trạng thái play/pause từ audio
-  audioPlayer.addEventListener('play', () => {
-    playPauseBtn.textContent = '⏸';
-    isPlaying = true;
-  });
-  
-  audioPlayer.addEventListener('pause', () => {
-    playPauseBtn.textContent = '▶';
-    isPlaying = false;
-  });
-  
-  // Bấm ra ngoài để ẩn panel
-  document.addEventListener('click', function(e) {
-    if (musicPanel && musicMainBtn) {
-      if (!musicMainBtn.contains(e.target) && !musicPanel.contains(e.target)) {
-        musicPanel.style.display = 'none';
-      }
+      isMuted = !isMuted;
     }
-  });
-  
-  // Khởi tạo bài đầu
-  loadSong(0);
+    
+    if (soundBtn) {
+      soundBtn.addEventListener('click', toggleMute);
+      soundBtn.addEventListener('touchstart', toggleMute);
+    }
+    
+    // Khởi tạo icon đúng trạng thái
+    if (audioPlayer.muted === true || audioPlayer.volume === 0) {
+      soundIcon.src = SOUND_ON;
+      isMuted = true;
+    } else {
+      soundIcon.src = SOUND_OFF;
+      isMuted = false;
+    }
+  })();
 </script>
 
 </body>

@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const data = {
-    name: "Nguyễn Ngọc Hảo",
+    name: "Thái tử seoul",
     avatar: "avatar.jpg",
-    desc: "2011, đếch biết sợ và thích bị ăn đòn",
+    desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-instagram", link: "https://www.instagram.com/_.ngnghao._/" },
