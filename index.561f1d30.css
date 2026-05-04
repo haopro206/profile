@@ -3019,19 +3019,6 @@ a, button, .social li, .info-btn, .avatar, .name {
   animation: none !important;
 }
 /* Hiệu ứng chữ kiểu "ni be xinh" */
-.name {
-  font-family: 'Courier New', 'Segoe UI', monospace !important;
-  font-size: 36px !important;
-  font-weight: 700 !important;
-  letter-spacing: 1px !important;
-  text-transform: lowercase !important;
-  color: #ffffff !important;
-  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255,255,255,0.5);
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-  animation: none !important;
-}
 
 /* Đổi chữ hoa thành chữ thường nếu muốn */
 .name:first-letter {
@@ -3151,4 +3138,62 @@ a, button, .social li, .info-btn, .avatar, .name {
     transform: translate(-47%, -50%) !important;
     object-position: left center !important;
   }
+}
+/* Đổi font cho đoạn mô tả thành Lucida Console */
+.excerpt {
+  font-family: 'Lucida Console', 'Courier New', monospace !important;
+   color: #000000 !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.5px !important;
+} 
+.details {
+  width: 450px;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .details {
+    width: 100%;
+  }
+}
+/* Giảm kích thước avatar */
+.avatar {
+  width: 150px !important;
+  height: 150px !important;
+  min-width: 150px !important;
+  min-height: 150px !important;
+}
+
+.avatar img,
+.avatar .image {
+  width: 150x !important;
+  height: 150px !important;
+  max-width: 150px !important;
+  max-height: 150px !important;
+  object-fit: cover !important;
+}
+.copyright {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: monospace;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .copyright {
+    font-size: 12px;
+    bottom: 5px;
+  }
+}
+
+.separator {
+  margin: 0 8px;
+  opacity: 0.5;
 }
