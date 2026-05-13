@@ -1126,43 +1126,49 @@ if (soundControl) soundControl.style.display = 'block';
 <!-- Hiệu ứng trái tim ♥ rơi từ khoảng không -->
 <div id="rainHeart" class="rain-heart"></div>
 <script>
-  // Hiệu ứng trái tim ♥ rơi chậm, nhỏ
+  // Hiệu ứng các ký tự ★ ✡ ❄ rơi từ khoảng không
   (function() {
     const rainContainer = document.getElementById('rainHeart');
     if (!rainContainer) return;
     
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart-fall';
-      heart.textContent = '♥';
-      heart.style.color = '#ffffff';
+    // Mảng các ký tự muốn rơi
+    const symbols = ['★', '✡', '❄'];
+    
+    function createSymbol() {
+      const symbol = document.createElement('div');
+      symbol.className = 'heart-fall';
+      
+      // Chọn ngẫu nhiên 1 trong 3 ký tự
+      const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+      symbol.textContent = randomSymbol;
+      symbol.style.color = '#ffffff';
       
       // Vị trí ngang ngẫu nhiên
       const leftPos = Math.random() * 100;
-      heart.style.left = leftPos + '%';
+      symbol.style.left = leftPos + '%';
       
-      // Kích thước nhỏ hơn (8px - 18px)
-      const size = 15 + Math.random() * 25;
-      heart.style.fontSize = size + 'px';
+      // Kích thước ngẫu nhiên (8px - 20px)
+      const size = 12 + Math.random() * 20;
+      symbol.style.fontSize = size + 'px';
       
-      // Tốc độ rơi CHẬM HƠN (5s - 10s)
-      const duration = 5 + Math.random() * 5;
-      heart.style.animationDuration = duration + 's';
+      // Tốc độ rơi ngẫu nhiên (4s - 8s)
+      const duration = 4 + Math.random() * 4;
+      symbol.style.animationDuration = duration + 's';
       
-      rainContainer.appendChild(heart);
+      rainContainer.appendChild(symbol);
       
-      // Xóa tim sau khi rơi xong
+      // Xóa sau khi rơi xong
       setTimeout(() => {
-        if (heart && heart.remove) heart.remove();
-      }, duration * 1000);
+        if (symbol && symbol.remove) symbol.remove();
+      }, (duration + 0.5) * 1000);
     }
     
-    // Tạo tim mới mỗi 0.4 giây (ít hơn)
-    setInterval(createHeart, 400);
+    // Tạo mới mỗi 0.35 giây
+    setInterval(createSymbol, 350);
     
-    // Tạo 3 tim ban đầu
-    for (let i = 0; i < 3; i++) {
-      setTimeout(createHeart, i * 100);
+    // Tạo 5 ký tự ban đầu
+    for (let i = 0; i < 5; i++) {
+      setTimeout(createSymbol, i * 80);
     }
   })();
 </script>
