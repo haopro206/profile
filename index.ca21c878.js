@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const data = {
-    name: "Thái tử seoul",
+    name: "Thái tử Incheon",
     avatar: "avatar.jpg",
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [

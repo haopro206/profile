@@ -3004,12 +3004,12 @@ a, button, .social li, .info-btn, .avatar, .name {
 }
 /* Xóa hiệu ứng glow/neon và viền hồng của tên */
 .name {
-  background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0000);
+  background: linear-gradient( 45deg, #cccccc, #999999, #666666, #333333);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
-  animation: rainbow 4s linear infinite;
+  animation: rainbow 10s linear infinite;
 }
 
 @keyframes rainbow {
@@ -3201,4 +3201,28 @@ a, button, .social li, .info-btn, .avatar, .name {
 .separator {
   margin: 0 8px;
   opacity: 0.5;
+}
+/* Hiệu ứng Jello chậm, khoảng cách giữa các lần giật lâu hơn */
+.name {
+  display: inline-block;
+  animation: jelloLoopSlow 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes jelloLoopSlow {
+  0%, 100% {
+    transform: scale3d(1, 1, 1);
+  }
+  15%, 35% {
+    transform: scale3d(1.06, 0.94, 1);
+  }
+  25% {
+    transform: scale3d(0.94, 1.06, 1);
+  }
+  45% {
+    transform: scale3d(0.98, 1.02, 1);
+  }
+  55% {
+    transform: scale3d(1.02, 0.98, 1);
+  }
 }
