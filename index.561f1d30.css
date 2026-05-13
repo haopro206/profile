@@ -3226,3 +3226,35 @@ a, button, .social li, .info-btn, .avatar, .name {
     transform: scale3d(1.02, 0.98, 1);
   }
 }
+
+/* Hiệu ứng trái tim rơi xuyên xuống dưới đáy */
+.rain-heart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.heart-fall {
+  position: absolute;
+  font-size: 14px;
+  font-weight: normal;
+  color: #ffffff;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  animation: fallHeart linear infinite;
+}
+
+@keyframes fallHeart {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(calc(100vh + 200px)) rotate(360deg);  /* Xuyên xuống dưới đáy 200px */
+  }
+}
