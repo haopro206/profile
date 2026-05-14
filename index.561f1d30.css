@@ -3147,7 +3147,7 @@ a, button, .social li, .info-btn, .avatar, .name {
 /* Đổi font cho đoạn mô tả thành Lucida Console */
 .excerpt {
   font-family: 'Lucida Console', 'Courier New', monospace !important;
-   color: #000000 !important;
+   color: #fffcfc !important; /* Màu trắng sáng hơn một chút để nổi bật trên nền tối */
   font-style: normal !important;
   font-weight: 400 !important;
   letter-spacing: 0.5px !important;
