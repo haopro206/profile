@@ -1195,16 +1195,80 @@ if (soundControl) soundControl.style.display = 'block';
     console.log("Phát bài: " + randomSong);
   }
 </script>
+<script>
+  // Random nhạc mỗi lần load trang
+  const playlist = ["music.mp3", "music2.mp3", "music3.mp3"];
+  const randomIndex = Math.floor(Math.random() * playlist.length);
+  const randomSong = playlist[randomIndex];
+  
+  const audioPlayer = document.getElementById('bgmusic');
+  if (audioPlayer) {
+    audioPlayer.src = randomSong;
+    console.log("Phát bài: " + randomSong);
+  }
+</script>
+
+<script>
+  // Đợi trang tải xong rồi mới gán sự kiện đổi avatar
+  document.addEventListener('DOMContentLoaded', function() {
+    const avatars = ["avatar1.gif", "avatar2.gif", "avatar3.gif", "avatar4.gif", "avatar5.gif",]
+    let currentIndex = 0;
+    
+    // Tìm avatar (thử nhiều selector)
+    let avatarElement = document.querySelector('.avatar .image');
+    if (!avatarElement) {
+      avatarElement = document.querySelector('.avatar img');
+    }
+    
+    if (avatarElement) {
+      console.log("Đã tìm thấy avatar:", avatarElement);
+      avatarElement.style.cursor = 'pointer';
+      
+      // Nếu là div .image (dùng background-image)
+      if (avatarElement.tagName === 'DIV') {
+        // Lấy ảnh hiện tại để xác định index
+        const currentBg = avatarElement.style.backgroundImage;
+        for (let i = 0; i < avatars.length; i++) {
+          if (currentBg && currentBg.includes(avatars[i])) {
+            currentIndex = i;
+            break;
+          }
+        }
+        
+        avatarElement.addEventListener('click', function() {
+          currentIndex = (currentIndex + 1) % avatars.length;
+          this.style.backgroundImage = `url('${avatars[currentIndex]}')`;
+          
+          // Hiệu ứng
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 150);
+        });
+      } 
+      // Nếu là thẻ img
+      else if (avatarElement.tagName === 'IMG') {
+        avatarElement.addEventListener('click', function() {
+          currentIndex = (currentIndex + 1) % avatars.length;
+          this.src = avatars[currentIndex];
+          
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 150);
+        });
+      }
+    } else {
+      console.log("Không tìm thấy avatar element");
+    }
+  });
+</script>
+
 </body>
+
 <!-- Video Background -->
 <video autoplay muted loop playsinline id="bgVideo" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -2; object-fit: cover;">
   <source src="bgr.mp4" type="video/mp4">
-  <!-- Thêm fallback nếu video lỗi -->
-  Your browser does not support HTML5 video.
 </video>
-<!-- Video với fallback màu đen -->
-<video autoplay muted loop playsinline id="bgVideo" poster="fallback.jpg">
-  <source src="background.mp4" type="video/mp4">
-  <div style="position: fixed; top:0; left:0; width:100%; height:100%; background: #0a0a1a; z-index:-2;"></div>
-</video>
+
 </html>

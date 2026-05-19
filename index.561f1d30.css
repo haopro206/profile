@@ -3258,3 +3258,18 @@ a, button, .social li, .info-btn, .avatar, .name {
     transform: translateY(calc(100vh + 200px)) rotate(360deg);  /* Xuyên xuống dưới đáy 200px */
   }
 }
+/* Xóa khung trắng bên ngoài avatar */
+.avatar {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.avatar .image,
+.avatar img {
+  box-shadow: none !important;
+  border: none !important;
+}
+.avatar img {
+  transition: transform 0.15s ease;
+  cursor: pointer;
+}
