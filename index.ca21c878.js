@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-instagram", link: "https://www.instagram.com/_.ngnghao._/" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
+      { icon: "fa-discord", type: "copy", text: "@ngojchao50xentimet." },
       { type: "info", icon: "fa-info-circle", link: "#" }
     ]
   };
@@ -40,18 +41,22 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="excerpt">${data.desc}</p>
           <ul class="social">
             ${data.social.map(s => `
-              <li>
-                ${s.type === "info" 
-                  ? `<a href="javascript:void(0)" class="info-btn" onclick="toggleInfoPanel()">
-                      <i class="fas fa-info-circle"></i>
+  <li>
+    ${s.type === "info" 
+      ? `<a href="javascript:void(0)" class="info-btn" onclick="toggleInfoPanel()">
+          <i class="fas fa-info-circle"></i>
+         </a>`
+      : s.type === "copy"
+        ? `<a href="javascript:void(0)" class="copy-btn" onclick="copyDiscordUsername('${s.text}', this)">
+                      <i class="fab fa-discord"></i>
                      </a>`
-                  : `<a href="${s.link}" target="_blank">
-                      <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
-                      ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
-                     </a>`
-                }
-              </li>
-            `).join("")}
+      : `<a href="${s.link}" target="_blank">
+          <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
+          ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
+         </a>`
+    }
+  </li>
+`).join("")}
           </ul>
         </div>
       </div>

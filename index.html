@@ -236,7 +236,7 @@
         }
     </script>
   
-   <script src="blockf12.js"></script>
+   <script src="blockf1.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -490,24 +490,22 @@ if (soundControl) soundControl.style.display = 'block';
       <span style="font-size:16px; color:#fff; font-weight:500;">Đực</span>
       <span></span>
 
+      <span style="font-size:16px; color:rgba(255,255,255,0.8);">STK</span>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="stkText" data-real="3915072006">***********MB</span>
+      <button onclick="copyRealText('stkText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋</button>
+
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">Zalo</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="zaloText">0334025718</span>
-      <button onclick="copyText('zaloText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
-       <span style="font-size:16px; color:rgba(255,255,255,0.8);">Bank</span>
-<span style="font-size:16px; color:#fff; font-weight:500;">
-  <span id="bankingText">3915072006</span> MB 
-</span>
-<button onclick="copyText('bankingText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
-      
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="zaloText" data-real="0334025718">***********</span>
+      <button onclick="copyRealText('zaloText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋</button>
       <!-- Dòng AOV có nút copy -->
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">AOV</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText">〆NgocHaoxyz.</span>
-      <button onclick="copyText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText" data-real="〆NgocHaoxyz.">***********</span>
+      <button onclick="copyRealText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       <!-- Dòng Riot có nút copy -->
       <span style="font-size:16px; color:rgba(255,255,255,0.8);">TFT</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText">flex xì xà xì xồ#206</span>
-      <button onclick="copyText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
+      <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText" data-real="flex xì xà xì xồ#206">***********</span>
+      <button onclick="copyRealText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
       
       
     </div>
@@ -520,12 +518,12 @@ if (soundControl) soundControl.style.display = 'block';
 </div>
 
 <script>
-  // Copy từng dòng (sửa lỗi event)
-  function copyText(elementId, btnElement) {
-    const textElement = document.getElementById(elementId);
-    const textToCopy = textElement.textContent;
+  // Copy nội dung thật (ẩn dưới dấu ***)
+  function copyRealText(elementId, btnElement) {
+    const element = document.getElementById(elementId);
+    const realText = element.getAttribute('data-real');
     
-    navigator.clipboard.writeText(textToCopy).then(function() {
+    navigator.clipboard.writeText(realText).then(function() {
       const originalText = btnElement.textContent;
       btnElement.textContent = '✅ Copied!';
       btnElement.style.background = 'rgba(0,200,0,0.3)';
@@ -538,34 +536,7 @@ if (soundControl) soundControl.style.display = 'block';
       alert('Không thể copy: ' + err);
     });
   }
-  
-  // Copy cả 2 dòng
-  function copyBoth() {
-    const aov = document.getElementById('aovText').textContent;
-    const riot = document.getElementById('riotText').textContent;
-    const textToCopy = `AOV: ${aov}\nRiot: ${riot}`;
-    const btn = event.target;
-    
-    navigator.clipboard.writeText(textToCopy).then(function() {
-      const originalText = btn.textContent;
-      btn.textContent = '✅ Copied!';
-      btn.style.background = 'rgba(0,200,0,0.3)';
-      
-      setTimeout(function() {
-        btn.textContent = originalText;
-        btn.style.background = 'rgba(255,255,255,0.15)';
-      }, 1500);
-    }).catch(function(err) {
-      alert('Không thể copy: ' + err);
-    });
-  }
-  
-  // Đóng panel
-  function closeInfoPanel() {
-    document.getElementById('infoPanel').style.display = 'none';
-  }
 </script>
-
 
 <style>
   /* Hiệu ứng Shimmer */
@@ -574,200 +545,62 @@ if (soundControl) soundControl.style.display = 'block';
     100% { left: 100%; }
   }
 </style>
-<script>
-  // Tạo hiệu ứng ripple khi chạm vào bất kỳ đâu trên trang
-  function createRipple(x, y) {
-    const ripple = document.createElement('div');
-    ripple.className = 'ripple-effect';
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
-    document.body.appendChild(ripple);
-    
-    // Tự động xóa ripple sau 0.6 giây
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
-  }
-  
-  // Bắt sự kiện click chuột (máy tính)
-  document.addEventListener('click', function(e) {
-    createRipple(e.clientX, e.clientY);
-  });
-  
-  // Bắt sự kiện chạm (điện thoại)
-  document.addEventListener('touchstart', function(e) {
-    const touch = e.touches[0];
-    createRipple(touch.clientX, touch.clientY);
-  });
-</script>
+
 <!-- Ảnh tùy chỉnh di theo chuột -->
 <div id="customCursor" class="custom-cursor" style="display: none;">
   <img src="hao.png" alt="hao" id="cursorImg">
 </div>
+
 <script>
-  // Hiệu ứng ảnh PNG - tối đa 3 ảnh cùng lúc
+  // CHỈ CÒN HIỆU ỨNG DI CHUỘT (HOVER) - ĐÃ XÓA HIỆU ỨNG CLICK
   (function() {
     const cursor = document.getElementById('customCursor');
     const cursorImg = document.getElementById('cursorImg');
     
-    // Đường dẫn ảnh của bạn
-    const cursorImageSrc = "hao.png"; // 👈 ẢNH CỦA BẠN
+    if (!cursor) return;
     
+    const cursorImageSrc = "hao.png";
     if (cursorImg) cursorImg.src = cursorImageSrc;
-    
-    let mouseX = 0, mouseY = 0;
-    let cursorVisible = false;
-    
-    // Mảng lưu nhiều ảnh (tối đa 3)
-    let imagesArray = [];
-    let timeoutsArray = [];
-    const MAX_IMAGES = 6;
     
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // PC: cập nhật vị trí chuột
-    if (!isMobile) {
-      document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        if (!cursorVisible) {
-          cursor.style.display = 'block';
-          cursorVisible = true;
-        }
-        
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-      });
-      
-      document.addEventListener('mouseleave', function() {
-        cursor.style.display = 'none';
-        cursorVisible = false;
-      });
-    } else {
-      if (cursor) cursor.style.display = 'none';
+    // Nếu là mobile, tắt cursor tùy chỉnh
+    if (isMobile) {
+      cursor.style.display = 'none';
+      document.body.style.cursor = 'auto';
+      return;
     }
     
-    // Hàm xóa ảnh cũ nhất nếu quá 3
-    function removeOldestImage() {
-      if (imagesArray.length >= MAX_IMAGES) {
-        const oldest = imagesArray.shift();
-        const oldestTimeout = timeoutsArray.shift();
-        if (oldestTimeout) clearTimeout(oldestTimeout);
-        if (oldest) {
-          oldest.style.transform = 'translate(-50%, -50%) scale(1.2)';
-          oldest.style.opacity = '0';
-          setTimeout(() => { if (oldest) oldest.remove(); }, 300);
-        }
+    let cursorVisible = false;
+    
+    // Di chuyển chuột (chỉ di chuyển, không click)
+    document.addEventListener('mousemove', function(e) {
+      if (!cursorVisible) {
+        cursor.style.display = 'block';
+        cursorVisible = true;
       }
-    }
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
     
-    // Hàm hiển thị ảnh
-    function showPersistentImage(x, y) {
-      removeOldestImage();
-      
-      const currentImage = document.createElement('div');
-      currentImage.style.position = 'fixed';
-      currentImage.style.left = x + 'px';
-      currentImage.style.top = y + 'px';
-      currentImage.style.width = '40px';
-      currentImage.style.height = '40px';
-      currentImage.style.transform = 'translate(-50%, -50%) scale(0)';
-      currentImage.style.pointerEvents = 'none';
-      currentImage.style.zIndex = '999998';
-      currentImage.style.transition = 'all 0.3s ease-out';
-      
-      const img = document.createElement('img');
-      img.src = cursorImageSrc;
-      img.style.width = '100%';
-      img.style.height = '100%';
-      img.style.objectFit = 'contain';
-      img.style.filter = 'none';
-      
-      currentImage.appendChild(img);
-      document.body.appendChild(currentImage);
-      
-      setTimeout(() => {
-        if (currentImage) {
-          currentImage.style.transform = 'translate(-50%, -50%) scale(1)';
-        }
-      }, 10);
-      
-      imagesArray.push(currentImage);
-      
-      const timeout = setTimeout(() => {
-        const index = imagesArray.indexOf(currentImage);
-        if (index > -1) {
-          imagesArray.splice(index, 1);
-          timeoutsArray.splice(index, 1);
-        }
-        if (currentImage) {
-          currentImage.style.transform = 'translate(-50%, -50%) scale(1.2)';
-          currentImage.style.opacity = '0';
-          setTimeout(() => {
-            if (currentImage) currentImage.remove();
-          }, 300);
-        }
-      }, 3000);
-      
-      timeoutsArray.push(timeout);
-    }
+    document.addEventListener('mouseleave', function() {
+      cursor.style.display = 'none';
+      cursorVisible = false;
+    });
     
-    // Hiệu ứng khi click chuột (PC)
-    if (!isMobile) {
-      document.addEventListener('mousedown', function(e) {
-        if (e.button === 0) {
-          cursor.classList.add('click');
-          showPersistentImage(mouseX, mouseY);
-          
-          setTimeout(() => {
-            cursor.classList.remove('click');
-          }, 200);
-        }
+    // HIỆU ỨNG HOVER KHI DI CHUỘT VÀO LINK
+    const allLinks = document.querySelectorAll('a, button, .info-btn, .social li, .avatar');
+    allLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.15)';
       });
-    }
-    
-    // Hiệu ứng khi chạm (điện thoại) - KHÔNG chặn sự kiện
-    let touchTimeout;
-    let lastTouchTime = 0;
-    
-    document.addEventListener('touchstart', function(e) {
-      // KHÔNG dùng e.preventDefault() để không chặn click
-      const now = Date.now();
-      if (now - lastTouchTime < 500) return;
-      lastTouchTime = now;
-      
-      const touch = e.touches[0];
-      const touchX = touch.clientX;
-      const touchY = touch.clientY;
-      
-      showPersistentImage(touchX, touchY);
-      
-      if (navigator.vibrate) navigator.vibrate(50);
-    }); // Đã xóa { passive: false }
-    
-    // Ẩn chuột khi rời khỏi cửa sổ (PC)
-    if (!isMobile) {
-      document.addEventListener('mouseleave', function() {
-        cursor.style.display = 'none';
-        cursorVisible = false;
+      link.addEventListener('mouseleave', () => {
+        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
       });
-    }
-    
-    // Khi chuột di chuyển qua link (PC)
-    if (!isMobile) {
-      const allLinks = document.querySelectorAll('a, button, .info-btn, .social li, .avatar');
-      allLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-          if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.1)';
-        });
-        link.addEventListener('mouseleave', () => {
-          if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-      });
-    }
+    });
   })();
 </script>
+
 <script>
   // Hiệu ứng 3D xoay theo chuột cho bảng thông tin
   (function() {
@@ -1320,6 +1153,39 @@ if (soundControl) soundControl.style.display = 'block';
     typeEffect();
   });
 </script>
+<script>
+  function copyDiscordUsername(username, element) {
+    navigator.clipboard.writeText(username).then(function() {
+      // Lấy vị trí của logo Discord
+      const rect = element.getBoundingClientRect();
+      
+      // Tạo tooltip tạm thời
+      let tooltip = document.querySelector('.discord-tooltip');
+      if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.className = 'discord-tooltip';
+        document.body.appendChild(tooltip);
+      }
+      
+      // Đặt nội dung
+      tooltip.textContent = 'Đã copy Username vào bộ nhớ tạm!';
+      
+      // Đặt vị trí sát dưới logo
+      // Đặt vị trí sát dưới logo + khoảng cách lớn hơn
+tooltip.style.left = (rect.left + rect.width / 2) + 'px';
+tooltip.style.top = (rect.bottom + 30) + 'px';  // Từ 5 lên 30 (hoặc 40, 50)
+      tooltip.style.display = 'block';
+      
+      // Tự động ẩn sau 1.5 giây
+      setTimeout(() => {
+        tooltip.style.display = 'none';
+      }, 1500);
+    }).catch(function(err) {
+      console.error("Copy thất bại:", err);
+    });
+  }
+</script>
+
 </body>
 
 <!-- Video Background -->

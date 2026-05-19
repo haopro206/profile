@@ -3273,3 +3273,146 @@ a, button, .social li, .info-btn, .avatar, .name {
   transition: transform 0.15s ease;
   cursor: pointer;
 }
+/* Tắt hiệu ứng màu xanh khi bấm nút info */
+.info-btn {
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  user-select: none !important;
+}
+
+.info-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.info-btn:active {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.discord-tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 11px;
+  color: white;
+  font-family: 'Courier New', monospace;
+  z-index: 10000;
+  pointer-events: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Mũi tên chỉ lên trên (từ logo xuống tooltip) */
+.discord-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+}
+
+/* Viền mũi tên (để có viền trắng) */
+.discord-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 9px;
+  border-style: solid;
+  border-color: transparent transparent rgba(255, 255, 255, 0.3) transparent;
+  z-index: -1;
+}
+.discord-tooltip {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 10px;
+  color: white;
+  font-family: 'Courier New', monospace;
+  z-index: 100000;
+  pointer-events: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Mũi tên màu trắng trong suốt */
+.discord-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Reset hoàn toàn hiệu ứng scale */
+/* Chỉ tắt hiệu ứng phóng to trên điện thoại */
+@/* PC vẫn giữ hiệu ứng (màn hình > 768px) */
+@media (min-width: 769px) {
+  .social li a:hover {
+    transform: scale(1.05) !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .social li a:active {
+    transform: scale(0.95) !important;
+  }
+}
+
+/* Mobile (≤ 768px) - tắt hết hiệu ứng */
+@media (max-width: 768px) {
+  .social li a,
+  .social li a:active,
+  .social li a:hover,
+  .social li a:focus,
+  .social li a:visited {
+    transform: scale(1) !important;
+    transform: none !important;
+    transition: none !important;
+    -webkit-transform: none !important;
+  }
+  
+  .social li a:hover i,
+  .social li a:active i {
+    transform: scale(1) !important;
+    transition: none !important;
+  }
+}
+#infoPanel button:last-child {
+  padding: 12px 20px !important;  /* Giữ nguyên chiều cao, giảm padding ngang */
+  width: auto !important;
+  min-width: 80px !important;
+  display: block !important;
+  margin: 12px auto 0 auto !important;
+}
+/* Nút copy - nhỏ */
+#infoPanel button[onclick*="copyRealText"] {
+  padding: 3px 6px !important;
+  font-size: 10px !important;
+  min-width: 30px !important;
+  border-radius: 4px !important;
+}
+
+/* Nút Close - to bình thường */
+#infoPanel button[onclick="closeInfoPanel()"] {
+  padding: 10px 24px !important;
+  font-size: 13px !important;
+  width: auto !important;
+  margin-top: 15px !important;
+}
+/* Đổi font cho tiêu đề INFORMATION giống tên */
