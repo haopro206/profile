@@ -244,7 +244,7 @@ var message="NoRightClicking"; function defeatIE() {if (document.all) {(message)
 
 <script defer="" src="../static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;4e195a5c150c405b90fd526cf9834b14&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
   </div>
-  <audio id="bgmusic" src="music.mp3" loop preload="auto" muted></audio>
+  <audio id="bgmusic" loop preload="auto"></audio>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var bgmusic = document.getElementById('bgmusic');
@@ -1171,6 +1171,28 @@ if (soundControl) soundControl.style.display = 'block';
       setTimeout(createSymbol, i * 80);
     }
   })();
+</script>
+<script>
+  // Danh sách nhạc - THÊM BÀI CỦA BẠN VÀO ĐÂY
+  const playlist = [
+    "music.mp3",
+    "music2.mp3", 
+    "music3.mp3",
+    "music4.mp3",
+    "music5.mp3"
+    // Thêm bao nhiêu bài cũng được
+  ];
+  
+  // Chọn bài ngẫu nhiên khi load trang
+  const randomIndex = Math.floor(Math.random() * playlist.length);
+  const randomSong = playlist[randomIndex];
+  
+  // Gán cho audio player
+  const audioPlayer = document.getElementById('bgmusic');
+  if (audioPlayer) {
+    audioPlayer.src = randomSong;
+    console.log("Phát bài: " + randomSong);
+  }
 </script>
 </body>
 <!-- Video Background -->
