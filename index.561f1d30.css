@@ -3416,3 +3416,28 @@ a, button, .social li, .info-btn, .avatar, .name {
   margin-top: 15px !important;
 }
 /* Đổi font cho tiêu đề INFORMATION giống tên */
+/* Video riêng cho PC và Mobile */
+.pc-video {
+  display: block !important;
+}
+.mobile-video {
+  display: none !important;
+}
+
+/* Trên điện thoại (dưới 768px) */
+@media (max-width: 768px) {
+  .pc-video {
+    display: none !important;
+  }
+  .mobile-video {
+    display: block !important;
+  }
+}
+/* Hiện lại con chuột mặc định */
+body, html, * {
+  cursor: auto !important;
+}
+
+a, button, .social li a, .info-btn {
+  cursor: pointer !important;
+}

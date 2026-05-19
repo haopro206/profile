@@ -236,7 +236,7 @@
         }
     </script>
   
-   <script src="blockf1.js"></script>
+   <script src="blockf12.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -547,59 +547,7 @@ if (soundControl) soundControl.style.display = 'block';
 </style>
 
 <!-- Ảnh tùy chỉnh di theo chuột -->
-<div id="customCursor" class="custom-cursor" style="display: none;">
-  <img src="hao.png" alt="hao" id="cursorImg">
-</div>
 
-<script>
-  // CHỈ CÒN HIỆU ỨNG DI CHUỘT (HOVER) - ĐÃ XÓA HIỆU ỨNG CLICK
-  (function() {
-    const cursor = document.getElementById('customCursor');
-    const cursorImg = document.getElementById('cursorImg');
-    
-    if (!cursor) return;
-    
-    const cursorImageSrc = "hao.png";
-    if (cursorImg) cursorImg.src = cursorImageSrc;
-    
-    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Nếu là mobile, tắt cursor tùy chỉnh
-    if (isMobile) {
-      cursor.style.display = 'none';
-      document.body.style.cursor = 'auto';
-      return;
-    }
-    
-    let cursorVisible = false;
-    
-    // Di chuyển chuột (chỉ di chuyển, không click)
-    document.addEventListener('mousemove', function(e) {
-      if (!cursorVisible) {
-        cursor.style.display = 'block';
-        cursorVisible = true;
-      }
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-    
-    document.addEventListener('mouseleave', function() {
-      cursor.style.display = 'none';
-      cursorVisible = false;
-    });
-    
-    // HIỆU ỨNG HOVER KHI DI CHUỘT VÀO LINK
-    const allLinks = document.querySelectorAll('a, button, .info-btn, .social li, .avatar');
-    allLinks.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.15)';
-      });
-      link.addEventListener('mouseleave', () => {
-        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      });
-    });
-  })();
-</script>
 
 <script>
   // Hiệu ứng 3D xoay theo chuột cho bảng thông tin
@@ -1185,12 +1133,23 @@ tooltip.style.top = (rect.bottom + 30) + 'px';  // Từ 5 lên 30 (hoặc 40, 50
     });
   }
 </script>
-
+<script>
+  // Đảm bảo video phát đúng trên mỗi thiết bị
+  document.addEventListener('DOMContentLoaded', function() {
+    const isMobile = window.innerWidth <= 768;
+    const pcVideo = document.getElementById('bgVideoPC');
+    const mobileVideo = document.getElementById('bgVideoMobile');
+    
+    if (isMobile && mobileVideo) {
+      mobileVideo.play();
+    } else if (pcVideo) {
+      pcVideo.play();
+    }
+  });
+</script>
 </body>
 
 <!-- Video Background -->
-<video autoplay muted loop playsinline id="bgVideo" style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -2; object-fit: cover;">
-  <source src="bgr.mp4" type="video/mp4">
-</video>
+<!-- Video cho PC -->
 
 </html>
