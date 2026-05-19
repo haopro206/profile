@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
   
   // Chọn ảnh ngẫu nhiên
-  const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+    const defaultAvatar = avatars[4];
   const data = {
    
     name: "thái tử seoul",
-    avatar: randomAvatar,
+    avatar: defaultAvatar,
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },

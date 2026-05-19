@@ -1178,7 +1178,6 @@ if (soundControl) soundControl.style.display = 'block';
     "music.mp3",
     "music2.mp3", 
     "music3.mp3",
-    "music4.mp3",
     "music5.mp3",
     "music6.mp3"
     // Thêm bao nhiêu bài cũng được
@@ -1211,7 +1210,7 @@ if (soundControl) soundControl.style.display = 'block';
 <script>
   // Đợi trang tải xong rồi mới gán sự kiện đổi avatar
   document.addEventListener('DOMContentLoaded', function() {
-    const avatars = ["avatar1.gif", "avatar2.gif", "avatar3.gif", "avatar4.gif", "avatar5.gif",]
+    const avatars = ["avatar5.gif", "avatar3.gif", "avatar2.gif", "avatar1.gif", "avatar4.gif",]
     let currentIndex = 0;
     
     // Tìm avatar (thử nhiều selector)
@@ -1263,7 +1262,64 @@ if (soundControl) soundControl.style.display = 'block';
     }
   });
 </script>
-
+<script>
+  // Hiệu ứng Typewriter cho tên
+  document.addEventListener('DOMContentLoaded', function() {
+    const nameElement = document.querySelector('.name');
+    if (!nameElement) return;
+    
+    // Các thành phố Hàn Quốc
+    const cities = [
+      "Seoul",
+      "Busan", 
+      "Incheon",
+      "Daegu",
+      "Daejeon",
+      "Gwangju",
+      "Ulsan",
+      "Jeju"
+    ];
+    
+    let cityIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let currentText = "Thái tử ";
+    
+    function typeEffect() {
+      const targetCity = cities[cityIndex];
+      
+      if (isDeleting) {
+        // Xóa tên thành phố
+        if (charIndex > 0) {
+          charIndex--;
+          nameElement.textContent = currentText + targetCity.substring(0, charIndex);
+          setTimeout(typeEffect, 50);
+        } else {
+          // Xóa xong, chuyển sang thành phố tiếp theo
+          isDeleting = false;
+          cityIndex = (cityIndex + 1) % cities.length;
+          setTimeout(typeEffect, 300);
+        }
+      } else {
+        // Gõ tên thành phố
+        if (charIndex < targetCity.length) {
+          charIndex++;
+          nameElement.textContent = currentText + targetCity.substring(0, charIndex);
+          setTimeout(typeEffect, 100);
+        } else {
+          // Gõ xong, chờ rồi xóa
+          isDeleting = true;
+          setTimeout(typeEffect, 1500);
+        }
+      }
+    }
+    
+    // Khởi tạo
+    nameElement.textContent = currentText + cities[0].charAt(0);
+    charIndex = 1;
+    typeEffect();
+  });
+</script>
 </body>
 
 <!-- Video Background -->
