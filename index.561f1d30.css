@@ -3441,3 +3441,29 @@ body, html, * {
 a, button, .social li a, .info-btn {
   cursor: pointer !important;
 }
+/* Mặc định: PC hiện, Mobile ẩn */
+.pc-gif {
+  display: block !important;
+}
+.mobile-gif {
+  display: none !important;
+}
+
+/* Trên điện thoại (dưới 768px) */
+@media (max-width: 768px) {
+  .pc-gif {
+    display: none !important;
+  }
+  .mobile-gif {
+    display: block !important;
+  }
+}
+.intro-screen h1 {
+  animation: fadeIn 2s ease-in !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.intro-screen h1:hover {
+  color: #ffffff !important;
+}
