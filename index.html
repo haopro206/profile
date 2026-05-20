@@ -1051,13 +1051,13 @@ if (soundControl) soundControl.style.display = 'block';
     
     // Các thành phố Hàn Quốc
     const cities = [
+      "Tokyo",
       "Seoul",
       "Busan", 
       "Incheon",
       "Daegu",
       "Daejeon",
       "Gwangju",
-      "Ulsan",
       "Jeju"
     ];
     
@@ -1147,9 +1147,30 @@ tooltip.style.top = (rect.bottom + 30) + 'px';  // Từ 5 lên 30 (hoặc 40, 50
     }
   });
 </script>
+<script>
+  // Danh sách tất cả avatar cần preload
+  const avatarList = [
+    "avatar1.gif",
+    "avatar2.gif", 
+    "avatar3.gif",
+    "avatar4.gif",
+    "avatar5.gif"
+  ];
+  
+  // Preload tất cả ảnh
+  avatarList.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    console.log("Preload: " + src);
+  });
+</script>
 </body>
+<!-- Ảnh GIF làm background -->
+<!-- GIF cho PC -->
+<img src="bg_pc.gif" alt="bg pc" id="bgPC" class="bg-gif pc-gif" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: block;">
 
-<!-- Video Background -->
+<!-- GIF cho điện thoại -->
+<img src="bg_mobile.gif" alt="bg mobile" id="bgMobile" class="bg-gif mobile-gif" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: none;">
 <!-- Video cho PC -->
 
 </html>
