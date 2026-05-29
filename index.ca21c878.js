@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
-      { icon: "fa-instagram", link: "https://www.instagram.com/_.ngnghao._/" },
+      { icon: "fa-instagram", link: "https://www.instagram.com/ngojc.haoss/" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
       { icon: "fa-discord", type: "copy", text: "@ngojchao50xentimet." },
