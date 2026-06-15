@@ -1105,38 +1105,7 @@ if (soundControl) soundControl.style.display = 'block';
     typeEffect();
   });
 </script>
-<script>
-  function copyDiscordUsername(username, element) {
-    navigator.clipboard.writeText(username).then(function() {
-      // Lấy vị trí của logo Discord
-      const rect = element.getBoundingClientRect();
-      
-      // Tạo tooltip tạm thời
-      let tooltip = document.querySelector('.discord-tooltip');
-      if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.className = 'discord-tooltip';
-        document.body.appendChild(tooltip);
-      }
-      
-      // Đặt nội dung
-      tooltip.textContent = 'Đã copy Username vào bộ nhớ tạm!';
-      
-      // Đặt vị trí sát dưới logo
-      // Đặt vị trí sát dưới logo + khoảng cách lớn hơn
-tooltip.style.left = (rect.left + rect.width / 2) + 'px';
-tooltip.style.top = (rect.bottom + 30) + 'px';  // Từ 5 lên 30 (hoặc 40, 50)
-      tooltip.style.display = 'block';
-      
-      // Tự động ẩn sau 1.5 giây
-      setTimeout(() => {
-        tooltip.style.display = 'none';
-      }, 1500);
-    }).catch(function(err) {
-      console.error("Copy thất bại:", err);
-    });
-  }
-</script>
+
 <script>
   // Đảm bảo video phát đúng trên mỗi thiết bị
   document.addEventListener('DOMContentLoaded', function() {

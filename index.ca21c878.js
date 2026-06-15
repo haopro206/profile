@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-instagram", link: "https://www.instagram.com/ngojc.haoss/" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
-      { icon: "fa-discord", type: "copy", text: "@ngojchao50xentimet." },
+      { icon: "fa-discord", link:  "https://discord.com/users/1099520246613815296" },
       { type: "info", icon: "fa-info-circle", link: "#" }
     ]
   };
@@ -50,10 +50,20 @@ document.addEventListener("DOMContentLoaded", function () {
         ? `<a href="javascript:void(0)" class="copy-btn" onclick="copyDiscordUsername('${s.text}', this)">
                       <i class="fab fa-discord"></i>
                      </a>`
-      : `<a href="${s.link}" target="_blank">
-          <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
-          ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
-         </a>`
+      : s.icon === "fa-discord"
+  ? `<a href="javascript:void(0)"
+        onclick="
+          window.location.href='discord://-/users/1099520246613815296';
+          setTimeout(function(){
+            window.open('https://discord.com/users/1099520246613815296','_blank');
+          },1000);
+        ">
+        <i class="fab fa-discord"></i>
+     </a>`
+  : `<a href="${s.link}" target="_blank">
+      <i class="${s.icon === 'fa-comment-dots' ? 'fas' : 'fab'} ${s.icon}"></i>
+      ${s.name ? `<span style="font-size: 11px; margin-left: 5px;">${s.name}</span>` : ''}
+     </a>`
     }
   </li>
 `).join("")}
