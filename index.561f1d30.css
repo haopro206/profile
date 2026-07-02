@@ -3471,3 +3471,7 @@ a, button, .social li a, .info-btn {
   transform: scale(1.05) !important;
   object-fit: cover !important;
 }
+/* Ẩn bảng thông tin */
+#infoPanel {
+  display: none !important;
+}
