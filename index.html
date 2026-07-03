@@ -912,30 +912,49 @@ if (soundControl) soundControl.style.display = 'block';
 <!-- Hiệu ứng trái tim ♥ rơi từ khoảng không -->
 <div id="rainHeart" class="rain-heart"></div>
 <script>
-  // Hiệu ứng các ký tự ★ ✡ ❄ rơi từ khoảng không
+  // Hiệu ứng các ký tự và PNG rơi từ khoảng không
   (function() {
     const rainContainer = document.getElementById('rainHeart');
     if (!rainContainer) return;
     
-    // Mảng các ký tự muốn rơi
-    const symbols = ['★', '✡︎', '❄︎'];
+    // Danh sách các phần tử muốn rơi (có thể là text hoặc HTML)
+    const symbols = [
+      { type: 'text', content: '★' },
+      { type: 'text', content: '✡︎' },
+      { type: 'text', content: 'Miao' },
+      { type: 'image', src: 'hao.png', width: 40, height: 40 }  // PNG của bạn
+    ];
     
     function createSymbol() {
       const symbol = document.createElement('div');
       symbol.className = 'heart-fall';
       
-      // Chọn ngẫu nhiên 1 trong 3 ký tự
-      const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-      symbol.textContent = randomSymbol;
-      symbol.style.color = '#ffffff';
+      // Chọn ngẫu nhiên 1 trong danh sách
+      const randomItem = symbols[Math.floor(Math.random() * symbols.length)];
+      
+      if (randomItem.type === 'image') {
+        // Tạo ảnh PNG
+        const img = document.createElement('img');
+        img.src = randomItem.src;
+        img.style.width = randomItem.width + 'px';
+        img.style.height = randomItem.height + 'px';
+        img.style.objectFit = 'contain';
+        symbol.appendChild(img);
+      } else {
+        // Tạo text
+        symbol.textContent = randomItem.content;
+        symbol.style.color = '#ffffff';
+      }
       
       // Vị trí ngang ngẫu nhiên
       const leftPos = Math.random() * 100;
       symbol.style.left = leftPos + '%';
       
-      // Kích thước ngẫu nhiên (8px - 20px)
-      const size = 12 + Math.random() * 20;
-      symbol.style.fontSize = size + 'px';
+      // Kích thước ngẫu nhiên (chỉ áp dụng cho text)
+      if (randomItem.type === 'text') {
+        const size = 12 + Math.random() * 20;
+        symbol.style.fontSize = size + 'px';
+      }
       
       // Tốc độ rơi ngẫu nhiên (4s - 8s)
       const duration = 4 + Math.random() * 4;
@@ -952,7 +971,7 @@ if (soundControl) soundControl.style.display = 'block';
     // Tạo mới mỗi 0.35 giây
     setInterval(createSymbol, 350);
     
-    // Tạo 5 ký tự ban đầu
+    // Tạo 5 phần tử ban đầu
     for (let i = 0; i < 5; i++) {
       setTimeout(createSymbol, i * 80);
     }
@@ -1057,13 +1076,9 @@ if (soundControl) soundControl.style.display = 'block';
     
     // Các thành phố Hàn Quốc
     const cities = [
-      "Tokyo",
-      "Seoul",
-      "Busan", 
-      "Incheon",
-      "Daegu",
-      "Daejeon",
-      "Jeju"
+      
+      "Seoul"
+      
     ];
     
     let cityIndex = 0;

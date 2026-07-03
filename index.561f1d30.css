@@ -3475,3 +3475,15 @@ a, button, .social li a, .info-btn {
 #infoPanel {
   display: none !important;
 }
+/* Tắt hiệu ứng morph cho avatar */
+.avatar .image {
+  animation: none !important;
+  border-radius: 50% !important;
+}
+/* Avatar hình vuông, không bo tròn */
+.avatar,
+.avatar .image,
+.avatar img {
+  border-radius: 0% !important;
+  animation: none !important;
+}
