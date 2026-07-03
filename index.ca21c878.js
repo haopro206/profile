@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
       { icon: "fa-discord", link:  "https://discord.com/users/1099520246613815296" },
-      { type: "info", icon: "fa-info-circle", link: "#" }
+        { icon: "fa-heart", link: "https://zyo.lol/myaowl", type: "link" }
     ]
   };
 
@@ -42,9 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
           <ul class="social">
             ${data.social.map(s => `
   <li>
-    ${s.type === "info" 
-      ? `<a href="javascript:void(0)" class="info-btn" onclick="toggleInfoPanel()">
-          <i class="fas fa-info-circle"></i>
+     ${s.type === "link" 
+      ? `<a href="${s.link}" target="_blank">
+          <i class="fas fa-heart" style="color: #ffffff; filter: invert(1);"></i>
          </a>`
       : s.type === "copy"
         ? `<a href="javascript:void(0)" class="copy-btn" onclick="copyDiscordUsername('${s.text}', this)">

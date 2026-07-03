@@ -451,139 +451,7 @@ if (soundControl) soundControl.style.display = 'block';
   }
   
   // Đóng khi bấm ESC
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      var panel = document.getElementById('infoPanel');
-      if (panel) panel.style.display = 'none';
-    }
-  });
   
-  // Đóng khi bấm ra ngoài
-  document.addEventListener('click', function(e) {
-    var panel = document.getElementById('infoPanel');
-    var infoCard = document.querySelector('.info-card');
-    if (panel && panel.style.display === 'flex') {
-      if (!infoCard.contains(e.target) && !e.target.closest('.info-btn')) {
-        panel.style.display = 'none';
-      }
-    }
-  });
-</script>
-</div>
-<!-- Bảng thông tin trong suốt -->
-<!-- Bảng thông tin trắng trong suốt -->
-<!-- Bảng thông tin Liquid Glass Style iOS 26 -->
-<!-- Bảng thông tin - Kiểu Thủy tinh Shimmer (lung linh) -->
-<!-- Bảng thông tin - Kiểu Glassmorphism từ css.glass -->
-<div id="infoPanel" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:99999; display:none; justify-content:center; align-items:center;">
-  <div style="background: rgba(255, 255, 255, 0); border-radius: 16px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); backdrop-filter: blur(4.2px); -webkit-backdrop-filter: blur(4.2px); border: 1px solid rgba(255, 255, 255, 0.52); width: 420px; max-width: 90%; padding: 28px 25px;">
-    
-    <h3 style="color:#28e7ea; margin-bottom:15px; font-size:22px; font-weight:600; text-align:center; font-family: monospace;">INFORMATION </h3>
-    
-    <div style="border-top:1px solid rgba(255,255,255,0.3); margin:15px 0;"></div>
-    
-    <!-- Dùng Grid để căn thẳng hàng -->
-    <div style="display:grid; grid-template-columns:100px 1fr auto; gap:10px; align-items:center;">
-      
-      
-      
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">Ngày sinh</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;">15/07/2008</span>
-      <span></span>
-      
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">Giới tính</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;">Đực</span>
-      <span></span>
-
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">STK</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="stkText" data-real="3915072006">***********MB</span>
-      <button onclick="copyRealText('stkText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋</button>
-
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">Zalo</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="zaloText" data-real="0334025718">***********</span>
-      <button onclick="copyRealText('zaloText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋</button>
-      <!-- Dòng AOV có nút copy -->
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">AOV</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="aovText" data-real="〆NgocHaoxyz.">***********</span>
-      <button onclick="copyRealText('aovText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
-      
-      <!-- Dòng Riot có nút copy -->
-      <span style="font-size:16px; color:rgba(255,255,255,0.8);">TFT</span>
-      <span style="font-size:16px; color:#fff; font-weight:500;" id="riotText" data-real="flex xì xà xì xồ#206">***********</span>
-      <button onclick="copyRealText('riotText', this)" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:8px; padding:5px 12px; cursor:pointer; color:white; font-size:12px;">📋 </button>
-
-      
-    </div>
-    
-    <!-- Nút copy cả 2 - ĐẶT TRONG infoPanel -->
-   
-    
-    <button onclick="closeInfoPanel()" style="margin-top:12px; padding:12px 28px; background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3); border-radius:50px; color:white; cursor:pointer; font-size:14px; width:100%;">Close</button>
-  </div>
-</div>
-
-<script>
-  // Copy nội dung thật (ẩn dưới dấu ***)
-  function copyRealText(elementId, btnElement) {
-    const element = document.getElementById(elementId);
-    const realText = element.getAttribute('data-real');
-    
-    navigator.clipboard.writeText(realText).then(function() {
-      const originalText = btnElement.textContent;
-      btnElement.textContent = '✅ Copied!';
-      btnElement.style.background = 'rgba(0,200,0,0.3)';
-      
-      setTimeout(function() {
-        btnElement.textContent = originalText;
-        btnElement.style.background = 'rgba(255,255,255,0.15)';
-      }, 1500);
-    }).catch(function(err) {
-      alert('Không thể copy: ' + err);
-    });
-  }
-</script>
-
-<style>
-  /* Hiệu ứng Shimmer */
-  @keyframes shimmerMove {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-</style>
-
-<!-- Ảnh tùy chỉnh di theo chuột -->
-
-
-<script>
-  // Hiệu ứng 3D xoay theo chuột cho bảng thông tin
-  (function() {
-    const panel = document.querySelector('#infoPanel > div');
-    if (!panel) return;
-    
-    let bounds = panel.getBoundingClientRect();
-    
-    window.addEventListener('resize', () => {
-      bounds = panel.getBoundingClientRect();
-    });
-    
-    panel.addEventListener('mousemove', function(e) {
-      const x = e.clientX - bounds.left;
-      const y = e.clientY - bounds.top;
-      
-      const xPercent = (x / bounds.width) * 100;
-      const yPercent = (y / bounds.height) * 100;
-      
-      const xRotate = (50 - xPercent) / 5;
-      const yRotate = (50 - yPercent) / 5;
-      
-      panel.style.transform = `perspective(1000px) rotateY(${xRotate}deg) rotateX(${-yRotate}deg) scale3d(1.02, 1.02, 1.02)`;
-    });
-    
-    panel.addEventListener('mouseleave', function() {
-      panel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    });
-  })();
-</script>
 <script>
   // Kéo thả avatar di chuyển
   (function() {
@@ -957,7 +825,7 @@ if (soundControl) soundControl.style.display = 'block';
       }
       
       // Tốc độ rơi ngẫu nhiên (4s - 8s)
-      const duration = 4 + Math.random() * 4;
+      const duration = 8 + Math.random() * 8;
       symbol.style.animationDuration = duration + 's';
       
       rainContainer.appendChild(symbol);
