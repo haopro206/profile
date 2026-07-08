@@ -16,12 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
     avatar: defaultAvatar,
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
+      
+      { icon: "fa-heart", link: "https://zyo.lol/myaowl", type: "link" },
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-instagram", link: "https://www.instagram.com/ngojc.haoss/" },
-      { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
       { icon: "fa-discord", link:  "https://discord.com/users/1099520246613815296" },
-        { icon: "fa-heart", link: "https://zyo.lol/myaowl", type: "link" }
+      { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
+      ,
+        
     ]
   };
 
