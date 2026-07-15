@@ -309,7 +309,7 @@ if (soundControl) soundControl.style.display = 'block';
     document.addEventListener('touchstart', unlockAudio, { once: true });
     document.addEventListener('keydown', unlockAudio, { once: true });
     document.addEventListener('keydown', enterWeb);
-    
+    document.getElementById('intro').addEventListener('click', enterWeb);
   </script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"0706ce1a04a14385b5e9fd2604ea8602","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
@@ -787,10 +787,10 @@ if (soundControl) soundControl.style.display = 'block';
     
     // Danh sách các phần tử muốn rơi (có thể là text hoặc HTML)
     const symbols = [
-      { type: 'text', content: '★' },
-      { type: 'text', content: '✡︎' },
+      { type: 'text', content: '' },
+      { type: 'text', content: '' },
       
-      { type: 'image', src: 'hao.png', width: 30, height: 30 }  // PNG của bạn
+ // PNG của bạn
     ];
     
     function createSymbol() {
