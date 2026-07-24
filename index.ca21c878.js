@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-heart", link: "https://ngochaovjppro.xyz", type: "link" },
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-instagram", link: "https://www.instagram.com/ngojc.haoss/" },
-      { icon: "fa-tiktok", link: "https://www.tiktok.com/@nnhchechou" },
+      { icon: "fa-tiktok", link: "https://www.tiktok.com/@nguyenngochao2009chuppy" },
       { icon: "fa-discord", link:  "https://discord.com/users/1099520246613815296" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2", },  // Có icon + chữ ngl
       ,
