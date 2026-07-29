@@ -241,7 +241,7 @@
         }
     </script>
   
-   <script src="blockf12.js"></script>
+   <script src="blockf2.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -727,12 +727,6 @@ if (soundControl) soundControl.style.display = 'block';
 
   © Copyright by @ngochaodz - 2026
 </div>
-
-
-
-
-
-
 <script>
   (function() {
     const soundBtn = document.getElementById('soundBtn');
@@ -982,14 +976,12 @@ if (soundControl) soundControl.style.display = 'block';
         }
       }
     }
-    
     // Khởi tạo
     nameElement.textContent = currentText + cities[0].charAt(0);
     charIndex = 1;
     typeEffect();
   });
 </script>
-
 <script>
   // Đảm bảo video phát đúng trên mỗi thiết bị
   document.addEventListener('DOMContentLoaded', function() {
@@ -1004,8 +996,72 @@ if (soundControl) soundControl.style.display = 'block';
     }
   });
 </script>
+<script>
+  let gamePanelVisible = false;
 
+  function toggleGameInfo() {
+    const heartBtn = document.querySelector('.social li a .fa-heart')?.closest('a');
+    const panel = document.getElementById('gameInfoPanel');
+    
+    if (!panel || !heartBtn) return;
+    
+    if (gamePanelVisible) {
+      panel.style.display = 'none';
+      gamePanelVisible = false;
+      return;
+    }
+    
+    // Lấy vị trí của nút trái tim
+    const rect = heartBtn.getBoundingClientRect();
+    panel.style.left = (rect.right + 8) + 'px';
+    panel.style.top = (rect.top - 10) + 'px';
+    
+    panel.style.display = 'block';
+    gamePanelVisible = true;
+  }
 
+  // Tạo panel
+  document.addEventListener('DOMContentLoaded', function() {
+    const panel = document.createElement('div');
+    panel.id = 'gameInfoPanel';
+    panel.className = 'game-info-panel';
+    panel.innerHTML = `
+     <div class="game-item" data-name="NgocHao.🫧" data-code="GAME1">
+  <img src="lq.png" class="game-logo">
+  <span class="game-name">NgocHao.🫧</span>
+</div>
+<div class="game-item" data-name="flex xì xà xì xồ#206" data-code="GAME2">
+  <img src=" tft.png" class="game-logo">
+  <span class="game-name">flex xì xà xì xồ#206  </span>
+</div>
+    `;
+    document.body.appendChild(panel);
+    
+    // Giữ lâu để copy
+    document.querySelectorAll('.game-item').forEach(item => {
+      let timer;
+      const copyGame = () => {
+        const name = item.dataset.name;
+        const code = item.dataset.code;
+        navigator.clipboard.writeText(`${name}: ${code}`).then(() => {
+          alert('✅ Copied: ' + name + ': ' + code);
+        });
+      };
+      item.addEventListener('mousedown', () => timer = setTimeout(copyGame, 600));
+      item.addEventListener('mouseup', () => clearTimeout(timer));
+      item.addEventListener('mouseleave', () => clearTimeout(timer));
+      item.addEventListener('touchstart', () => timer = setTimeout(copyGame, 600));
+      item.addEventListener('touchend', () => clearTimeout(timer));
+      item.addEventListener('touchcancel', () => clearTimeout(timer));
+    });
+  });
+</script>
+<script>
+  // Cho phép copy trong bảng game
+  document.querySelectorAll('.game-item, .game-name, .game-code').forEach(el => {
+    el.style.userSelect = 'text';
+    el.style.webkitUserSelect = 'text';
+  });
+</script>
 </body>
-
 </html>
