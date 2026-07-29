@@ -15,11 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
     avatar: defaultAvatar,
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
-      { icon: "fa-heart", type: "game-info" },  // ← Đã sửa thành hiện bảng game
+        // ← Đã sửa thành hiện bảng game
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-instagram", link: "https://www.instagram.com/ngojc.haoss/" },
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@nguyenngochao2009chuppy" },
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
+      { icon: "fa-heart", type: "game-info" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2" }
     ]
   };
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   // Icon trái tim -> hiện bảng game
                   return `<li>
                     <a href="javascript:void(0)" onclick="toggleGameInfo()">
-                      <i class="fas fa-heart" style="color: #ff1177;"></i>
+                      <i class="fas fa-heart" style="color: #000000 !important; filter: none !important;"></i>
                     </a>
                   </li>`;
                 } else if (s.type === "copy") {

@@ -241,7 +241,7 @@
         }
     </script>
   
-   <script src="blockf2.js"></script>
+   <script src="blockf12.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -999,26 +999,54 @@ if (soundControl) soundControl.style.display = 'block';
 <script>
   let gamePanelVisible = false;
 
-  function toggleGameInfo() {
-    const heartBtn = document.querySelector('.social li a .fa-heart')?.closest('a');
-    const panel = document.getElementById('gameInfoPanel');
+ function toggleGameInfo() {
+  const heartBtn = document.querySelector('.social li a .fa-heart')?.closest('a');
+  const panel = document.getElementById('gameInfoPanel');
+  
+  if (!panel || !heartBtn) return;
+  
+  if (gamePanelVisible) {
+    // 🔥 HIỆU ỨNG ĐÓNG - THU NHỎ VỀ TIM
+    panel.style.transition = 'all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)';
+    panel.style.transform = 'scale(0.3)';
+    panel.style.opacity = '0';
     
-    if (!panel || !heartBtn) return;
-    
-    if (gamePanelVisible) {
+    setTimeout(() => {
       panel.style.display = 'none';
-      gamePanelVisible = false;
-      return;
-    }
+      panel.style.transform = '';
+      panel.style.opacity = '';
+    }, 300);
     
-    // Lấy vị trí của nút trái tim
-    const rect = heartBtn.getBoundingClientRect();
-    panel.style.left = (rect.right + 8) + 'px';
-    panel.style.top = (rect.top - 10) + 'px';
-    
-    panel.style.display = 'block';
-    gamePanelVisible = true;
+    gamePanelVisible = false;
+    return;
   }
+  
+  // HIỆU ỨNG MỞ - PHÓNG TO TỪ TIM
+  const rect = heartBtn.getBoundingClientRect();
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const panelWidth = panel.offsetWidth || 220;
+  const panelHeight = panel.offsetHeight || 150;
+  
+  // Bắt đầu từ vị trí trái tim (thu nhỏ)
+  panel.style.transition = 'none';
+  panel.style.left = (rect.left - panelWidth / 2) + 'px';
+  panel.style.top = (rect.top - panelHeight / 2) + 'px';
+  panel.style.transform = 'scale(0.3)';
+  panel.style.opacity = '0';
+  panel.style.display = 'block';
+  
+  // Phóng to ra giữa màn hình
+  setTimeout(() => {
+    panel.style.transition = 'all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1)';
+    panel.style.left = (windowWidth - panelWidth) / 2 + 'px';
+    panel.style.top = (windowHeight - panelHeight) / 2 + 'px';
+    panel.style.transform = 'scale(1)';
+    panel.style.opacity = '1';
+  }, 20);
+  
+  gamePanelVisible = true;
+}
 
   // Tạo panel
   document.addEventListener('DOMContentLoaded', function() {
