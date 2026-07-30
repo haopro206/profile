@@ -8,6 +8,7 @@
   <link rel="preload" as="image" href="avatar3.gif">
   <link rel="preload" as="image" href="avatar4.gif">
   <link rel="preload" as="image" href="avatar5.gif">
+   <link rel="preload" as="image" href="avatar6.gif">
 
   <link rel="icon" href="hehe.png" type="image/gif">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -615,7 +616,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
   // Đợi trang tải xong rồi mới gán sự kiện đổi avatar
   document.addEventListener('DOMContentLoaded', function() {
-    const avatars = ["avatar5.gif", "avatar3.gif", "avatar2.gif", "avatar1.gif", "avatar4.gif",]
+    const avatars = ["avatar5.gif", "avatar3.gif", "avatar2.gif", "avatar1.gif", "avatar4.gif", "avatar6.gif"];
     let currentIndex = 0;
     
     // Tìm avatar (thử nhiều selector)
@@ -849,20 +850,23 @@ overlay.addEventListener("click", () => {
     
     // Giữ lâu để copy
     document.querySelectorAll('.game-item').forEach(item => {
-      let timer;
-      const copyGame = () => {
-        const name = item.dataset.name;
-        const code = item.dataset.code;
-        navigator.clipboard.writeText(`${name}: ${code}`).then(() => {
-          alert('✅ Copied: ' + name + ': ' + code);
-        });
-      };
-      item.addEventListener('mousedown', () => timer = setTimeout(copyGame, 600));
-      item.addEventListener('mouseup', () => clearTimeout(timer));
-      item.addEventListener('mouseleave', () => clearTimeout(timer));
-      item.addEventListener('touchstart', () => timer = setTimeout(copyGame, 600));
-      item.addEventListener('touchend', () => clearTimeout(timer));
-      item.addEventListener('touchcancel', () => clearTimeout(timer));
+     const copyGame = () => {
+    const name = item.dataset.name;
+    const code = item.dataset.code;
+
+    navigator.clipboard.writeText(`${name}: ${code}`).then(() => {
+        alert(`Copied to clipboard!`);
+    });
+};
+
+// PC
+item.addEventListener("click", copyGame);
+
+// Điện thoại
+item.addEventListener("touchend", function(e){
+    e.preventDefault();
+    copyGame();
+});
     });
   });
 </script>

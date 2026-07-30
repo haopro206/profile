@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "avatar2.gif", 
     "avatar3.gif",
     "avatar4.gif",
-    "avatar5.gif"
+    "avatar5.gif",
+    "avatar6.gif"
   ];
   
   const defaultAvatar = avatars[4];
