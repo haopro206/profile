@@ -71,7 +71,7 @@
     </li>
     <li>
       
-  <button class="info-btn" onclick="toggleInfoPanel()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">
+  <button class="info-btn" onclick="toggleInfoPanel(event)" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;">
     <i class="fas fa-info-circle"></i>
   </button>
 </li>
@@ -452,252 +452,11 @@ if (soundControl) soundControl.style.display = 'block';
   
   // Đóng khi bấm ESC
   
-<script>
-  // Kéo thả avatar di chuyển
-  (function() {
-    const avatar = document.querySelector('.avatar');
-    if (!avatar) return;
-    
-    let isDragging = false;
-    let startX, startY;
-    let offsetX, offsetY;
-    
-    // Bắt đầu kéo (chuột)
-    avatar.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      
-      // Lấy vị trí hiện tại của avatar
-      const rect = avatar.getBoundingClientRect();
-      offsetX = startX - rect.left;
-      offsetY = startY - rect.top;
-      
-      avatar.style.cursor = 'grabbing';
-      avatar.style.transition = 'none';
-      e.preventDefault();
-    });
-    
-    // Di chuyển (chuột)
-    document.addEventListener('mousemove', function(e) {
-      if (!isDragging) return;
-      
-      let newX = e.clientX - offsetX;
-      let newY = e.clientY - offsetY;
-      
-      // Giới hạn trong màn hình
-      const maxX = window.innerWidth - avatar.offsetWidth;
-      const maxY = window.innerHeight - avatar.offsetHeight;
-      newX = Math.min(Math.max(0, newX), maxX);
-      newY = Math.min(Math.max(0, newY), maxY);
-      
-      avatar.style.position = 'fixed';
-      avatar.style.left = newX + 'px';
-      avatar.style.top = newY + 'px';
-      avatar.style.margin = '0';
-      avatar.style.zIndex = '1000';
-    });
-    
-    // Thả chuột
-    document.addEventListener('mouseup', function() {
-      if (isDragging) {
-        isDragging = false;
-        avatar.style.cursor = 'grab';
-        avatar.style.transition = 'transform 0.2s';
-      }
-    });
-    
-    // Hỗ trợ chạm trên điện thoại
-    avatar.addEventListener('touchstart', function(e) {
-      const touch = e.touches[0];
-      isDragging = true;
-      startX = touch.clientX;
-      startY = touch.clientY;
-      
-      const rect = avatar.getBoundingClientRect();
-      offsetX = startX - rect.left;
-      offsetY = startY - rect.top;
-      
-      avatar.style.transition = 'none';
-      e.preventDefault();
-    });
-    
-    document.addEventListener('touchmove', function(e) {
-      if (!isDragging) return;
-      
-      const touch = e.touches[0];
-      let newX = touch.clientX - offsetX;
-      let newY = touch.clientY - offsetY;
-      
-      const maxX = window.innerWidth - avatar.offsetWidth;
-      const maxY = window.innerHeight - avatar.offsetHeight;
-      newX = Math.min(Math.max(0, newX), maxX);
-      newY = Math.min(Math.max(0, newY), maxY);
-      
-      avatar.style.position = 'fixed';
-      avatar.style.left = newX + 'px';
-      avatar.style.top = newY + 'px';
-      avatar.style.margin = '0';
-      avatar.style.zIndex = '1000';
-    });
-    
-    document.addEventListener('touchend', function() {
-      isDragging = false;
-      avatar.style.transition = 'transform 0.2s';
-    });
-    
-    // Thêm cursor grab cho avatar
-    avatar.style.cursor = 'grab';
-    avatar.style.userSelect = 'none';
-  })();
-</script>
-<script>
-  (function() {
-    const avatar = document.querySelector('.avatar');
-    if (!avatar) {
-      console.log('Không tìm thấy avatar');
-      return;
-    }
-    
-    let isDragging = false;
-    let startX = 0, startY = 0;
-    let initialLeft = 0, initialTop = 0;
-    
-    // Hàm lấy vị trí hiện tại của avatar
-    function getAvatarPosition() {
-      const rect = avatar.getBoundingClientRect();
-      return { x: rect.left, y: rect.top };
-    }
-    
-    // Bắt đầu kéo
-    function onStart(e) {
-      e.preventDefault();
-      isDragging = true;
-      
-      // Lấy vị trí chuột/touch
-      const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
-      const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
-      
-      const pos = getAvatarPosition();
-      startX = clientX - pos.x;
-      startY = clientY - pos.y;
-      
-      // Chuyển sang fixed positioning
-      avatar.style.position = 'fixed';
-      avatar.style.left = pos.x + 'px';
-      avatar.style.top = pos.y + 'px';
-      avatar.style.margin = '0';
-      avatar.classList.add('dragging');
-      
-      console.log('Bắt đầu kéo tại:', pos.x, pos.y);
-    }
-    
-    // Di chuyển
-    function onMove(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
-      const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
-      
-      let newX = clientX - startX;
-      let newY = clientY - startY;
-      
-      // Giới hạn trong màn hình
-      newX = Math.min(Math.max(0, newX), window.innerWidth - avatar.offsetWidth);
-      newY = Math.min(Math.max(0, newY), window.innerHeight - avatar.offsetHeight);
-      
-      avatar.style.left = newX + 'px';
-      avatar.style.top = newY + 'px';
-    }
-    
-    // Kết thúc kéo
-    function onEnd() {
-      if (isDragging) {
-        isDragging = false;
-        avatar.classList.remove('dragging');
-        console.log('Kết thúc kéo, vị trí:', avatar.style.left, avatar.style.top);
-      }
-    }
-    
-    // Gắn sự kiện chuột
-    avatar.addEventListener('mousedown', onStart);
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onEnd);
-    
-    // Gắn sự kiện chạm (điện thoại)
-    avatar.addEventListener('touchstart', onStart, { passive: false });
-    document.addEventListener('touchmove', onMove, { passive: false });
-    document.addEventListener('touchend', onEnd);
-    
-    avatar.style.cursor = 'grab';
-  })();
-</script>
-<!-- Thêm jQuery và jQuery UI -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-<script>
-  $(function() {
-    $(".avatar").draggable({
-      containment: "window",
-      cursor: "grab",
-      opacity: 0.8,
-      scroll: false
-    });
-  });
-</script>
-<script>
-  (function() {
-    const avatar = document.querySelector('.avatar');
-    if (!avatar) return;
-    
-    let isDragging = false;
-    let startX = 0, startY = 0;
-    let offsetX = 0, offsetY = 0;
-    
-    // Lấy vị trí chuột/touch
-    function getClientPos(e) {
-      if (e.touches) {
-        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      }
-      return { x: e.clientX, y: e.clientY };
-    }
-    
-    function onStart(e) {
-      e.preventDefault();
-      isDragging = true;
-      
-      const pos = getClientPos(e);
-      const rect = avatar.getBoundingClientRect();
-      
-      startX = pos.x - rect.left;
-      startY = pos.y - rect.top;
-      
-      avatar.style.position = 'fixed';
-      avatar.style.left = rect.left + 'px';
-      avatar.style.top = rect.top + 'px';
-      avatar.style.margin = '0';
-      avatar.style.zIndex = '9999';
-      avatar.style.cursor = 'grabbing';
-    }
-    
-    function onMove(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      const pos = getClientPos(e);
-      let newX = pos.x - startX;
-      let newY = pos.y - startY;
-      
-      // Giới hạn màn hình
-      newX = Math.min(Math.max(0, newX), window.innerWidth - avatar.offsetWidth);
-      newY = Math.min(Math.max(0, newY), window.innerHeight - avatar.offsetHeight);
-      
-      avatar.style.left = newX + 'px';
-      avatar.style.top = newY + 'px';
-    }
+
+
+
+
     
     function onEnd() {
       isDragging = false;
@@ -770,75 +529,6 @@ if (soundControl) soundControl.style.display = 'block';
     soundBtn.addEventListener('touchstart', toggleMute, { passive: false });
   })();
 </script>
-
-<!-- Hiệu ứng trái tim ♥ rơi từ khoảng không -->
-<div id="rainHeart" class="rain-heart"></div>
-<script>
-  // Hiệu ứng các ký tự và PNG rơi từ khoảng không
-  (function() {
-    const rainContainer = document.getElementById('rainHeart');
-    if (!rainContainer) return;
-    
-    // Danh sách các phần tử muốn rơi (có thể là text hoặc HTML)
-    const symbols = [
-      { type: 'text', content: '' },
-      { type: 'text', content: '' },
-      
- // PNG của bạn
-    ];
-    
-    function createSymbol() {
-      const symbol = document.createElement('div');
-      symbol.className = 'heart-fall';
-      
-      // Chọn ngẫu nhiên 1 trong danh sách
-      const randomItem = symbols[Math.floor(Math.random() * symbols.length)];
-      
-      if (randomItem.type === 'image') {
-        // Tạo ảnh PNG
-        const img = document.createElement('img');
-        img.src = randomItem.src;
-        img.style.width = randomItem.width + 'px';
-        img.style.height = randomItem.height + 'px';
-        img.style.objectFit = 'contain';
-        symbol.appendChild(img);
-      } else {
-        // Tạo text
-        symbol.textContent = randomItem.content;
-        symbol.style.color = '#ffffff';
-      }
-      
-      // Vị trí ngang ngẫu nhiên
-      const leftPos = Math.random() * 100;
-      symbol.style.left = leftPos + '%';
-      
-      // Kích thước ngẫu nhiên (chỉ áp dụng cho text)
-      if (randomItem.type === 'text') {
-        const size = 8 + Math.random() * 15;
-        symbol.style.fontSize = size + 'px';
-      }
-      
-      // Tốc độ rơi ngẫu nhiên (4s - 8s)
-      const duration = 8 + Math.random() * 8;
-      symbol.style.animationDuration = duration + 's';
-      
-      rainContainer.appendChild(symbol);
-      
-      // Xóa sau khi rơi xong
-      setTimeout(() => {
-        if (symbol && symbol.remove) symbol.remove();
-      }, (duration + 0.5) * 1000);
-    }
-    
-    // Tạo mới mỗi 0.35 giây
-    setInterval(createSymbol, 350);
-    
-    // Tạo 5 phần tử ban đầu
-    for (let i = 0; i < 5; i++) {
-      setTimeout(createSymbol, i * 80);
-    }
-  })();
-</script>
 <script>
   // Danh sách nhạc - THÊM BÀI CỦA BẠN VÀO ĐÂY
   const playlist = [
@@ -863,16 +553,63 @@ if (soundControl) soundControl.style.display = 'block';
   }
 </script>
 <script>
-  // Random nhạc mỗi lần load trang
-  const playlist = ["music.mp3", "music2.mp3", "music3.mp3"];
-  const randomIndex = Math.floor(Math.random() * playlist.length);
-  const randomSong = playlist[randomIndex];
-  
-  const audioPlayer = document.getElementById('bgmusic');
-  if (audioPlayer) {
-    audioPlayer.src = randomSong;
-    console.log("Phát bài: " + randomSong);
-  }
+document.addEventListener("DOMContentLoaded", () => {
+    const avatar = document.querySelector(".avatar");
+    if (!avatar) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let x = 0;
+    let y = 0;
+
+    avatar.style.touchAction = "none";
+    avatar.style.cursor = "grab";
+
+    function point(e) {
+        return e.touches
+            ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
+            : { x: e.clientX, y: e.clientY };
+    }
+
+    function start(e) {
+        isDragging = true;
+        const p = point(e);
+        startX = p.x;
+        startY = p.y;
+        avatar.style.cursor = "grabbing";
+    }
+
+    function move(e) {
+        if (!isDragging) return;
+
+        e.preventDefault();
+
+        const p = point(e);
+
+        x += p.x - startX;
+        y += p.y - startY;
+
+        startX = p.x;
+        startY = p.y;
+
+        avatar.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function end() {
+        isDragging = false;
+        avatar.style.cursor = "grab";
+    }
+
+    avatar.addEventListener("mousedown", start);
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseup", end);
+
+    avatar.addEventListener("touchstart", start, { passive: false });
+    document.addEventListener("touchmove", move, { passive: false });
+    document.addEventListener("touchend", end);
+    document.addEventListener("touchcancel", end);
+});
 </script>
 
 <script>
@@ -1002,6 +739,7 @@ if (soundControl) soundControl.style.display = 'block';
  function toggleGameInfo() {
   const heartBtn = document.querySelector('.social li a .fa-heart')?.closest('a');
   const panel = document.getElementById('gameInfoPanel');
+  const overlay = document.getElementById("overlay");
   
   if (!panel || !heartBtn) return;
   
@@ -1015,6 +753,8 @@ if (soundControl) soundControl.style.display = 'block';
       panel.style.display = 'none';
       panel.style.transform = '';
       panel.style.opacity = '';
+      overlay.style.opacity = "0";
+overlay.style.visibility = "hidden";
     }, 300);
     
     gamePanelVisible = false;
@@ -1035,6 +775,8 @@ if (soundControl) soundControl.style.display = 'block';
   panel.style.transform = 'scale(0.3)';
   panel.style.opacity = '0';
   panel.style.display = 'block';
+  overlay.style.visibility = "visible";
+overlay.style.opacity = "1";
   
   // Phóng to ra giữa màn hình
   setTimeout(() => {
@@ -1063,7 +805,47 @@ if (soundControl) soundControl.style.display = 'block';
   <span class="game-name">flex xì xà xì xồ#206  </span>
 </div>
     `;
+    document.addEventListener("click", function (e) {
+    const panel = document.getElementById("infoPanel");
+    const btn = document.querySelector(".info-btn");
+
+    if (!panel) return;
+
+    // Nếu click vào nút hoặc bên trong panel thì bỏ qua
+    if ((btn && btn.contains(e.target)) || panel.contains(e.target)) {
+        return;
+    }
+
+    // Chỉ đóng nếu đang mở
+    panel.style.display = "none";
+    
+});
+// Đóng khi bấm ra ngoài bảng game
+document.addEventListener("click", function (e) {
+  const panel = document.getElementById("gameInfoPanel") || document.getElementById("infoPanel");
+  if (!panel) return;
+
+  const btn = document.querySelector('[onclick="toggleGameInfo()"], [onclick="toggleInfoPanel()"]');
+
+  // Nếu bảng đang mở
+  if (panel.style.display === "flex" || panel.style.display === "block") {
+    // Click ngoài bảng và ngoài nút mở
+    if (!panel.contains(e.target) && (!btn || !btn.contains(e.target))) {
+      panel.style.display = "none";
+    }
+  }
+});
     document.body.appendChild(panel);
+    const overlay = document.createElement("div");
+overlay.id = "overlay";
+document.body.appendChild(overlay);
+
+overlay.addEventListener("click", () => {
+    if (gamePanelVisible) {
+        toggleGameInfo();
+        const overlay = document.getElementById("overlay");
+    }
+});
     
     // Giữ lâu để copy
     document.querySelectorAll('.game-item').forEach(item => {
@@ -1091,5 +873,6 @@ if (soundControl) soundControl.style.display = 'block';
     el.style.webkitUserSelect = 'text';
   });
 </script>
+
 </body>
 </html>
