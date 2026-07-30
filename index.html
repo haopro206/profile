@@ -797,11 +797,15 @@ overlay.style.opacity = "1";
     panel.id = 'gameInfoPanel';
     panel.className = 'game-info-panel';
     panel.innerHTML = `
-     <div class="game-item" data-name="NgocHao.🫧" data-code="GAME1">
+    <div class="game-item"
+     data-game="AoV"
+     data-name="NgocHao.🫧">
   <img src="lq.png" class="game-logo">
   <span class="game-name">NgocHao.🫧</span>
 </div>
-<div class="game-item" data-name="flex xì xà xì xồ#206" data-code="GAME2">
+<div class="game-item"
+     data-game="TFT"
+     data-name="flex xì xà xì xồ#206">
   <img src=" tft.png" class="game-logo">
   <span class="game-name">flex xì xà xì xồ#206  </span>
 </div>
@@ -850,24 +854,22 @@ overlay.addEventListener("click", () => {
     
     // Giữ lâu để copy
     document.querySelectorAll('.game-item').forEach(item => {
-     const copyGame = () => {
-    const name = item.dataset.name;
-    const code = item.dataset.code;
+    const copyGame = () => {
+        const name = item.dataset.name;
+        const game = item.dataset.game;
 
-    navigator.clipboard.writeText(`${name}: ${code}`).then(() => {
-        alert(`Copied to clipboard!`);
+        navigator.clipboard.writeText(name).then(() => {
+            alert(`Copied ${game} ig to clipboard!😂😂`);
+        });
+    };
+
+    item.addEventListener("click", copyGame);
+
+    item.addEventListener("touchend", function(e){
+        e.preventDefault();
+        copyGame();
     });
-};
-
-// PC
-item.addEventListener("click", copyGame);
-
-// Điện thoại
-item.addEventListener("touchend", function(e){
-    e.preventDefault();
-    copyGame();
 });
-    });
   });
 </script>
 <script>
