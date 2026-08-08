@@ -3429,7 +3429,8 @@ a, button, .social li a, .info-btn {
 }
 
 .game-item:last-child .game-name {
-  font-size: 12px !important;
+  font-size: 15px !important;
+    font-weight: bold !important;
   opacity: 0.8;
 }
 .game-info-panel {
