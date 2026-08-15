@@ -914,6 +914,66 @@ overlay.addEventListener("click", () => {
     el.style.webkitUserSelect = 'text';
   });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Chỉ chạy trên điện thoại / màn hình mobile
+    if (window.innerWidth > 768) return;
+
+    const profile = document.querySelector(".home");
+
+    if (!profile) return;
+
+    function shakeByPosition(x, y) {
+
+        const rect = profile.getBoundingClientRect();
+
+        // Vị trí chạm từ -1 đến 1
+        const posX = ((x - rect.left) / rect.width) * 2 - 1;
+        const posY = ((y - rect.top) / rect.height) * 2 - 1;
+
+        // Lắc rất nhẹ
+        const strength = 2;
+
+        const shakeX = -posY * strength;
+        const shakeY = posX * strength;
+
+        profile.style.setProperty(
+            "--shake-x",
+            shakeX.toFixed(2) + "deg"
+        );
+
+        profile.style.setProperty(
+            "--shake-y",
+            shakeY.toFixed(2) + "deg"
+        );
+
+        profile.classList.remove("touch-shake");
+
+        void profile.offsetWidth;
+
+        profile.classList.add("touch-shake");
+    }
+
+    // Chỉ nhận thao tác chạm trên mobile
+    profile.addEventListener("touchstart", function (e) {
+
+        if (!e.touches || !e.touches[0]) return;
+
+        const touch = e.touches[0];
+
+        shakeByPosition(
+            touch.clientX,
+            touch.clientY
+        );
+
+    }, {
+        passive: true
+    });
+
+});
+</script>
+
 
 
 </body>
