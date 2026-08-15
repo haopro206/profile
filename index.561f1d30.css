@@ -2952,10 +2952,11 @@ from {
 }
 
 .excerpt {
-  font-family: "Lucida Console", "Courier New", monospace !important;
-  color: #fffcfc !important;
+  font-family: "Trebuchet MS", Arial, sans-serif !important;
+  color: #ffffff !important;
   font-style: normal !important;
   font-weight: 400 !important;
+   font-size: 15px !important;
   letter-spacing: 0.5px !important;
 }
 
