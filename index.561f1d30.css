@@ -3537,3 +3537,19 @@ a, button, .social li a, .info-btn {
 #gameInfoPanel{
     z-index:9999;
 }
+.pc-gif {
+  display: block !important;
+}
+.mobile-gif {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .pc-gif {
+    display: none !important;
+  }
+  .mobile-gif {
+    display: block !important;
+  }
+}
+
