@@ -3564,38 +3564,30 @@ a, button, .social li a, .info-btn {
 /* Cái khung nằm phía sau avatar + tên + tiểu sử + social */
 .home::before {
     content: "";
-    position: absolute;
+    position: fixed;
 
-    /* Căn chính giữa màn hình */
+    /* Luôn căn giữa theo màn hình */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    /* Kích thước khung */
     width: 850px;
     height: 300px;
 
-    /* Màu nền giống ảnh 1 */
     background: rgba(35, 35, 35, 0.78);
 
-    /* Bo góc */
     border-radius: 30px;
 
-    /* Hiệu ứng kính */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    /* Viền nhẹ */
     border: 1px solid rgba(255, 255, 255, 0.12);
 
-    /* Bóng */
     box-shadow:
         0 15px 40px rgba(0, 0, 0, 0.35),
         inset 0 0 30px rgba(255, 255, 255, 0.03);
 
-    /* Nằm phía sau nội dung */
     z-index: 0;
-
     pointer-events: none;
 }
 
