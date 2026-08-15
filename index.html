@@ -29,6 +29,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="index.561f1d30.css">
+  
 </head>
 
 <body>
@@ -363,48 +364,67 @@ if (soundControl) soundControl.style.display = 'block';
   });
 </script>
 <script>
-  // Hiệu ứng typewriter LOOP cho câu mô tả
   document.addEventListener('DOMContentLoaded', function() {
-    const text = "VẠN SỰ TÙY DUYÊN.";
+    const texts = [
+      "Một tuổi thơi không được chọn vẹn.",
+      "Một cuộc sống đời thường thực tế nhất.",
+      "Của em và gia đình (3915072006 MBBank).",
+      "Kon kảm ơn các pác !"
+    ];
+
     const excerptEl = document.querySelector('.excerpt');
-    
+
     if (!excerptEl) {
       console.log('Không tìm thấy .excerpt');
       return;
     }
-    
-    let index = 0;
+
+    let textIndex = 0;
+    let charIndex = 0;
     let isDeleting = false;
-    
-    // Xóa nội dung gốc
+
     excerptEl.textContent = '';
-    
+
     function typeLoop() {
+      const currentText = texts[textIndex];
+
       if (isDeleting) {
         // Đang xóa
-        if (index > 0) {
-          excerptEl.textContent = text.substring(0, index - 1);
-          index--;
-          setTimeout(typeLoop, 50);
-        } else {
-          // Xóa xong, chuyển sang gõ lại
+        excerptEl.textContent = currentText.substring(0, charIndex);
+        charIndex--;
+
+        if (charIndex < 0) {
+          // Xóa xong → chuyển sang text tiếp theo
           isDeleting = false;
+          charIndex = 0;
+
+          textIndex++;
+
+          // Nếu hết 3 text → quay lại text đầu tiên
+          if (textIndex >= texts.length) {
+            textIndex = 0;
+          }
+
           setTimeout(typeLoop, 500);
+        } else {
+          setTimeout(typeLoop, 50);
         }
+
       } else {
         // Đang gõ
-        if (index <= text.length) {
-          excerptEl.textContent = text.substring(0, index);
-          index++;
-          setTimeout(typeLoop, 100);
-        } else {
-          // Gõ xong, chờ 2 giây rồi xóa
+        excerptEl.textContent = currentText.substring(0, charIndex);
+        charIndex++;
+
+        if (charIndex > currentText.length) {
+          // Gõ xong → chờ 2 giây rồi bắt đầu xóa
           isDeleting = true;
           setTimeout(typeLoop, 2000);
+        } else {
+          setTimeout(typeLoop, 100);
         }
       }
     }
-    
+
     typeLoop();
   });
 </script>
@@ -688,6 +708,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Các thành phố Hàn Quốc
     const cities = [
       
+      "S",
+      "Se",
+      "Seo",
+      "Seou",
       "Seoul"
       
     ];
