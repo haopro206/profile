@@ -3590,6 +3590,13 @@ a, button, .social li a, .info-btn {
     z-index: 0;
     pointer-events: none;
 }
+@media (max-width: 768px) {
+    .home::before {
+        width: 90%;
+        height: 430px;
+        border-radius: 25px;
+    }
+}
 
 
 /* Đảm bảo avatar + tên + tiểu sử + social nằm TRÊN khung */
@@ -3616,5 +3623,28 @@ a, button, .social li a, .info-btn {
   .social {
     transform: translateY(-25px) !important;
   }
+}
+/* PC: bảng luôn giữa màn hình */
+@media (min-width: 769px) {
+    .home::before {
+        position: fixed !important;
+    }
+}
+
+
+/* ĐIỆN THOẠI: bảng dính với nội dung */
+@media (max-width: 768px) {
+    .home::before {
+        position: absolute !important;
+
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+
+        width: 90% !important;
+        height: 430px !important;
+
+        border-radius: 25px !important;
+    }
 }
 
