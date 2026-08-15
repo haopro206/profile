@@ -2954,7 +2954,7 @@ from {
 .excerpt {
   font-family: "Trebuchet MS", Arial, sans-serif !important;
   color: #ffffff !important;
-  font-style: normal !important;
+  font-style: italic !important;
   font-weight: 400 !important;
    font-size: 15px !important;
   letter-spacing: 0.5px !important;
@@ -3551,6 +3551,78 @@ a, button, .social li a, .info-btn {
   }
   .mobile-gif {
     display: block !important;
+  }
+}
+/* =========================================
+   KHUNG BAO NGOÀI - KHÔNG ĐỤNG VỊ TRÍ NỘI DUNG
+========================================= */
+
+.home {
+    position: relative !important;
+}
+
+/* Cái khung nằm phía sau avatar + tên + tiểu sử + social */
+.home::before {
+    content: "";
+    position: absolute;
+
+    /* Căn chính giữa màn hình */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Kích thước khung */
+    width: 850px;
+    height: 300px;
+
+    /* Màu nền giống ảnh 1 */
+    background: rgba(35, 35, 35, 0.78);
+
+    /* Bo góc */
+    border-radius: 30px;
+
+    /* Hiệu ứng kính */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Viền nhẹ */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    /* Bóng */
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35),
+        inset 0 0 30px rgba(255, 255, 255, 0.03);
+
+    /* Nằm phía sau nội dung */
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+
+/* Đảm bảo avatar + tên + tiểu sử + social nằm TRÊN khung */
+.home > .avatar,
+.home > .details {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .home::before {
+        width: 90%;
+        height: 430px;
+        border-radius: 25px;
+    }
+}
+@media (min-width: 769px) {
+  .social {
+    transform: translateY(-25px) !important;
   }
 }
 
