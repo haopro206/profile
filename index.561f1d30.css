@@ -3552,30 +3552,4 @@ a, button, .social li a, .info-btn {
     display: block !important;
   }
 }
-.link-preview {
-    width: 300px;
-    padding: 14px;
-    background: rgba(40, 25, 28, 0.95);
-    border-left: 4px solid #ff9dcc;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
-.preview-title {
-    color: #6eb4ff;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.preview-description {
-    color: white;
-    margin-bottom: 14px;
-}
-
-.preview-image {
-    width: 100%;
-    max-height: 375px;
-    object-fit: cover;
-    border-radius: 5px;
-}
