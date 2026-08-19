@@ -254,7 +254,7 @@
         }
     </script>
   
-   <script src="blocf12.js"></script>
+   <script src="blockf12.js"></script>
   <script type="text/JavaScript">
 var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false") 
 </script>
@@ -411,12 +411,11 @@ if (soundControl) soundControl.style.display = 'block';
         }
 
       } else {
-        // Đang gõ
+       
         excerptEl.textContent = currentText.substring(0, charIndex);
         charIndex++;
 
         if (charIndex > currentText.length) {
-          // Gõ xong → chờ 2 giây rồi bắt đầu xóa
           isDeleting = true;
           setTimeout(typeLoop, 2000);
         } else {
@@ -429,7 +428,6 @@ if (soundControl) soundControl.style.display = 'block';
   });
 </script>
 <script>
-  // Hiệu ứng title typewriter (gõ → xóa → gõ câu khác)
   const titles = [
     "@ngochaodz"
   ];
@@ -482,41 +480,29 @@ if (soundControl) soundControl.style.display = 'block';
     document.getElementById('infoPanel').style.display = 'none';
   }
   
-  // Đóng khi bấm ESC
-  
-
-
-
-
-
-    
     function onEnd() {
       isDragging = false;
       avatar.style.cursor = 'grab';
     }
-    
-    // Sự kiện chuột (PC)
+  
     avatar.addEventListener('mousedown', onStart);
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseup', onEnd);
-    
-    // Sự kiện chạm (Mobile)
+   
     avatar.addEventListener('touchstart', onStart, { passive: false });
     document.addEventListener('touchmove', onMove, { passive: false });
     document.addEventListener('touchend', onEnd);
     
     avatar.style.cursor = 'grab';
   })();
-</script><!-- Nút điều khiển nhạc (góc trái trên) -->
-<!-- Nút âm lượng đơn giản -->
+</script>
 <div id="soundControl" class="sound-control" style="display: none;">
   <button id="soundBtn" class="sound-btn">
     <img id="soundIcon" src="sound-on.png" alt="sound">
   </button>
 </div>
 <div class="copyright">
-
-  © Copyright by @ngochaodz - 2026
+ © Copyright by @ngochaodz - 2026
 </div>
 <script>
   (function() {
@@ -536,13 +522,12 @@ if (soundControl) soundControl.style.display = 'block';
     const SOUND_ON = "sound-on.png";
     const SOUND_OFF = "sound-off.png";
     
-    // Mặc định bật âm
     soundIcon.src = SOUND_ON;
     audioPlayer.muted = false;
     audioPlayer.volume = 0.7;
     
     function toggleMute(e) {
-      e.preventDefault();  // Ngăn delay trên mobile
+      e.preventDefault();
       if (isMuted) {
         audioPlayer.muted = false;
         audioPlayer.volume = lastVolume;
@@ -556,13 +541,11 @@ if (soundControl) soundControl.style.display = 'block';
       isMuted = !isMuted;
     }
     
-    // Dùng cả click và touchstart để mobile phản hồi nhanh
     soundBtn.addEventListener('click', toggleMute);
     soundBtn.addEventListener('touchstart', toggleMute, { passive: false });
   })();
 </script>
 <script>
-  // Danh sách nhạc - THÊM BÀI CỦA BẠN VÀO ĐÂY
   const playlist = [
     "music.mp3",
     "music2.mp3", 
@@ -570,14 +553,11 @@ if (soundControl) soundControl.style.display = 'block';
     "music5.mp3",
     "music4.mp3",
     "music6.mp3"
-    // Thêm bao nhiêu bài cũng được
   ];
   
-  // Chọn bài ngẫu nhiên khi load trang
   const randomIndex = Math.floor(Math.random() * playlist.length);
   const randomSong = playlist[randomIndex];
   
-  // Gán cho audio player
   const audioPlayer = document.getElementById('bgmusic');
   if (audioPlayer) {
     audioPlayer.src = randomSong;
@@ -645,12 +625,9 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-  // Đợi trang tải xong rồi mới gán sự kiện đổi avatar
   document.addEventListener('DOMContentLoaded', function() {
     const avatars = ["avatar5.gif", "avatar3.gif", "avatar2.gif", "avatar1.gif", "avatar4.gif", "avatar6.gif"];
     let currentIndex = 0;
-    
-    // Tìm avatar (thử nhiều selector)
     let avatarElement = document.querySelector('.avatar .image');
     if (!avatarElement) {
       avatarElement = document.querySelector('.avatar img');
@@ -660,9 +637,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Đã tìm thấy avatar:", avatarElement);
       avatarElement.style.cursor = 'pointer';
       
-      // Nếu là div .image (dùng background-image)
       if (avatarElement.tagName === 'DIV') {
-        // Lấy ảnh hiện tại để xác định index
         const currentBg = avatarElement.style.backgroundImage;
         for (let i = 0; i < avatars.length; i++) {
           if (currentBg && currentBg.includes(avatars[i])) {
@@ -670,24 +645,19 @@ document.addEventListener("DOMContentLoaded", () => {
             break;
           }
         }
-        
-        avatarElement.addEventListener('click', function() {
+         avatarElement.addEventListener('click', function() {
           currentIndex = (currentIndex + 1) % avatars.length;
           this.style.backgroundImage = `url('${avatars[currentIndex]}')`;
-          
-          // Hiệu ứng
           this.style.transform = 'scale(0.95)';
           setTimeout(() => {
             this.style.transform = 'scale(1)';
           }, 150);
         });
       } 
-      // Nếu là thẻ img
       else if (avatarElement.tagName === 'IMG') {
         avatarElement.addEventListener('click', function() {
           currentIndex = (currentIndex + 1) % avatars.length;
           this.src = avatars[currentIndex];
-          
           this.style.transform = 'scale(0.95)';
           setTimeout(() => {
             this.style.transform = 'scale(1)';
@@ -700,63 +670,48 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 </script>
 <script>
-  // Hiệu ứng Typewriter cho tên
   document.addEventListener('DOMContentLoaded', function() {
     const nameElement = document.querySelector('.name');
     if (!nameElement) return;
-    
-    // Các thành phố Hàn Quốc
     const cities = [
-      
-      "S",
-      "Se",
-      "Seo",
-      "Seou",
-      "Seoul"
-      
+  // "Seoul"
     ];
-    
     let cityIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let currentText = "Thái tử ";
+    let currentText = "Thái tử SEoul ";
     
     function typeEffect() {
       const targetCity = cities[cityIndex];
       
       if (isDeleting) {
-        // Xóa tên thành phố
+    
         if (charIndex > 0) {
           charIndex--;
           nameElement.textContent = currentText + targetCity.substring(0, charIndex);
           setTimeout(typeEffect, 50);
         } else {
-          // Xóa xong, chuyển sang thành phố tiếp theo
           isDeleting = false;
           cityIndex = (cityIndex + 1) % cities.length;
           setTimeout(typeEffect, 300);
         }
       } else {
-        // Gõ tên thành phố
         if (charIndex < targetCity.length) {
           charIndex++;
           nameElement.textContent = currentText + targetCity.substring(0, charIndex);
           setTimeout(typeEffect, 100);
         } else {
-          // Gõ xong, chờ rồi xóa
           isDeleting = true;
           setTimeout(typeEffect, 1500);
         }
       }
     }
-    // Khởi tạo
     nameElement.textContent = currentText + cities[0].charAt(0);
     charIndex = 1;
     typeEffect();
   });
 </script>
 <script>
-  // Đảm bảo video phát đúng trên mỗi thiết bị
   document.addEventListener('DOMContentLoaded', function() {
     const isMobile = window.innerWidth <= 768;
     const pcVideo = document.getElementById('bgVideoPC');
@@ -780,7 +735,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!panel || !heartBtn) return;
   
   if (gamePanelVisible) {
-    // 🔥 HIỆU ỨNG ĐÓNG - THU NHỎ VỀ TIM
     panel.style.transition = 'all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)';
     panel.style.transform = 'scale(0.3)';
     panel.style.opacity = '0';
@@ -796,15 +750,12 @@ overlay.style.visibility = "hidden";
     gamePanelVisible = false;
     return;
   }
-  
-  // HIỆU ỨNG MỞ - PHÓNG TO TỪ TIM
   const rect = heartBtn.getBoundingClientRect();
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
   const panelWidth = panel.offsetWidth || 220;
   const panelHeight = panel.offsetHeight || 150;
-  
-  // Bắt đầu từ vị trí trái tim (thu nhỏ)
+
   panel.style.transition = 'none';
   panel.style.left = (rect.left - panelWidth / 2) + 'px';
   panel.style.top = (rect.top - panelHeight / 2) + 'px';
@@ -814,7 +765,6 @@ overlay.style.visibility = "hidden";
   overlay.style.visibility = "visible";
 overlay.style.opacity = "1";
   
-  // Phóng to ra giữa màn hình
   setTimeout(() => {
     panel.style.transition = 'all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1)';
     panel.style.left = (windowWidth - panelWidth) / 2 + 'px';
@@ -826,7 +776,6 @@ overlay.style.opacity = "1";
   gamePanelVisible = true;
 }
 
-  // Tạo panel
   document.addEventListener('DOMContentLoaded', function() {
     const panel = document.createElement('div');
     panel.id = 'gameInfoPanel';
@@ -851,25 +800,20 @@ overlay.style.opacity = "1";
 
     if (!panel) return;
 
-    // Nếu click vào nút hoặc bên trong panel thì bỏ qua
     if ((btn && btn.contains(e.target)) || panel.contains(e.target)) {
         return;
     }
-
-    // Chỉ đóng nếu đang mở
     panel.style.display = "none";
     
 });
-// Đóng khi bấm ra ngoài bảng game
 document.addEventListener("click", function (e) {
   const panel = document.getElementById("gameInfoPanel") || document.getElementById("infoPanel");
   if (!panel) return;
 
   const btn = document.querySelector('[onclick="toggleGameInfo()"], [onclick="toggleInfoPanel()"]');
 
-  // Nếu bảng đang mở
   if (panel.style.display === "flex" || panel.style.display === "block") {
-    // Click ngoài bảng và ngoài nút mở
+ 
     if (!panel.contains(e.target) && (!btn || !btn.contains(e.target))) {
       panel.style.display = "none";
     }
@@ -887,7 +831,6 @@ overlay.addEventListener("click", () => {
     }
 });
     
-    // Giữ lâu để copy
     document.querySelectorAll('.game-item').forEach(item => {
     const copyGame = () => {
         const name = item.dataset.name;
@@ -908,7 +851,6 @@ overlay.addEventListener("click", () => {
   });
 </script>
 <script>
-  // Cho phép copy trong bảng game
   document.querySelectorAll('.game-item, .game-name, .game-code').forEach(el => {
     el.style.userSelect = 'text';
     el.style.webkitUserSelect = 'text';
@@ -917,7 +859,6 @@ overlay.addEventListener("click", () => {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Chỉ chạy trên điện thoại / màn hình mobile
     if (window.innerWidth > 768) return;
 
     const profile = document.querySelector(".home");
@@ -927,14 +868,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function shakeByPosition(x, y) {
 
         const rect = profile.getBoundingClientRect();
-
-        // Vị trí chạm từ -1 đến 1
         const posX = ((x - rect.left) / rect.width) * 2 - 1;
         const posY = ((y - rect.top) / rect.height) * 2 - 1;
-
-        // Lắc rất nhẹ
         const strength = 2;
-
         const shakeX = -posY * strength;
         const shakeY = posX * strength;
 
@@ -954,8 +890,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         profile.classList.add("touch-shake");
     }
-
-    // Chỉ nhận thao tác chạm trên mobile
     profile.addEventListener("touchstart", function (e) {
 
         if (!e.touches || !e.touches[0]) return;
@@ -973,13 +907,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-
-
-
 </body>
-<!-- GIF cho PC -->
 <img src="bg_pc.gif" alt="bg pc" id="bgPC" class="bg-gif pc-gif" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: block;">
-
-<!-- GIF cho điện thoại -->
 <img src="bg_mobile.gif" alt="bg mobile" id="bgMobile" class="bg-gif mobile-gif" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; display: none;">
 </html>
