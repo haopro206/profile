@@ -21,8 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=242d8251cae54fa6" },
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@ngochaolimited.06" },
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
+      { icon: "fa-instagram", link: "https://www.instagram.com/ngochaopremium.06/" },
       { icon: "fa-heart", type: "game-info" },
-      { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2" }
+      { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2" },
+      { icon: "fa-instagram", link: "https://www.instagram.com/ngochaopremium.06/" }
     ]
   };
 
