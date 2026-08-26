@@ -23,8 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
       { icon: "fa-instagram", link: "https://www.instagram.com/ngochaopremium.06/" },
       { icon: "fa-heart", type: "game-info" },
-      { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2" },
-      { icon: "fa-instagram", link: "https://www.instagram.com/ngochaopremium.06/" }
+      { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2" }
     ]
   };
 
