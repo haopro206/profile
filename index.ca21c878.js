@@ -48,15 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
                   </li>`;
                 } else if (s.icon === "fa-spotify") {
-                  // Spotify - giống y hệt Discord
+                  // Spotify - mở thẳng link web, trên mobile sẽ tự hỏi mở app
                   return `<li>
-                    <a href="javascript:void(0)"
-                      onclick="
-                        window.location.href='${s.link.replace('https://open.spotify.com/', 'spotify:')}';
-                        setTimeout(function(){
-                          window.open('${s.link}','_blank');
-                        },1000);
-                      ">
+                    <a href="${s.link}" target="_blank">
                       <i class="fab fa-spotify"></i>
                     </a>
                   </li>`;
