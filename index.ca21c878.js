@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
-      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=Yg3pCBFuRkSoXTZ2Pbbdrw&utm_source=copy-link" },
+      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy" },
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@ngochaolimited.06" },
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
       { icon: "fa-heart", type: "game-info" },
@@ -48,8 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
                   </li>`;
                 } else if (s.icon === "fa-spotify") {
+                  // Spotify - giống y hệt Discord
                   return `<li>
-                    <a href="javascript:void(0)" onclick="openSpotify('${s.link}')">
+                    <a href="javascript:void(0)"
+                      onclick="
+                        window.location.href='${s.link.replace('https://open.spotify.com/', 'spotify:')}';
+                        setTimeout(function(){
+                          window.open('${s.link}','_blank');
+                        },1000);
+                      ">
                       <i class="fab fa-spotify"></i>
                     </a>
                   </li>`;
@@ -90,15 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     avatarImage.style.backgroundRepeat = "no-repeat";
   }
 });
-
-// Hàm mở Spotify
-function openSpotify(url) {
-  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    window.location.href = url;
-  } else {
-    window.open(url, '_blank');
-  }
-}
 
 // Hàm toggle game info
 function toggleGameInfo() {
