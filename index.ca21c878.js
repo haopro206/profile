@@ -48,9 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
                   </li>`;
                 } else if (s.icon === "fa-spotify") {
-                  // Spotify - mở thẳng link web, trên mobile sẽ tự hỏi mở app
                   return `<li>
-                    <a href="${s.link}" target="_blank">
+                    <a href="javascript:void(0)" onclick="openSpotify('${s.link}')">
                       <i class="fab fa-spotify"></i>
                     </a>
                   </li>`;
@@ -91,6 +90,15 @@ document.addEventListener("DOMContentLoaded", function () {
     avatarImage.style.backgroundRepeat = "no-repeat";
   }
 });
+
+// Hàm mở Spotify
+function openSpotify(url) {
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    window.location.href = url;
+  } else {
+    window.open(url, '_blank');
+  }
+}
 
 // Hàm toggle game info
 function toggleGameInfo() {
