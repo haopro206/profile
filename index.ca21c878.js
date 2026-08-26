@@ -16,8 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     avatar: defaultAvatar,
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
+        // ← Đã sửa thành hiện bảng game
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
-      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy" },
+      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=242d8251cae54fa6" },
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@ngochaolimited.06" },
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
       { icon: "fa-heart", type: "game-info" },
@@ -42,22 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
             <ul class="social">
               ${data.social.map(s => {
                 if (s.type === "game-info") {
+                  // Icon trái tim -> hiện bảng game
                   return `<li>
                     <a href="javascript:void(0)" onclick="toggleGameInfo()">
                       <i class="fas fa-heart" style="color: #000000 !important; filter: none !important;"></i>
                     </a>
                   </li>`;
-                } else if (s.icon === "fa-spotify") {
-                  // Spotify - giống y hệt Discord
+                } else if (s.type === "copy") {
                   return `<li>
-                    <a href="javascript:void(0)"
-                      onclick="
-                        window.location.href='${s.link.replace('https://open.spotify.com/', 'spotify:')}';
-                        setTimeout(function(){
-                          window.open('${s.link}','_blank');
-                        },1000);
-                      ">
-                      <i class="fab fa-spotify"></i>
+                    <a href="javascript:void(0)" class="copy-btn" onclick="copyDiscordUsername('${s.text}', this)">
+                      <i class="fab fa-discord"></i>
                     </a>
                   </li>`;
                 } else if (s.icon === "fa-discord") {
@@ -97,8 +92,3 @@ document.addEventListener("DOMContentLoaded", function () {
     avatarImage.style.backgroundRepeat = "no-repeat";
   }
 });
-
-// Hàm toggle game info
-function toggleGameInfo() {
-  alert("Game info coming soon!");
-}
