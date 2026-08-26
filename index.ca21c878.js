@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
-      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=242d8251cae54fa6" },
+      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=Yg3pCBFuRkSoXTZ2Pbbdrw&utm_source=copy-link" },
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@ngochaolimited.06" },
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
       { icon: "fa-heart", type: "game-info" },
@@ -48,10 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     </a>
                   </li>`;
                 } else if (s.icon === "fa-spotify") {
-                  // Spotify - mở bằng app nếu có, fallback web
-                  const spotifyUrl = s.link;
+                  // Spotify - giống y hệt Discord
                   return `<li>
-                    <a href="javascript:void(0)" onclick="openSpotify('${spotifyUrl}')">
+                    <a href="javascript:void(0)"
+                      onclick="
+                        window.location.href='${s.link.replace('https://open.spotify.com/', 'spotify:')}';
+                        setTimeout(function(){
+                          window.open('${s.link}','_blank');
+                        },1000);
+                      ">
                       <i class="fab fa-spotify"></i>
                     </a>
                   </li>`;
@@ -93,19 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Hàm mở Spotify (giống Discord)
-function openSpotify(url) {
-  // Thử mở bằng app Spotify
-  window.location.href = url.replace('https://open.spotify.com/', 'spotify:');
-  
-  // Nếu không có app, sau 1 giây chuyển sang web
-  setTimeout(function() {
-    window.open(url, '_blank');
-  }, 1000);
-}
-
-// Hàm toggle game info (giữ nguyên)
+// Hàm toggle game info
 function toggleGameInfo() {
-  // Code của bạn ở đây
   alert("Game info coming soon!");
 }
