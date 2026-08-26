@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     social: [
         // ← Đã sửa thành hiện bảng game
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
-      { icon: "fa-instagram", link: "https://www.instagram.com/ngojc.haoss/" },
-      { icon: "fa-tiktok", link: "https://www.tiktok.com/@nguyenngochao2009chuppy" },
+      { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=242d8251cae54fa6" },
+      { icon: "fa-tiktok", link: "https://www.tiktok.com/@ngochaolimited.06" },
       { icon: "fa-discord", link: "https://discord.com/users/1099520246613815296" },
       { icon: "fa-heart", type: "game-info" },
       { icon: "fa-comment-dots", link: "https://ngl.link/_.ngnghao._2" }
