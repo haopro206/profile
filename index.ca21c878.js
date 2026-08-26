@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     avatar: defaultAvatar,
     desc: "2011, đếch biết sợ và thích bị ăn đòn.",
     social: [
-        // ← Đã sửa thành hiện bảng game
       { icon: "fa-facebook-f", link: "https://www.facebook.com/haovjppro206/" },
       { icon: "fa-spotify", link: "https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=242d8251cae54fa6" },
       { icon: "fa-tiktok", link: "https://www.tiktok.com/@ngochaolimited.06" },
@@ -43,16 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
             <ul class="social">
               ${data.social.map(s => {
                 if (s.type === "game-info") {
-                  // Icon trái tim -> hiện bảng game
                   return `<li>
                     <a href="javascript:void(0)" onclick="toggleGameInfo()">
                       <i class="fas fa-heart" style="color: #000000 !important; filter: none !important;"></i>
                     </a>
                   </li>`;
-                } else if (s.type === "copy") {
+                } else if (s.icon === "fa-spotify") {
+                  // Spotify - mở bằng app nếu có, fallback web
+                  const spotifyUrl = s.link;
                   return `<li>
-                    <a href="javascript:void(0)" class="copy-btn" onclick="copyDiscordUsername('${s.text}', this)">
-                      <i class="fab fa-discord"></i>
+                    <a href="javascript:void(0)" onclick="openSpotify('${spotifyUrl}')">
+                      <i class="fab fa-spotify"></i>
                     </a>
                   </li>`;
                 } else if (s.icon === "fa-discord") {
@@ -92,3 +92,20 @@ document.addEventListener("DOMContentLoaded", function () {
     avatarImage.style.backgroundRepeat = "no-repeat";
   }
 });
+
+// Hàm mở Spotify (giống Discord)
+function openSpotify(url) {
+  // Thử mở bằng app Spotify
+  window.location.href = url.replace('https://open.spotify.com/', 'spotify:');
+  
+  // Nếu không có app, sau 1 giây chuyển sang web
+  setTimeout(function() {
+    window.open(url, '_blank');
+  }, 1000);
+}
+
+// Hàm toggle game info (giữ nguyên)
+function toggleGameInfo() {
+  // Code của bạn ở đây
+  alert("Game info coming soon!");
+}
