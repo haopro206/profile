@@ -1,46 +1,77 @@
+/**
+ * Anti-F12, Anti-Inspect Element & Anti-Copy
+ * Khóa F12, chuột phải, bôi đen, sao chép (copy) và các phím tắt Developer Tools
+ */
 (function () {
   'use strict';
 
-  // 1. Chặn chuột phải & các phím tắt
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (
-      e.key === 'F12' || e.keyCode === 123 ||
-      (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) ||
-      (e.ctrlKey && ['u','U','s','S'].includes(e.key))
-    ) {
+  // 1. Chặn click chuột phải (Context Menu)
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 2. Chặn sao chép (Copy), Cắt (Cut), Bôi đen (Select) và Kéo thả (Drag)
+  document.addEventListener('copy', function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  document.addEventListener('cut', function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  document.addEventListener('dragstart', function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 3. Chặn các tổ hợp phím tắt DevTools, Copy & xem mã nguồn
+  document.addEventListener('keydown', function (e) {
+    // Chặn F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
+    // Chặn Ctrl + Shift + I (Inspect), Ctrl + Shift + J (Console), Ctrl + Shift + C (Select Element)
+    if (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
+    // Chặn Ctrl + U (Xem mã nguồn trang)
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
+    // Chặn Ctrl + S (Lưu trang), Ctrl + P (In trang)
+    if (e.ctrlKey && ['s', 'S', 'p', 'P'].includes(e.key)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
+    // Chặn Ctrl + A (Chọn tất cả), Ctrl + C (Sao chép), Ctrl + X (Cắt)
+    if (e.ctrlKey && ['a', 'A', 'c', 'C', 'x', 'X'].includes(e.key)) {
       e.preventDefault();
       e.stopPropagation();
       return false;
     }
   });
 
-  // 2. Thông báo trong Console
-  console.log(
-    "%c F12 CÁI CON CẶC! %c", 
-    'font-family: sans-serif; font-size: 22px; color: #ff2a7a; font-weight: bold;', 
-    "font-size: 12px; color: #888;"
-  );
-
-  // 3. Treo tab DevTools bằng vòng lặp Debugger (có ngắt nhịp để máy không bị lag)
-  function freezeDevTools() {
-    (function () {
-      (function a() {
-        try {
-          (function b(i) {
-            if (('' + (i / i)).length !== 1 || i % 20 === 0) {
-              (function () {}).constructor('debugger')();
-            } else {
-              debugger;
-            }
-            b(++i);
-          })(0);
-        } catch (e) {
-          setTimeout(a, 1000);
-        }
-      })();
-    })();
-  }
-
-  freezeDevTools();
+  // 4. Tự động xóa Console định kỳ
+  setInterval(function () {
+    console.clear();
+  }, 1000);
 })();

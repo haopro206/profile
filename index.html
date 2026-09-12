@@ -1111,10 +1111,11 @@
           </div>
 
           <!-- LOGO SPOTIFY MÀU XANH CHÍNH HÃNG Ở GIỮA -->
-          <a href="https://open.spotify.com/user/31xt4tggsrd4uouqviwfbvvn2gjy?si=242d8251cae54fa6" target="_blank" class="spotify-center-logo" title="Mở trên Spotify">
-            <i class="fab fa-spotify"></i>
-            <span>Spotify</span>
-          </a>
+         <!-- LOGO SPOTIFY MÀU XANH CHÍNH HÃNG Ở GIỮA (LINK ĐỔI THEO TỪNG BÀI HÁT) -->
+<a href="https://open.spotify.com/intl-vi/track/6mKMGpkgP2cH5gmqILWe7b?si=96d1efa1a6b74e0b" target="_blank" class="spotify-center-logo" id="mmbSpotifyLink" title="Mở trên Spotify">
+  <i class="fab fa-spotify"></i>
+  <span>Spotify</span>
+</a>
 
           <!-- Kéo âm lượng -->
           <div class="mmb-vol-section">
@@ -1145,11 +1146,11 @@
           <span class="tooltip">TikTok</span>
         </li>
         <li>
-          <a href="javascript:void(0)" onclick="openDiscord()" class="dc" aria-label="Discord">
-            <i class="fab fa-discord"></i>
-          </a>
-          <span class="tooltip">Discord</span>
-        </li>
+  <a href="discord://-/users/1099520246613815296" class="dc" aria-label="Discord">
+    <i class="fab fa-discord"></i>
+  </a>
+  <span class="tooltip">Discord</span>
+</li>
         <li>
           <a href="https://www.instagram.com/ngochaopremium.06/" target="_blank" class="ig" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
@@ -1296,13 +1297,46 @@
     // =========================================
     // 2. PLAYLIST NHẠC - HỖ TRỢ ẢNH RIÊNG MỖI BÀI
     // =========================================
+        // =========================================
+    // 2. PLAYLIST NHẠC - CÓ LINK SPOTIFY RIÊNG CHO TỪNG BÀI
+    // =========================================
     const playlist = [
-      { src: "music.mp3",  title: "Vết thương-Fishy", cover: "cover1.jpg" },
-      { src: "music2.mp3", title: "Không buông-Hngle", cover: "cover2.jpg" },
-      { src: "music3.mp3", title: "vaicaunoicokhienngthaydoi", cover: "cover3.jpg" },
-      { src: "music5.mp3", title: "Sinh ra đã là thứ đối lập nhau", cover: "cover4.jpg" },
-      { src: "music4.mp3", title: "Dự báo thời tiết hôm nay mưa", cover: "cover5.gif" },
-      { src: "music6.mp3", title: "Ánh sao và bầu trời-TRI", cover: "cover6.jpg" }
+      { 
+        src: "music.mp3",  
+        title: "Vết thương-Fishy", 
+        cover: "cover1.jpg", 
+        spotify: "https://open.spotify.com/intl-vi/track/6mKMGpkgP2cH5gmqILWe7b?si=96d1efa1a6b74e0b" 
+      },
+      { 
+        src: "music2.mp3", 
+        title: "Không buông-Hngle", 
+        cover: "cover2.jpg", 
+        spotify: "https://open.spotify.com/intl-vi/track/1ApIGNgp1azc0qB61x4GzG?si=0797118fe8b3429c" 
+      },
+      { 
+        src: "music3.mp3", 
+        title: "vaicaunoicokhienngthaydoi", 
+        cover: "cover3.jpg", 
+        spotify: "https://open.spotify.com/intl-vi/track/25h0TqC9H3BcMA7KjK5nHK?si=07a532d10e31491b" 
+      },
+      { 
+        src: "music5.mp3", 
+        title: "Sinh ra đã là thứ đối lập nhau", 
+        cover: "cover4.jpg", 
+        spotify: "https://open.spotify.com/intl-vi/album/5vJ5JDNypTPlAc5yv3du8s?si=e7abf830cd0c44d4" 
+      },
+      { 
+        src: "music4.mp3", 
+        title: "Dự báo thời tiết hôm nay mưa", 
+        cover: "cover5.gif", 
+        spotify: "https://open.spotify.com/intl-vi/track/7bFFUPBiF15n8m8RziqS4o?si=6ae500f5aa1f4bff" 
+      },
+      { 
+        src: "music6.mp3", 
+        title: "Ánh sao và bầu trời-TRI", 
+        cover: "cover6.jpg", 
+        spotify: "https://open.spotify.com/intl-vi/track/5iZHnufFUgATzrpGgH1K0W?si=ee6cbae8841b4091" 
+      }
     ];
 
     let currentTrack = Math.floor(Math.random() * playlist.length);
@@ -1328,10 +1362,20 @@
       const track = playlist[currentTrack];
       audio.src = track.src;
       mmbSongTitle.textContent = track.title;
-      // Cập nhật ảnh tương ứng với bài hát
       mmbCover.src = track.cover;
+
+      // Tự động cập nhật liên kết Spotify theo đúng bài hát đang phát
+      if (mmbSpotifyLink) {
+        const targetSpotify = track.spotify || "https://open.spotify.com/";
+        mmbSpotifyLink.href = targetSpotify;
+        mmbSpotifyLink.setAttribute("href", targetSpotify);
+      }
       mmbProgressFill.style.width = "0%";
     }
+
+    // Khởi tạo ngay khi tải trang để link Spotify và tên bài khớp ngay từ đầu
+    loadSong(currentTrack);
+
 
     // Update play UI
     function updatePlayState(isPlaying) {
@@ -1416,6 +1460,15 @@
     mmbNextBtn.addEventListener("click", nextSong);
     mmbPrevBtn.addEventListener("click", prevSong);
     mmbVolIcon.addEventListener("click", toggleMute);
+
+    if (mmbSpotifyLink) {
+      mmbSpotifyLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        const track = playlist[currentTrack];
+        const link = (track && track.spotify) ? track.spotify : mmbSpotifyLink.href;
+        window.open(link, "_blank", "noopener,noreferrer");
+      });
+    }
 
     audio.addEventListener("ended", nextSong);
 
@@ -1608,11 +1661,8 @@
     document.getElementById("topSettingsBtn").addEventListener("click", toggleSettingsModal);
 
     function openDiscord() {
-      window.location.href = "discord://-/users/1099520246613815296";
-      setTimeout(() => {
-        window.open("https://discord.com/users/1099520246613815296", "_blank");
-      }, 800);
-    }
+  window.location.href = "discord://-/users/1099520246613815296";
+}
 
     // =========================================
     // 6. GUNS.LOL CUSTOMIZE CONTROLS (MẶC ĐỊNH 10% OPACITY, 0px BLUR)
