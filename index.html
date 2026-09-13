@@ -1017,6 +1017,154 @@
 
       
     }
+
+    /* =========================================
+       CUTE FLYING COMPANIONS (BIỆT ĐỘI THÚ CƯNG BAY LƯỢN CUTE)
+    ========================================= */
+    .flying-pet-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      pointer-events: auto;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      will-change: transform;
+      transition: transform 0.12s linear;
+    }
+
+    .pet-flipper {
+      display: block;
+      will-change: transform;
+      transform-origin: center center;
+      transition: transform 0.15s ease-out;
+    }
+
+    .flying-pet-img {
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+      pointer-events: auto !important;
+      -webkit-user-drag: none !important;
+      user-drag: none !important;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Kích thước & nhịp đập cánh riêng cho từng bé */
+    .pusheen-img {
+      width: 78px;
+      animation: petBobbing1 2.2s ease-in-out infinite alternate;
+    }
+    .cat-img {
+      width: 72px;
+      animation: petBobbing2 1.9s ease-in-out infinite alternate;
+    }
+    .dog-img {
+      width: 78px;
+      animation: petBobbing3 2.1s ease-in-out infinite alternate;
+    }
+    .bunny-img {
+      width: 65px;
+      animation: petBobbing4 1.8s ease-in-out infinite alternate;
+    }
+
+    @media (max-width: 768px) {
+      .pusheen-img { width: 62px; }
+      .cat-img { width: 56px; }
+      .dog-img { width: 62px; }
+      .bunny-img { width: 50px; }
+    }
+
+    .flying-pet-img.spin {
+      animation: petSpin 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+
+    @keyframes petBobbing1 {
+      0% { transform: translateY(-5px) rotate(-3deg); }
+      100% { transform: translateY(6px) rotate(3deg); }
+    }
+    @keyframes petBobbing2 {
+      0% { transform: translateY(-4px) rotate(2deg); }
+      100% { transform: translateY(5px) rotate(-2deg); }
+    }
+    @keyframes petBobbing3 {
+      0% { transform: translateY(-6px) rotate(-4deg); }
+      100% { transform: translateY(5px) rotate(5deg); }
+    }
+    @keyframes petBobbing4 {
+      0% { transform: translateY(-3px) rotate(3deg); }
+      100% { transform: translateY(6px) rotate(-3deg); }
+    }
+
+    @keyframes petSpin {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.35) rotate(180deg); }
+      100% { transform: scale(1) rotate(360deg); }
+    }
+
+    /* Hạt lấp lánh sao & tim rơi ra từ cánh khi bay */
+    .cat-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 998;
+      font-size: 15px;
+      user-select: none;
+      -webkit-user-select: none;
+      animation: catSparkleAnim 0.9s ease-out forwards;
+    }
+
+    @keyframes catSparkleAnim {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1.1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx, 0px), var(--dy, 22px)) scale(0.3);
+      }
+    }
+
+    /* Bong bóng thoại vui nhộn khi chạm vào */
+    .pet-voice-bubble {
+      position: absolute;
+      top: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(18, 18, 28, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 12px;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      animation: bubblePop 2s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+      z-index: 1000;
+    }
+
+    .pet-voice-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 4px 4px 0;
+      border-style: solid;
+      border-color: rgba(18, 18, 28, 0.88) transparent;
+    }
+
+    @keyframes bubblePop {
+      0% { opacity: 0; transform: translateX(-50%) translateY(6px) scale(0.7); }
+      20% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.08); }
+      75% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.85); }
+    }
   </style>
 </head>
 
@@ -1033,6 +1181,39 @@
 
   <!-- Floating particles -->
   <div class="particles-layer" id="particlesLayer"></div>
+
+  <!-- =========================================
+       BIỆT ĐỘI THÚ CƯNG CÓ CÁNH BAY LUNG TUNG (FLYING PETS SQUAD)
+  ========================================= -->
+  <div id="flyingPetsContainer">
+    <!-- 1. Bé Mèo Pusheen Cánh Thiên Thần -->
+    <div class="flying-pet-wrap" id="flyingPusheen" data-name="Pusheen Thiên Thần" data-sound="Nyan~ 🐾" data-sparkles="✨,💖,🐾,⭐">
+      <div class="pet-flipper">
+        <img src="pusheen.gif" alt="Flying Pusheen" class="flying-pet-img pusheen-img" onerror="this.onerror=null; this.src='https://media3.giphy.com/media/5hmjE5bB11NzEUGtpW/giphy.gif';">
+      </div>
+    </div>
+
+    <!-- 2. Bé Mèo Trắng Yudoart Vỗ Cánh -->
+    <div class="flying-pet-wrap" id="flyingCat" data-name="Mèo Cánh Yudoart" data-sound="Meow! 💕" data-sparkles="✨,💖,🐾,🌸">
+      <div class="pet-flipper">
+        <img src="cat.gif" alt="Flying Cat" class="flying-pet-img cat-img" onerror="this.onerror=null; this.src='https://media1.giphy.com/media/9wtKm1ZNq5CpBm6IKU/giphy.gif';">
+      </div>
+    </div>
+
+    <!-- 3. Chú Cún Thiên Thần Có Cánh -->
+    <div class="flying-pet-wrap" id="flyingDog" data-name="Cún Thiên Thần" data-sound="Đauu! 🐶" data-sparkles="🌟,💖,🦴,✨">
+      <div class="pet-flipper">
+        <img src="dog.gif" alt="Flying Dog" class="flying-pet-img dog-img" onerror="this.onerror=null; this.src='https://media2.giphy.com/media/Q5kKwuxuG5qJcluiMu/giphy.gif';">
+      </div>
+    </div>
+
+    <!-- 4. Bé Thỏ Trái Tim Pixel Có Cánh -->
+    <div class="flying-pet-wrap" id="flyingBunny" data-name="Thỏ Pixel" data-sound="Awww~ 🐰" data-sparkles="🌸,💕,⭐,✨">
+      <div class="pet-flipper">
+        <img src="bunny.gif" alt="Angel Bunny" class="flying-pet-img bunny-img" onerror="this.onerror=null; this.src='https://media3.giphy.com/media/I2axDoMp1r4uNpCCL6/giphy.gif';">
+      </div>
+    </div>
+  </div>
 
   <!-- =========================================
        1. CLICK TO ENTER SCREEN (HIỆU ỨNG VIỀN NHIỀU MÀU + XOAY TRÒN + TYPEWRITER MỜ MỜ)
@@ -1774,6 +1955,206 @@
       p.style.animationDelay = (Math.random() * 8) + "s";
       particlesContainer.appendChild(p);
     }
+
+    // =========================================
+    // BEHAVIOR: BIỆT ĐỘI THÚ CƯNG CÓ CÁNH BAY LUNG TUNG (FLYING PETS SQUAD)
+    // =========================================
+    (function () {
+      const petWraps = document.querySelectorAll(".flying-pet-wrap");
+      if (!petWraps.length) return;
+
+      // Danh sách câu chào "Hello" & thời gian chờ riêng biệt cho từng con (khi không ai chạm vào)
+      const petConfigs = [
+        {
+          idleInterval: 8000,  // Con 1 (Pusheen): 8 giây
+          greetings: ["Hello! ✨", "Nyan~ 🐾", "Chan tớ đê! 💖", "Hello hello! ⭐", "Đói bụng ghê 🍕"]
+        },
+        {
+          idleInterval: 13000, // Con 2 (Mèo trắng): 13 giây
+          greetings: ["Hello! 💕", "Meow! 🌸", "Chạm vào tớ đi! ✨", "Hello bạn nha! 🐾", "Ngoan nè~ 💖"]
+        },
+        {
+          idleInterval: 18000, // Con 3 (Cún thiên thần): 18 giây
+          greetings: ["Hello sen! 🐶", "Gâu gâu! 🦴", "Chơi với tớ nè! 🌟", "Hello bro! ✨", "Vẫy đuôi~ 💕"]
+        },
+        {
+          idleInterval: 24000, // Con 4 (Thỏ pixel): 24 giây
+          greetings: ["Hello! 🐰", "Pyon pyon~ ⭐", "Chào đằng ấy! 💕", "Hello nè! 🌸", "Tặng bạn tim nè! 💖"]
+        }
+      ];
+
+      const pets = [];
+
+      petWraps.forEach((el, index) => {
+        const img = el.querySelector(".flying-pet-img");
+        let flipper = el.querySelector(".pet-flipper");
+        if (!flipper && img) {
+          flipper = document.createElement("div");
+          flipper.className = "pet-flipper";
+          img.parentNode.insertBefore(flipper, img);
+          flipper.appendChild(img);
+        }
+        const sparkleList = (el.dataset.sparkles || "✨,💖,⭐").split(",");
+        const soundText = el.dataset.sound || "✨ Hi! ✨";
+        const cfg = petConfigs[index % petConfigs.length];
+
+        // Tọa độ khởi tạo phân bố đều ở các góc khác nhau
+        const spreadX = (window.innerWidth * (0.12 + (index * 0.23))) % (window.innerWidth - 110);
+        const spreadY = (window.innerHeight * (0.15 + (index * 0.22))) % (window.innerHeight - 110);
+
+        const pet = {
+          el,
+          flipper,
+          img,
+          sparkles: sparkleList,
+          sound: soundText,
+          idleInterval: cfg.idleInterval,
+          greetings: cfg.greetings,
+          lastActiveTime: Date.now() + (index * 1500),
+          posX: Math.max(40, spreadX),
+          posY: Math.max(40, spreadY),
+          targetX: spreadX,
+          targetY: spreadY,
+          facing: index % 2 === 0 ? 1 : -1,
+          baseSpeed: 1.1 + Math.random() * 0.7,
+          speed: 1.3,
+          isSpinning: false,
+          lastSparkleTime: 0,
+          sparkleDelay: 220 + index * 40
+        };
+
+        // Hàm hiện bong bóng thoại
+        function showBubble(text, duration = 2000) {
+          const oldBubble = el.querySelector(".pet-voice-bubble");
+          if (oldBubble) oldBubble.remove();
+
+          const bubble = document.createElement("div");
+          bubble.className = "pet-voice-bubble";
+          bubble.textContent = text;
+          el.appendChild(bubble);
+
+          setTimeout(() => {
+            if (bubble.parentNode) bubble.remove();
+          }, duration);
+        }
+
+        function pickTarget() {
+          const padX = 60;
+          const padY = 60;
+          const maxX = Math.max(padX, window.innerWidth - 110);
+          const maxY = Math.max(padY, window.innerHeight - 110);
+          pet.targetX = Math.random() * (maxX - padX) + padX;
+          pet.targetY = Math.random() * (maxY - padY) + padY;
+          pet.speed = pet.baseSpeed * (0.8 + Math.random() * 0.5);
+        }
+
+        pickTarget();
+        setInterval(pickTarget, 3600 + index * 850);
+
+        // Tự động chào "Hello" khi lâu lâu không có ai chạm vào
+        setInterval(() => {
+          const now = Date.now();
+          if (!pet.isSpinning && (now - pet.lastActiveTime >= pet.idleInterval)) {
+            pet.lastActiveTime = now;
+            const greet = pet.greetings[Math.floor(Math.random() * pet.greetings.length)];
+            showBubble(greet, 1900);
+            dropSparkle(pet.posX, pet.posY, pet.sparkles, pet.facing);
+          }
+        }, 1000);
+
+        // Tương tác khi click hoặc chạm tay vào
+        function interact(e) {
+          e.stopPropagation();
+          pet.lastActiveTime = Date.now(); // reset đếm thời gian khi chạm vào
+          if (pet.isSpinning) return;
+          pet.isSpinning = true;
+
+          pet.img.classList.add("spin");
+
+          // Hiện bong bóng thoại tương tác
+          showBubble(pet.sound, 1350);
+
+          // Bắn chùm hạt ngôi sao & trái tim lấp lánh
+          for (let i = 0; i < 7; i++) {
+            setTimeout(() => {
+              dropSparkle(pet.posX, pet.posY, pet.sparkles, pet.facing);
+            }, i * 60);
+          }
+
+          pickTarget();
+          pet.speed = 4.2;
+
+          setTimeout(() => {
+            pet.img.classList.remove("spin");
+            pet.isSpinning = false;
+            pet.speed = pet.baseSpeed;
+          }, 750);
+        }
+
+        pet.el.addEventListener("click", interact);
+        pet.el.addEventListener("touchstart", interact, { passive: true });
+
+        pets.push(pet);
+      });
+
+      // Rải hạt ngôi sao & trái tim khi bay
+      function dropSparkle(x, y, list, facing) {
+        const s = document.createElement("div");
+        s.className = "cat-sparkle";
+        s.textContent = list[Math.floor(Math.random() * list.length)];
+        s.style.left = (x + (facing === 1 ? 15 : 40)) + "px";
+        s.style.top = (y + 28) + "px";
+        s.style.setProperty("--dx", ((Math.random() - 0.5) * 36) + "px");
+        s.style.setProperty("--dy", (Math.random() * 24 + 10) + "px");
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 900);
+      }
+
+      // Vòng lặp cử động bằng requestAnimationFrame
+      function animateAllPets() {
+        const now = Date.now();
+
+        pets.forEach((pet) => {
+          const dx = pet.targetX - pet.posX;
+          const dy = pet.targetY - pet.posY;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist > 5) {
+            pet.posX += (dx / dist) * pet.speed;
+            pet.posY += (dy / dist) * pet.speed;
+
+            // Quay mặt theo hướng bay
+            if (dx > 3 && pet.facing !== 1) {
+              pet.facing = 1;
+            } else if (dx < -3 && pet.facing !== -1) {
+              pet.facing = -1;
+            }
+
+            // Rải ngôi sao và trái tim sau cánh khi bay
+            if (now - pet.lastSparkleTime > pet.sparkleDelay) {
+              pet.lastSparkleTime = now;
+              dropSparkle(pet.posX, pet.posY, pet.sparkles, pet.facing);
+            }
+          }
+
+          pet.el.style.transform = `translate3d(${pet.posX}px, ${pet.posY}px, 0)`;
+          if (pet.flipper) {
+            pet.flipper.style.transform = `scaleX(${pet.facing})`;
+          }
+        });
+
+        requestAnimationFrame(animateAllPets);
+      }
+      requestAnimationFrame(animateAllPets);
+
+      // Đảm bảo không bị bay ra ngoài mép màn hình khi xoay điện thoại / resize
+      window.addEventListener("resize", () => {
+        pets.forEach((pet) => {
+          pet.posX = Math.min(pet.posX, Math.max(20, window.innerWidth - 90));
+          pet.posY = Math.min(pet.posY, Math.max(20, window.innerHeight - 90));
+        });
+      });
+    })();
   </script>
 </body>
 </html>
