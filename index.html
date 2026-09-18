@@ -2049,6 +2049,13 @@
 
           const cardRect = card ? card.getBoundingClientRect() : null;
           const zones = [];
+                    // Nếu là con mèo, cho điểm đến bay lượn bên trong khung thẻ
+          if (pet.el.id === "flyingPusheen" && cardRect) {
+            pet.targetX = cardRect.left + 20 + Math.random() * (cardRect.width - 90);
+            pet.targetY = cardRect.top + 20 + Math.random() * (cardRect.height - 90);
+            pet.speed = pet.baseSpeed * (0.7 + Math.random() * 0.4);
+            return; // Dừng lại ở đây, không chọn vùng bên ngoài
+          }
 
           if (cardRect) {
             // Vùng 1: Dải bên TRÁI khung
@@ -2203,7 +2210,8 @@
             let stepY = (dy / dist) * pet.speed;
 
             // Kiểm tra né khung thẻ: nếu bước đi tiếp theo chuẩn bị đi vào khung thẻ, trượt né ra mép ngoài
-            if (cardBox) {
+            // DÒNG MỚI: Bỏ qua con mèo, không đẩy dạt con mèo ra ngoài mép
+if (cardBox && pet.el.id !== "flyingPusheen") {
               const nextX = pet.posX + stepX;
               const nextY = pet.posY + stepY;
               const inCardX = nextX > cardBox.left - 50 && nextX < cardBox.right;
