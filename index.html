@@ -40,8 +40,8 @@
     :root {
       --accent: #f2eff0;                       /* Đổi sang màu bạn muốn làm mặc định */
       --accent-glow: rgba(242, 239, 240, 0.4);
-      --card-bg: rgba(18, 18, 28, 0.15); /* Mặc định 10% */
-      --card-blur: 5px;                  /* Mặc định 0px */
+      --card-bg: rgba(18, 18, 28, 0.03); /* Mặc định 10% */
+      --card-blur: 3px;                  /* Mặc định 0px */
       --card-border: rgba(255, 255, 255, 0.1);
       --text-main: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.65);
@@ -1372,19 +1372,19 @@
         <div class="settings-row">
       <div class="settings-label">
         <span>Độ mờ khung</span>
-        <span id="opacityVal">15%</span>
+        <span id="opacityVal">3%</span>
       </div>
       <!-- 👇 Đổi value="10" thành value="15" -->
-      <input type="range" class="settings-slider" id="opacitySlider" min="0" max="95" value="15">
+      <input type="range" class="settings-slider" id="opacitySlider" min="0" max="95" value="3">
     </div>
 
     <div class="settings-row">
       <div class="settings-label">
         <span>Độ kính mờ (Blur)</span>
-        <span id="blurVal">5px</span>
+        <span id="blurVal">3px</span>
       </div>
       <!-- 👇 Đổi value="0" thành value="5" (thì thanh trượt mới nhảy lên số 5) -->
-      <input type="range" class="settings-slider" id="blurSlider" min="0" max="40" value="5">
+      <input type="range" class="settings-slider" id="blurSlider" min="0" max="40" value="3">
     </div>
 
     <div class="settings-row">
