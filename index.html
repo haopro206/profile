@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>@ngochaolimited</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Nguyen Ngoc Hao | 15/07/2009">
@@ -48,6 +48,19 @@
       padding: 0;
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+
+    /* Chặn triệt để nhấn giữ xem ảnh / lưu ảnh / kéo thả trên mobile */
+    img, video, canvas {
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      -webkit-user-drag: none !important;
+      user-drag: none !important;
+      pointer-events: none !important;
     }
 
     body {
@@ -969,7 +982,7 @@
     ========================================= */
     .copyright {
       margin-top: 14px;
-      font-size: 1px !important;                 /* Thu nhỏ chữ copyright */
+      font-size: 12px !important;                 /* Thu nhỏ chữ copyright */
       color: rgba(255, 255, 255, 0.22) !important;/* Rất mờ và tinh tế */
       font-family: monospace;
       transform: scale();
@@ -1046,7 +1059,7 @@
       height: auto;
       display: block;
       filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
-      pointer-events: auto !important;
+      pointer-events: none !important;
       -webkit-user-drag: none !important;
       user-drag: none !important;
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1065,16 +1078,11 @@
       width: 78px;
       animation: petBobbing3 2.1s ease-in-out infinite alternate;
     }
-    .bunny-img {
-      width: 65px;
-      animation: petBobbing4 1.8s ease-in-out infinite alternate;
-    }
 
     @media (max-width: 768px) {
       .pusheen-img { width: 62px; }
       .cat-img { width: 56px; }
       .dog-img { width: 62px; }
-      .bunny-img { width: 50px; }
     }
 
     .flying-pet-img.spin {
@@ -1204,13 +1212,6 @@
     <div class="flying-pet-wrap" id="flyingDog" data-name="Cún Thiên Thần" data-sound="Đauu! 🐶" data-sparkles="🌟,💖,🦴,✨">
       <div class="pet-flipper">
         <img src="dog.gif" alt="Flying Dog" class="flying-pet-img dog-img" onerror="this.onerror=null; this.src='https://media2.giphy.com/media/Q5kKwuxuG5qJcluiMu/giphy.gif';">
-      </div>
-    </div>
-
-    <!-- 4. Bé Thỏ Trái Tim Pixel Có Cánh -->
-    <div class="flying-pet-wrap" id="flyingBunny" data-name="Thỏ Pixel" data-sound="Awww~ 🐰" data-sparkles="🌸,💕,⭐,✨">
-      <div class="pet-flipper">
-        <img src="bunny.gif" alt="Angel Bunny" class="flying-pet-img bunny-img" onerror="this.onerror=null; this.src='https://media3.giphy.com/media/I2axDoMp1r4uNpCCL6/giphy.gif';">
       </div>
     </div>
   </div>
@@ -1976,10 +1977,6 @@
         {
           idleInterval: 18000, // Con 3 (Cún thiên thần): 18 giây
           greetings: ["Hello sen! 🐶", "Gâu gâu! 🦴", "Chơi với tớ nè! 🌟", "Hello bro! ✨", "Vẫy đuôi~ 💕"]
-        },
-        {
-          idleInterval: 24000, // Con 4 (Thỏ pixel): 24 giây
-          greetings: ["Hello! 🐰", "Pyon pyon~ ⭐", "Chào đằng ấy! 💕", "Hello nè! 🌸", "Tặng bạn tim nè! 💖"]
         }
       ];
 
@@ -1998,9 +1995,13 @@
         const soundText = el.dataset.sound || "✨ Hi! ✨";
         const cfg = petConfigs[index % petConfigs.length];
 
-        // Tọa độ khởi tạo phân bố đều ở các góc khác nhau
-        const spreadX = (window.innerWidth * (0.12 + (index * 0.23))) % (window.innerWidth - 110);
-        const spreadY = (window.innerHeight * (0.15 + (index * 0.22))) % (window.innerHeight - 110);
+        // Tọa độ khởi tạo bên ngoài khung thẻ
+        const initPositions = [
+          { x: 30, y: 70 },                                    // Con 1: Góc trên bên trái
+          { x: Math.max(30, window.innerWidth - 110), y: 85 }, // Con 2: Góc trên bên phải
+          { x: 35, y: Math.max(60, window.innerHeight - 135) } // Con 3: Góc dưới bên trái
+        ];
+        const initPos = initPositions[index % initPositions.length];
 
         const pet = {
           el,
@@ -2011,10 +2012,10 @@
           idleInterval: cfg.idleInterval,
           greetings: cfg.greetings,
           lastActiveTime: Date.now() + (index * 1500),
-          posX: Math.max(40, spreadX),
-          posY: Math.max(40, spreadY),
-          targetX: spreadX,
-          targetY: spreadY,
+          posX: initPos.x,
+          posY: initPos.y,
+          targetX: initPos.x,
+          targetY: initPos.y,
           facing: index % 2 === 0 ? 1 : -1,
           baseSpeed: 1.1 + Math.random() * 0.7,
           speed: 1.3,
@@ -2038,13 +2039,79 @@
           }, duration);
         }
 
+        // Chọn mục tiêu bay chỉ ở CÁC VÙNG TRỐNG BÊN NGOÀI KHUNG THẺ
         function pickTarget() {
-          const padX = 60;
-          const padY = 60;
-          const maxX = Math.max(padX, window.innerWidth - 110);
-          const maxY = Math.max(padY, window.innerHeight - 110);
-          pet.targetX = Math.random() * (maxX - padX) + padX;
-          pet.targetY = Math.random() * (maxY - padY) + padY;
+          const card = document.querySelector(".profile-card");
+          const W = window.innerWidth;
+          const H = window.innerHeight;
+          const petSize = 75;
+          const pad = 35; // Khoảng đệm an toàn cách xa khung
+
+          const cardRect = card ? card.getBoundingClientRect() : null;
+          const zones = [];
+
+          if (cardRect) {
+            // Vùng 1: Dải bên TRÁI khung
+            if (cardRect.left > petSize + 20) {
+              zones.push({
+                minX: 15,
+                maxX: Math.max(15, cardRect.left - petSize - pad),
+                minY: 25,
+                maxY: Math.max(25, H - petSize - 25)
+              });
+            }
+            // Vùng 2: Dải bên PHẢI khung
+            if (W - cardRect.right > petSize + 20) {
+              zones.push({
+                minX: Math.min(W - petSize - 15, cardRect.right + pad),
+                maxX: Math.max(cardRect.right + pad, W - petSize - 15),
+                minY: 25,
+                maxY: Math.max(25, H - petSize - 25)
+              });
+            }
+            // Vùng 3: Dải bên TRÊN khung
+            if (cardRect.top > petSize + 20) {
+              zones.push({
+                minX: 20,
+                maxX: Math.max(20, W - petSize - 20),
+                minY: 20,
+                maxY: Math.max(20, cardRect.top - petSize - pad)
+              });
+            }
+            // Vùng 4: Dải bên DƯỚI khung
+            if (H - cardRect.bottom > petSize + 20) {
+              zones.push({
+                minX: 20,
+                maxX: Math.max(20, W - petSize - 20),
+                minY: Math.min(H - petSize - 20, cardRect.bottom + pad),
+                maxY: Math.max(cardRect.bottom + pad, H - petSize - 20)
+              });
+            }
+          }
+
+          if (zones.length > 0) {
+            // Chọn ngẫu nhiên 1 vùng ngoài khung
+            const z = zones[Math.floor(Math.random() * zones.length)];
+            pet.targetX = Math.random() * (z.maxX - z.minX) + z.minX;
+            pet.targetY = Math.random() * (z.maxY - z.minY) + z.minY;
+          } else {
+            // Màn hình hẹp: bay men theo viền ngoài cùng
+            const edge = Math.floor(Math.random() * 4);
+            if (edge === 0) {
+              pet.targetX = Math.random() * (W - petSize - 20) + 10;
+              pet.targetY = 15;
+            } else if (edge === 1) {
+              pet.targetX = Math.random() * (W - petSize - 20) + 10;
+              pet.targetY = H - petSize - 15;
+            } else if (edge === 2) {
+              pet.targetX = 10;
+              pet.targetY = Math.random() * (H - petSize - 20) + 10;
+            } else {
+              pet.targetX = W - petSize - 10;
+              pet.targetY = Math.random() * (H - petSize - 20) + 10;
+            }
+          }
+
           pet.speed = pet.baseSpeed * (0.8 + Math.random() * 0.5);
         }
 
@@ -2113,6 +2180,18 @@
       // Vòng lặp cử động bằng requestAnimationFrame
       function animateAllPets() {
         const now = Date.now();
+        const cardEl = document.querySelector(".profile-card");
+        let cardBox = null;
+        if (cardEl) {
+          const r = cardEl.getBoundingClientRect();
+          // Vùng cấm bay: bao quanh khung thẻ profile + khoảng đệm an toàn 25px
+          cardBox = {
+            left: r.left - 25,
+            right: r.right + 25,
+            top: r.top - 25,
+            bottom: r.bottom + 25
+          };
+        }
 
         pets.forEach((pet) => {
           const dx = pet.targetX - pet.posX;
@@ -2120,13 +2199,47 @@
           const dist = Math.hypot(dx, dy);
 
           if (dist > 5) {
-            pet.posX += (dx / dist) * pet.speed;
-            pet.posY += (dy / dist) * pet.speed;
+            let stepX = (dx / dist) * pet.speed;
+            let stepY = (dy / dist) * pet.speed;
+
+            // Kiểm tra né khung thẻ: nếu bước đi tiếp theo chuẩn bị đi vào khung thẻ, trượt né ra mép ngoài
+            if (cardBox) {
+              const nextX = pet.posX + stepX;
+              const nextY = pet.posY + stepY;
+              const inCardX = nextX > cardBox.left - 50 && nextX < cardBox.right;
+              const inCardY = nextY > cardBox.top - 50 && nextY < cardBox.bottom;
+
+              if (inCardX && inCardY) {
+                pet.stuckCounter = (pet.stuckCounter || 0) + 1;
+                if (pet.stuckCounter > 25) {
+                  pet.stuckCounter = 0;
+                  const W = window.innerWidth;
+                  const H = window.innerHeight;
+                  pet.targetX = pet.posX < cardBox.left ? 25 : Math.max(25, W - 90);
+                  pet.targetY = pet.posY < (cardBox.top + cardBox.bottom) / 2 ? 30 : Math.max(30, H - 90);
+                }
+                const dL = Math.abs(nextX - cardBox.left);
+                const dR = Math.abs(nextX - cardBox.right);
+                const dT = Math.abs(nextY - cardBox.top);
+                const dB = Math.abs(nextY - cardBox.bottom);
+                const minD = Math.min(dL, dR, dT, dB);
+
+                if (minD === dL) stepX = -pet.speed * 1.3;
+                else if (minD === dR) stepX = pet.speed * 1.3;
+                else if (minD === dT) stepY = -pet.speed * 1.3;
+                else stepY = pet.speed * 1.3;
+              } else {
+                pet.stuckCounter = 0;
+              }
+            }
+
+            pet.posX += stepX;
+            pet.posY += stepY;
 
             // Quay mặt theo hướng bay
-            if (dx > 3 && pet.facing !== 1) {
+            if (stepX > 1.2 && pet.facing !== 1) {
               pet.facing = 1;
-            } else if (dx < -3 && pet.facing !== -1) {
+            } else if (stepX < -1.2 && pet.facing !== -1) {
               pet.facing = -1;
             }
 
@@ -2153,6 +2266,66 @@
           pet.posX = Math.min(pet.posX, Math.max(20, window.innerWidth - 90));
           pet.posY = Math.min(pet.posY, Math.max(20, window.innerHeight - 90));
         });
+      });
+    })();
+
+    // =========================================
+    // CHỐNG COPY, CHỐNG GIỮ ẢNH / XEM FULL TRÊN MOBILE (ĐỘC LẬP HOÀN TOÀN)
+    // =========================================
+    (function () {
+      // 1. Chặn menu chuột phải & menu nhấn giữ ảnh trên mobile (Context Menu / Long press)
+      window.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, { capture: true, passive: false });
+
+      // 2. Chặn sự kiện Copy & Cut
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+        if (e.clipboardData) e.clipboardData.setData("text/plain", "");
+        return false;
+      }, { capture: true });
+
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+        return false;
+      }, { capture: true });
+
+      // 3. Chặn bôi đen chữ trên mobile (ngăn kính lúp & popup Copy/Share)
+      document.addEventListener("selectstart", function (e) {
+        e.preventDefault();
+        return false;
+      }, { capture: true });
+
+      document.addEventListener("selectionchange", function () {
+        const sel = window.getSelection();
+        if (sel && sel.toString().length > 0) {
+          sel.removeAllRanges();
+        }
+      });
+
+      // 4. Chặn kéo thả hình ảnh
+      document.addEventListener("dragstart", function (e) {
+        e.preventDefault();
+        return false;
+      }, { capture: true });
+
+      // 5. Chặn zoom 2 ngón & cử chỉ phóng to ảnh trên Safari iOS & Android
+      document.addEventListener("touchstart", function (e) {
+        if (e.touches && e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      document.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener("gesturechange", function (e) {
+        e.preventDefault();
+      });
+      document.addEventListener("gestureend", function (e) {
+        e.preventDefault();
       });
     })();
   </script>
