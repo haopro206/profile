@@ -31,7 +31,7 @@
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <!-- Chặn F12, chuột phải & xem mã nguồn -->
   <script src="blockf12.js"></script>
@@ -40,8 +40,8 @@
     :root {
       --accent: #f2eff0;                       /* Đổi sang màu bạn muốn làm mặc định */
       --accent-glow: rgba(242, 239, 240, 0.4);
-      --card-bg: rgba(18, 18, 28, 0.03); /* Mặc định 10% */
-      --card-blur: 3px;                  /* Mặc định 0px */
+      --card-bg: rgba(18, 18, 28, 0.03); /* Mặc định 3% */
+      --card-blur: 3px;                  /* Mặc định 3px */
       --card-border: rgba(255, 255, 255, 0.1);
       --text-main: #ffffff;
       --text-muted: rgba(255, 255, 255, 0.65);
@@ -353,38 +353,56 @@
       align-items: center;
     }
 
-    /* Status badge */
+    /* =========================================
+       STATUS BADGE: TOÀN BỘ MÀU TRẮNG TINH TẾ
+    ========================================= */
     .status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(85, 239, 196, 0.12);
-      border: 1px solid rgba(85, 239, 196, 0.3);
-      padding: 4px 12px;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 5px 14px;
       border-radius: 50px;
-      font-size: 0.72rem;
-      color: #55efc4;
-      font-weight: 500;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.76rem;
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
       margin: 0 auto 18px auto;
-      transition: transform 0.2s;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    #statusText {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .status-badge:active {
       transform: scale(1.06);
     }
 
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      background: #55efc4;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #55efc4;
-      animation: pulseDot 2s infinite;
+    /* Icon Location màu trắng phát sáng nhẹ nhàng */
+    .status-location-icon {
+      font-size: 0.85rem;
+      color: #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+      animation: pulseLocation 2.2s infinite ease-in-out;
     }
 
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+    @keyframes pulseLocation {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: 0.75;
+      }
     }
 
     /* =========================================
@@ -986,7 +1004,7 @@
     ========================================= */
     .copyright {
       margin-top: 14px;
-      font-size: 12px !important;                 /* Thu nhỏ chữ copyright */
+      font-size: 1px !important;                 /* Thu nhỏ chữ copyright */
       color: rgba(255, 255, 255, 0.22) !important;/* Rất mờ và tinh tế */
       font-family: monospace;
       transform: scale();
@@ -1247,10 +1265,10 @@
   <div class="profile-wrapper">
     <div class="profile-card" id="profileCard">
 
-      <!-- Status badge -->
+      <!-- Status badge (Toàn bộ màu trắng + Icon Location) -->
       <div class="status-badge">
-        <div class="status-dot"></div>
-        <span id="statusText">良い一日をお過ごしください</span>
+        <i class="fa-solid fa-location-dot status-location-icon"></i>
+        <span id="statusText">HÀ NỘI</span>
       </div>
 
       <!-- AVATAR (KHÔNG VIỀN, KHÔNG BÓNG VUÔNG, CHỈ MỖI AVATAR) -->
@@ -1374,7 +1392,6 @@
         <span>Độ mờ khung</span>
         <span id="opacityVal">3%</span>
       </div>
-      <!-- 👇 Đổi value="10" thành value="15" -->
       <input type="range" class="settings-slider" id="opacitySlider" min="0" max="95" value="3">
     </div>
 
@@ -1383,7 +1400,6 @@
         <span>Độ kính mờ (Blur)</span>
         <span id="blurVal">3px</span>
       </div>
-      <!-- 👇 Đổi value="0" thành value="5" (thì thanh trượt mới nhảy lên số 5) -->
       <input type="range" class="settings-slider" id="blurSlider" min="0" max="40" value="3">
     </div>
 
@@ -1791,41 +1807,23 @@
     typeLoop();
 
     // =========================================
-    // STATUS BADGE TYPING EFFECT
+    // STATUS BADGE: THAY PHIÊN "HÀ NỘI" VÀ "NGHỆ AN" MỖI 5 GIÂY
     // =========================================
-    const statusPhrases = [
-      
-      "良い一日をお過ごしください"
-    ];
-    let sIdx = 0, sCharIdx = 0, sIsDeleting = false;
+    const statusLocations = ["HÀ NỘI", "NGHỆ AN"];
+    let locIdx = 0;
     const statusEl = document.getElementById("statusText");
 
-    function statusTypeLoop() {
-      if (!statusEl) return;
-      const current = statusPhrases[sIdx];
-      if (sIsDeleting) {
-        statusEl.textContent = current.substring(0, sCharIdx);
-        sCharIdx--;
-        if (sCharIdx < 0) {
-          sIsDeleting = false;
-          sCharIdx = 0;
-          sIdx = (sIdx + 1) % statusPhrases.length;
-          setTimeout(statusTypeLoop, 400);
-          return;
-        }
-        setTimeout(statusTypeLoop, 45);
-      } else {
-        statusEl.textContent = current.substring(0, sCharIdx);
-        sCharIdx++;
-        if (sCharIdx > current.length) {
-          sIsDeleting = true;
-          setTimeout(statusTypeLoop, 2200);
-          return;
-        }
-        setTimeout(statusTypeLoop, 90);
-      }
+    if (statusEl) {
+      statusEl.style.transition = "opacity 0.35s ease";
+      setInterval(() => {
+        statusEl.style.opacity = "0";
+        setTimeout(() => {
+          locIdx = (locIdx + 1) % statusLocations.length;
+          statusEl.textContent = statusLocations[locIdx];
+          statusEl.style.opacity = "1";
+        }, 350);
+      }, 5000);
     }
-    statusTypeLoop();
 
     // =========================================
     // 5. MODAL CÀI ĐẶT
@@ -1859,18 +1857,21 @@
     const blurSlider = document.getElementById("blurSlider");
     const blurVal = document.getElementById("blurVal");
 
-    opacitySlider.addEventListener("input", (e) => {
-      const v = e.target.value;
-      opacityVal.textContent = v + "%";
-      profileCard.style.background = `rgba(18, 18, 28, ${v / 100})`;
-    });
+    function syncCardAppearance() {
+      const op = opacitySlider.value;
+      const bl = blurSlider.value;
+      opacityVal.textContent = op + "%";
+      blurVal.textContent = bl + "px";
+      profileCard.style.background = `rgba(18, 18, 28, ${op / 100})`;
+      profileCard.style.backdropFilter = `blur(${bl}px)`;
+      profileCard.style.webkitBackdropFilter = `blur(${bl}px)`;
+    }
 
-    blurSlider.addEventListener("input", (e) => {
-      const v = e.target.value;
-      blurVal.textContent = v + "px";
-      profileCard.style.backdropFilter = `blur(${v}px)`;
-      profileCard.style.webkitBackdropFilter = `blur(${v}px)`;
-    });
+    opacitySlider.addEventListener("input", syncCardAppearance);
+    blurSlider.addEventListener("input", syncCardAppearance);
+
+    // Ép giao diện mặc định lúc tải trang đúng y hệt 100% như khi gạt tay
+    syncCardAppearance();
 
     function setThemeColor(color, glow, el) {
       document.documentElement.style.setProperty("--accent", color);
@@ -2053,7 +2054,8 @@
 
           const cardRect = card ? card.getBoundingClientRect() : null;
           const zones = [];
-                    // Nếu là con mèo, cho điểm đến bay lượn bên trong khung thẻ
+
+          // Nếu là con mèo, cho điểm đến bay lượn bên trong khung thẻ
           if (pet.el.id === "flyingPusheen" && cardRect) {
             pet.targetX = cardRect.left + 20 + Math.random() * (cardRect.width - 90);
             pet.targetY = cardRect.top + 20 + Math.random() * (cardRect.height - 90);
@@ -2214,8 +2216,8 @@
             let stepY = (dy / dist) * pet.speed;
 
             // Kiểm tra né khung thẻ: nếu bước đi tiếp theo chuẩn bị đi vào khung thẻ, trượt né ra mép ngoài
-            // DÒNG MỚI: Bỏ qua con mèo, không đẩy dạt con mèo ra ngoài mép
-if (cardBox && pet.el.id !== "flyingPusheen") {
+            // Bỏ qua con mèo, không đẩy dạt con mèo ra ngoài mép
+            if (cardBox && pet.el.id !== "flyingPusheen") {
               const nextX = pet.posX + stepX;
               const nextY = pet.posY + stepY;
               const inCardX = nextX > cardBox.left - 50 && nextX < cardBox.right;
