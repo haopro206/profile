@@ -8,7 +8,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Nguyen Ngoc Hao | 15/07/2009">
   <meta property="og:description" content="𝘊𝘰 𝘬𝘩𝘪 𝘯𝘢𝘰 𝘦𝘮 𝘵𝘪𝘯 𝘷𝘢𝘰 𝘭𝘰𝘪 𝘯𝘰𝘪 𝘥𝘰𝘪 ?">
-  <meta property="og:image" content="https://ngochaovjppro.xyz/preview.jpg">
+  <meta property="og:image" content="https://ngochaovjppro.xyz/shin.jpg">
   <meta property="og:url" content="https://ngochaovjppro.xyz/">
   <meta property="og:type" content="website">
 
@@ -24,7 +24,9 @@
   <link rel="preload" as="image" href="avatar8.gif">
   <link rel="preload" as="image" href="avatar9.gif">
   <link rel="preload" as="image" href="avatar10.gif">
-  <link rel="icon" href="hehe.jpg" type="image/jpg">
+  <link rel="preload" as="image" href="hehe.jpg">
+  <link rel="shortcut icon" href="cute.jpg" type="image/jpeg">
+  <link rel="icon" href="cute.jpg" type="image/jpeg">
   <!-- Chặn F12, chuột phải & xem mã nguồn -->
 
 
@@ -490,7 +492,7 @@
       transform: scale(1.06);
     }
 
-    #statusText {
+    #statusText, #previewRealtime {
       font-family: 'Quicksand', sans-serif;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -811,9 +813,12 @@
       position: relative;
       margin-bottom: 10px;
       transition: height 0.15s ease;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    .mmb-progress-wrap:hover, .mmb-progress-wrap:active {
+    .mmb-progress-wrap:hover, .mmb-progress-wrap:active, .mmb-progress-wrap.scrubbing {
       height: 6px;
     }
 
@@ -824,6 +829,10 @@
       width: 0%;
       position: relative;
       transition: width 0.1s linear;
+    }
+
+    .mmb-progress-wrap.scrubbing .mmb-progress-fill {
+      transition: none !important;
     }
 
     .mmb-progress-fill::after {
@@ -841,7 +850,8 @@
     }
 
     .mmb-progress-wrap:hover .mmb-progress-fill::after,
-    .mmb-progress-wrap:active .mmb-progress-fill::after {
+    .mmb-progress-wrap:active .mmb-progress-fill::after,
+    .mmb-progress-wrap.scrubbing .mmb-progress-fill::after {
       transform: translateY(-50%) scale(1);
     }
 
@@ -1157,12 +1167,16 @@
 
     .settings-slider {
       width: 100%;
-      height: 4px;
+      height: 6px;
       -webkit-appearance: none;
       appearance: none;
       background: rgba(255, 255, 255, 0.15);
       border-radius: 4px;
       outline: none;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: pointer;
     }
 
     .settings-slider::-webkit-slider-thumb {
@@ -1172,6 +1186,15 @@
       height: 14px;
       border-radius: 50%;
       background: var(--accent);
+      cursor: pointer;
+    }
+
+    .settings-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
       cursor: pointer;
     }
 
@@ -1519,6 +1542,12 @@
       animation: rotateCube 4s linear infinite;
     }
 
+    .avatar-preview-badge i.status-location-icon {
+      color: #ffffff;
+      font-size: 0.85rem;
+      animation: pulseLocation 2.2s infinite ease-in-out;
+    }
+
     @keyframes rotateCube {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -1671,7 +1700,7 @@
        2. TOP CONTROLS (NÚT TÙY CHỈNH GUNS.LOL GÓC PHẢI)
   ========================================= -->
   <div class="top-controls">
-    <button class="top-btn" id="topSettingsBtn" title="Tùy chỉnh độ mờ & màu sắc">
+    <button class="top-btn" id="topSettingsBtn" title="Customize">
       <i class="fas fa-sliders-h"></i>
     </button>
   </div>
@@ -1682,21 +1711,21 @@
   <div class="profile-wrapper">
     <div class="profile-card" id="profileCard">
 
-      <!-- Status badge (Toàn bộ màu trắng + Icon Location) -->
+      <!-- Status badge (Đồng hồ thời gian thực) -->
       <div class="status-badge">
-        <i class="fa-solid fa-location-dot status-location-icon"></i>
-        <span id="statusText">HÀ NỘI</span>
+        <i class="fa-regular fa-clock" style="color: #4292ed;"></i>
+        <span id="previewRealtime">--:--:--</span>
       </div>
 
       <!-- AVATAR (KHÔNG VIỀN, KHÔNG BÓNG VUÔNG, CHỈ MỖI AVATAR) -->
-      <div class="avatar-box" id="avatarBox" title="Click để đổi avatar / Nhấn giữ để xem trước 3D / Kéo thả">
+      <div class="avatar-box" id="avatarBox" title="Click and hold ">
         <img src="avatar2.gif" alt="Avatar" class="avatar-img" id="avatarImg" onerror="this.src='avatar2.gif'">
       </div>
 
       <!-- TIỂU SỬ: TÊN + TICK XANH VIỀN BÁNH RĂNG -->
       <h2 class="user-name" id="userName">
         <span class="user-name-text">Thái Tử Seoul</span>
-        <span class="verified-badge-wrap" title="Đã xác minh">
+        <span class="verified-badge-wrap" title="Verified">
           <svg class="verified-badge-icon" viewBox="0 0 24 24" width="22" height="22">
             <path fill="#1da1f2" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34z"/>
             <path fill="#ffffff" d="M10.2 16.2L6.3 12.3l1.4-1.4 2.5 2.5 6.1-6.1 1.4 1.4-7.5 7.5z"/>
@@ -1734,14 +1763,14 @@
         <!-- Các nút: Previous - Play/Pause - Next | LOGO SPOTIFY ĐẦY ĐỦ MÀU Ở GIỮA | Volume Slider -->
         <div class="mmb-controls-row">
           <div class="mmb-btns">
-            <button class="mmb-btn" id="mmbPrev" title="Bài trước (←)"><i class="fas fa-step-backward"></i></button>
-            <button class="mmb-btn mmb-play" id="mmbPlay" title="Dừng/Phát (Space)"><i class="fas fa-play" id="mmbPlayIcon"></i></button>
-            <button class="mmb-btn" id="mmbNext" title="Bài tiếp (→)"><i class="fas fa-step-forward"></i></button>
+            <button class="mmb-btn" id="mmbPrev" title="Previous Song (←)"><i class="fas fa-step-backward"></i></button>
+            <button class="mmb-btn mmb-play" id="mmbPlay" title="Pause/Play (Space)"><i class="fas fa-play" id="mmbPlayIcon"></i></button>
+            <button class="mmb-btn" id="mmbNext" title="Next Song (→)"><i class="fas fa-step-forward"></i></button>
           </div>
 
           <!-- LOGO SPOTIFY MÀU XANH CHÍNH HÃNG Ở GIỮA -->
          <!-- LOGO SPOTIFY MÀU XANH CHÍNH HÃNG Ở GIỮA (LINK ĐỔI THEO TỪNG BÀI HÁT) -->
-<a href="https://open.spotify.com/intl-vi/track/6mKMGpkgP2cH5gmqILWe7b?si=96d1efa1a6b74e0b" target="_blank" class="spotify-center-logo" id="mmbSpotifyLink" title="Mở trên Spotify">
+<a href="https://open.spotify.com/intl-vi/track/6mKMGpkgP2cH5gmqILWe7b?si=96d1efa1a6b74e0b" target="_blank" class="spotify-center-logo" id="mmbSpotifyLink" title="Open in Spotify">
   <i class="fab fa-spotify"></i>
   <span>Spotify</span>
 </a>
@@ -1790,7 +1819,7 @@
           <a href="https://ngl.link/_.ngnghao._2" target="_blank" class="ng" aria-label="NGL">
             <i class="fas fa-comment-dots"></i>
           </a>
-          <span class="tooltip">NGL Nhắn tin</span>
+          <span class="tooltip">NGL</span>
         </li>
       </ul>
 
@@ -1808,7 +1837,7 @@
   <div class="game-modal-overlay" id="gameModalOverlay" onclick="toggleSettingsModal()"></div>
   <div class="settings-modal" id="settingsModal">
     <div class="game-modal-title">
-      <span><i class="fas fa-palette" style="color:var(--accent); margin-right:6px;"></i> Tùy Chỉnh Khung</span>
+      <span><i class="fas fa-palette" style="color:var(--accent); margin-right:6px;"></i> Customize</span>
       <button class="game-modal-close" onclick="toggleSettingsModal()"><i class="fas fa-times"></i></button>
     </div>
 
@@ -1852,14 +1881,13 @@
         <div class="avatar-card-glare" id="avatarCardGlare"></div>
         
         <!-- Nút đóng nhanh góc trên -->
-        <button class="avatar-preview-close" id="avatarPreviewClose" title="Đóng xem trước"><i class="fas fa-times"></i></button>
+        <button class="avatar-preview-close" id="avatarPreviewClose" title="Close Preview"><i class="fas fa-times"></i></button>
 
-        <!-- Badge nhãn 3D Peek -->
-        <!-- MỚI: Đổi sang icon đồng hồ và đặt id để JS cập nhật giờ -->
-<div class="avatar-preview-badge">
-  <i class="fa-regular fa-clock" style="color: #4292ed;"></i>
-  <span id="previewRealtime">--:--:--</span>
-</div>
+        <!-- Badge nhãn địa điểm Hà Nội / Nghệ An -->
+        <div class="avatar-preview-badge">
+          <i class="fa-solid fa-location-dot status-location-icon"></i>
+          <span id="statusText">HÀ NỘI</span>
+        </div>
 
         <!-- Khung ảnh Avatar 3D nổi khối -->
         <div class="avatar-preview-img-wrap">
@@ -1871,7 +1899,7 @@
         <div class="avatar-preview-info">
           <h3 class="avatar-preview-name">
             <span>NGUYỄN NGỌC HẢO</span>
-            <span class="verified-badge-wrap" title="Đã xác minh">
+            <span class="verified-badge-wrap" title="Verified">
               <svg class="verified-badge-icon" viewBox="0 0 24 24" width="18" height="18">
                 <path fill="#1da1f2" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.67-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91c-1.31.67-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34z"/>
                 <path fill="#ffffff" d="M10.2 16.2L6.3 12.3l1.4-1.4 2.5 2.5 6.1-6.1 1.4 1.4-7.5 7.5z"/>
@@ -2146,20 +2174,120 @@
 
     audio.addEventListener("ended", nextSong);
 
-    // Progress bar update
+    // =========================================
+    // THANH TIẾN TRÌNH NHẠC: TUA KHI CLICK VÀ KÉO (DRAG / SCRUB)
+    // =========================================
+    let isScrubbingMusic = false;
+
+    // Cập nhật thanh tiến trình theo nhạc đang phát (khi không kéo)
     audio.addEventListener("timeupdate", () => {
-      if (audio.duration) {
+      if (!isScrubbingMusic && audio.duration) {
         const pct = (audio.currentTime / audio.duration) * 100;
         mmbProgressFill.style.width = pct + "%";
       }
     });
 
-    // Seek on click
-    mmbProgressWrap.addEventListener("click", (e) => {
+    function getMusicProgressRatio(clientX) {
       const rect = mmbProgressWrap.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = pos * audio.duration;
-    });
+      if (rect.width <= 0) return 0;
+      const pos = (clientX - rect.left) / rect.width;
+      return Math.max(0, Math.min(1, pos));
+    }
+
+    function updateMusicProgressFill(ratio) {
+      mmbProgressFill.style.width = (ratio * 100) + "%";
+    }
+
+    function applyMusicSeek(ratio) {
+      if (audio.duration && !isNaN(audio.duration)) {
+        audio.currentTime = ratio * audio.duration;
+      }
+    }
+
+    function handleMusicScrubStart(clientX) {
+      isScrubbingMusic = true;
+      mmbProgressWrap.classList.add("scrubbing");
+      const ratio = getMusicProgressRatio(clientX);
+      updateMusicProgressFill(ratio);
+    }
+
+    function handleMusicScrubMove(clientX) {
+      if (!isScrubbingMusic) return;
+      const ratio = getMusicProgressRatio(clientX);
+      updateMusicProgressFill(ratio);
+    }
+
+    function handleMusicScrubEnd(clientX) {
+      if (!isScrubbingMusic) return;
+      const ratio = getMusicProgressRatio(clientX);
+      updateMusicProgressFill(ratio);
+      applyMusicSeek(ratio);
+      isScrubbingMusic = false;
+      mmbProgressWrap.classList.remove("scrubbing");
+    }
+
+    // Hỗ trợ cả chuột (mouse) và cảm ứng điện thoại (touch) qua Pointer Events
+    if (window.PointerEvent) {
+      mmbProgressWrap.addEventListener("pointerdown", (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        handleMusicScrubStart(e.clientX);
+        e.preventDefault();
+        e.stopPropagation();
+
+        const onPointerMove = (evt) => {
+          if (!isScrubbingMusic) return;
+          handleMusicScrubMove(evt.clientX);
+        };
+
+        const onPointerUp = (evt) => {
+          window.removeEventListener("pointermove", onPointerMove);
+          window.removeEventListener("pointerup", onPointerUp);
+          window.removeEventListener("pointercancel", onPointerUp);
+          handleMusicScrubEnd(evt.clientX);
+        };
+
+        window.addEventListener("pointermove", onPointerMove);
+        window.addEventListener("pointerup", onPointerUp);
+        window.addEventListener("pointercancel", onPointerUp);
+      });
+    } else {
+      const onMouseMove = (evt) => handleMusicScrubMove(evt.clientX);
+      const onMouseUp = (evt) => {
+        window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("mouseup", onMouseUp);
+        handleMusicScrubEnd(evt.clientX);
+      };
+      mmbProgressWrap.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return;
+        handleMusicScrubStart(e.clientX);
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseup", onMouseUp);
+        e.preventDefault();
+        e.stopPropagation();
+      });
+
+      const onTouchMove = (evt) => {
+        if (evt.touches && evt.touches[0]) handleMusicScrubMove(evt.touches[0].clientX);
+      };
+      const onTouchEnd = (evt) => {
+        window.removeEventListener("touchmove", onTouchMove);
+        window.removeEventListener("touchend", onTouchEnd);
+        const touch = (evt.changedTouches && evt.changedTouches[0]) ? evt.changedTouches[0] : null;
+        if (touch) handleMusicScrubEnd(touch.clientX);
+        else {
+          isScrubbingMusic = false;
+          mmbProgressWrap.classList.remove("scrubbing");
+        }
+      };
+      mmbProgressWrap.addEventListener("touchstart", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        handleMusicScrubStart(e.touches[0].clientX);
+        window.addEventListener("touchmove", onTouchMove, { passive: false });
+        window.addEventListener("touchend", onTouchEnd);
+        e.preventDefault();
+        e.stopPropagation();
+      }, { passive: false });
+    }
 
     // Volume slider
     mmbVolSlider.addEventListener("input", (e) => {
@@ -2436,6 +2564,7 @@
       } else {
         settingsModal.classList.add("active");
         gameModalOverlay.classList.add("active");
+        profileCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
       }
     }
 
@@ -2454,18 +2583,76 @@
     const blurSlider = document.getElementById("blurSlider");
     const blurVal = document.getElementById("blurVal");
 
+    let syncCardRaf = null;
     function syncCardAppearance() {
       const op = opacitySlider.value;
       const bl = blurSlider.value;
       opacityVal.textContent = op + "%";
       blurVal.textContent = bl + "px";
-      profileCard.style.background = `rgba(18, 18, 28, ${op / 100})`;
-      profileCard.style.backdropFilter = `blur(${bl}px)`;
-      profileCard.style.webkitBackdropFilter = `blur(${bl}px)`;
+      if (syncCardRaf) cancelAnimationFrame(syncCardRaf);
+      syncCardRaf = requestAnimationFrame(() => {
+        profileCard.style.background = `rgba(18, 18, 28, ${op / 100})`;
+        profileCard.style.backdropFilter = `blur(${bl}px)`;
+        profileCard.style.webkitBackdropFilter = `blur(${bl}px)`;
+      });
     }
 
     opacitySlider.addEventListener("input", syncCardAppearance);
     blurSlider.addEventListener("input", syncCardAppearance);
+
+    // Kéo thả mượt mà tuyệt đối 100% qua Pointer Capture, không phụ thuộc vào native tracking
+    function makeRangeSliderDraggable(slider, onInput) {
+      if (!slider) return;
+
+      function updateVal(clientX) {
+        const rect = slider.getBoundingClientRect();
+        if (rect.width <= 0) return;
+        const min = parseFloat(slider.min) || 0;
+        const max = parseFloat(slider.max) || 100;
+        const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        const val = Math.round(min + ratio * (max - min));
+        if (slider.value != val) {
+          slider.value = val;
+          onInput();
+        }
+      }
+
+      slider.addEventListener("pointerdown", (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        window.isDraggingSlider = true;
+        try { slider.setPointerCapture(e.pointerId); } catch (_) {}
+        updateVal(e.clientX);
+        e.preventDefault();
+        e.stopPropagation();
+
+        const onPointerMove = (evt) => {
+          if (!window.isDraggingSlider) return;
+          updateVal(evt.clientX);
+        };
+
+        const onPointerUp = (evt) => {
+          window.isDraggingSlider = false;
+          try { slider.releasePointerCapture(evt.pointerId); } catch (_) {}
+          window.removeEventListener("pointermove", onPointerMove);
+          window.removeEventListener("pointerup", onPointerUp);
+          window.removeEventListener("pointercancel", onPointerUp);
+          slider.removeEventListener("pointermove", onPointerMove);
+          slider.removeEventListener("pointerup", onPointerUp);
+          slider.removeEventListener("pointercancel", onPointerUp);
+          updateVal(evt.clientX);
+        };
+
+        slider.addEventListener("pointermove", onPointerMove);
+        slider.addEventListener("pointerup", onPointerUp);
+        slider.addEventListener("pointercancel", onPointerUp);
+        window.addEventListener("pointermove", onPointerMove);
+        window.addEventListener("pointerup", onPointerUp);
+        window.addEventListener("pointercancel", onPointerUp);
+      });
+    }
+
+    makeRangeSliderDraggable(opacitySlider, syncCardAppearance);
+    makeRangeSliderDraggable(blurSlider, syncCardAppearance);
 
     // Ép giao diện mặc định lúc tải trang đúng y hệt 100% như khi gạt tay
     syncCardAppearance();
@@ -2483,6 +2670,7 @@
     // Desktop Mouse Move
     document.addEventListener("mousemove", (e) => {
       if (window.innerWidth < 768) return;
+      if (settingsModal && settingsModal.classList.contains("active")) return;
       const rect = profileCard.getBoundingClientRect();
       const x = e.clientX - (rect.left + rect.width / 2);
       const y = e.clientY - (rect.top + rect.height / 2);
@@ -2886,6 +3074,7 @@
     (function () {
       // 1. Chặn menu chuột phải & menu nhấn giữ ảnh trên mobile (Context Menu / Long press)
       window.addEventListener("contextmenu", function (e) {
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || (e.target.closest && e.target.closest("input, textarea, .settings-modal, .mini-music-bar")))) return;
         e.preventDefault();
         e.stopPropagation();
         return false;
@@ -2893,23 +3082,30 @@
 
       // 2. Chặn sự kiện Copy & Cut
       document.addEventListener("copy", function (e) {
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || (e.target.closest && e.target.closest("input, textarea, .settings-modal, .mini-music-bar")))) return;
         e.preventDefault();
         if (e.clipboardData) e.clipboardData.setData("text/plain", "");
         return false;
       }, { capture: true });
 
       document.addEventListener("cut", function (e) {
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || (e.target.closest && e.target.closest("input, textarea, .settings-modal, .mini-music-bar")))) return;
         e.preventDefault();
         return false;
       }, { capture: true });
 
       // 3. Chặn bôi đen chữ trên mobile (ngăn kính lúp & popup Copy/Share)
       document.addEventListener("selectstart", function (e) {
+        if (window.isDraggingSlider) return true;
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || (e.target.closest && e.target.closest("input, textarea, .settings-modal, .mini-music-bar")))) return true;
         e.preventDefault();
         return false;
       }, { capture: true });
 
       document.addEventListener("selectionchange", function () {
+        if (window.isDraggingSlider) return;
+        const active = document.activeElement;
+        if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || (active.closest && active.closest("input, textarea, .settings-modal")))) return;
         const sel = window.getSelection();
         if (sel && sel.toString().length > 0) {
           sel.removeAllRanges();
@@ -2918,6 +3114,8 @@
 
       // 4. Chặn kéo thả hình ảnh
       document.addEventListener("dragstart", function (e) {
+        if (window.isDraggingSlider) return true;
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || (e.target.closest && e.target.closest("input, textarea, .settings-modal, .mini-music-bar")))) return true;
         e.preventDefault();
         return false;
       }, { capture: true });

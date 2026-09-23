@@ -13,21 +13,27 @@
 
   // 2. Chặn sao chép (Copy), Cắt (Cut), Bôi đen (Select) và Kéo thả (Drag)
   document.addEventListener('copy', function (e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || (e.target.closest && e.target.closest('input, textarea, .settings-modal, .mini-music-bar')))) return true;
     e.preventDefault();
     return false;
   });
 
   document.addEventListener('cut', function (e) {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || (e.target.closest && e.target.closest('input, textarea, .settings-modal, .mini-music-bar')))) return true;
     e.preventDefault();
     return false;
   });
 
   document.addEventListener('selectstart', function (e) {
+    if (window.isDraggingSlider) return true;
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || (e.target.closest && e.target.closest('input, textarea, .settings-modal, .mini-music-bar')))) return true;
     e.preventDefault();
     return false;
   });
 
   document.addEventListener('dragstart', function (e) {
+    if (window.isDraggingSlider) return true;
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || (e.target.closest && e.target.closest('input, textarea, .settings-modal, .mini-music-bar')))) return true;
     e.preventDefault();
     return false;
   });
